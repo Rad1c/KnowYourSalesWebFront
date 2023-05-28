@@ -1,0 +1,19 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Roboto, sans-serif";
+}
+
+:root {
+  font-size: 14px;
+  line-height: 24px;
+  font-weight: 400;
+}
+
+.Action-module_Action__xmlYq {
+  display: block;
+}
+
+html {
+  scroll-behavior: smooth;
+}
