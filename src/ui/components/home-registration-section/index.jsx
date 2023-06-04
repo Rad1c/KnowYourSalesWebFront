@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { Button } from "@mui/material";
 import { MediumTitleHeight } from "../common/styled";
+import { useNavigate } from "react-router-dom";
 import {
   RegistrationSectionContainer,
   BoxLeftContainer,
@@ -13,6 +14,7 @@ import {
 } from "./styled";
 
 const RegistrationSection = () => {
+  const navigate = useNavigate();
   return (
     <RegistrationSectionContainer id="registration-section">
       <div css={MediumTitleHeight}>registracija</div>
@@ -23,7 +25,9 @@ const RegistrationSection = () => {
             Registrujte vaš nalog i počnite dobijati obavještenja o popustima u vašim omiljenim
             radnjama
           </Text>
-          <Button css={BtnRegisterUser}>Započnite registraciju</Button>
+          <Button css={BtnRegisterUser} onClick={() => navigate("/user-registration")}>
+            Započnite registraciju
+          </Button>
         </BoxLeftContainer>
         <BoxRightContainer>
           <P>Registrujte nalog</P>
@@ -31,7 +35,9 @@ const RegistrationSection = () => {
             Registrujte vaš nalog i počnite dobijati obavještenja o popustima u vašim omiljenim
             radnjama
           </Text>
-          <Button css={BtnRegisterCommerce}>Započnite registraciju</Button>
+          <Button css={BtnRegisterCommerce} onClick={() => navigate("/commerce-registration")}>
+            Započnite registraciju
+          </Button>
         </BoxRightContainer>
       </ContentContainer>
     </RegistrationSectionContainer>

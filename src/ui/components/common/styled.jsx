@@ -31,10 +31,44 @@ const BigTitleHeight = styled.div`
   font-size: 40px;
   font-weight: bold;
   line-height: 1.2;
+  margin-bottom: 25px;
 `;
 
 const MaskDiv = styled.div`
   background-color: #fafafa;
 `;
 
-export { Wrapper, Section, MediumTitleHeight, BigTitleHeight, MaskDiv };
+const DiamondContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const Diamond = styled.div`
+  background: #644688;
+  height: 50px;
+  text-align: center;
+  transform: rotate(45deg);
+  width: 50px;
+`;
+
+const DiamondText = css`
+  color: #fafafa;
+  display: table-cell;
+  height: 50px;
+  transform: rotate(-45deg);
+  vertical-align: middle;
+  font-size: 24px;
+  width: 60px;
+`;
+
+export {
+  Wrapper,
+  Section,
+  MediumTitleHeight,
+  BigTitleHeight,
+  MaskDiv,
+  DiamondContainer,
+  Diamond,
+  DiamondText,
+};

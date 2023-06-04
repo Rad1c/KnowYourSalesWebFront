@@ -5,9 +5,11 @@ import { useState, useEffect } from "react";
 import Menu from "../menu";
 import SelectOption from "../select";
 import { Button } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const MainSection = () => {
   const [selectedValue, setSelectedValue] = useState("");
+  const navigate = useNavigate();
   const cityArr = [
     { id: 1, name: "Banja Luka" },
     { id: 2, name: "Sarajevo" },
@@ -19,9 +21,6 @@ const MainSection = () => {
     { id: 2, name: "Automobili" },
   ];
 
-  useEffect(() => {
-    console.log(selectedValue);
-  }, [selectedValue]);
   return (
     <MaskDiv>
       <MainSectionContainer id="main-section">
@@ -29,7 +28,7 @@ const MainSection = () => {
         <TextContainer>
           Uštedite novac.
           <br /> Pronađite najbolje popuste
-          <p style={{ fontSize: "40px", marginTop: "30px" }}>
+          <p style={{ fontSize: "clamp(1.5rem, 1rem + 1vw, 50px)", marginTop: "30px" }}>
             Pronađite najbolje i najnovije popuste u radnjama iz vašeg grada <br /> i uštedite sa
             nama.
           </p>
@@ -37,7 +36,13 @@ const MainSection = () => {
         <SelectContainer>
           <SelectOption name="Odaberite grad" data={cityArr} />
           <SelectOption name="Odaberite kategoriju" data={CategoryArr} />
-          <Button variant="outlined" color="inherit" size="small" css={BtnSearch}>
+          <Button
+            variant="outlined"
+            color="inherit"
+            size="small"
+            css={BtnSearch}
+            onClick={() => navigate("/products")}
+          >
             Započnite pretragu
           </Button>
         </SelectContainer>

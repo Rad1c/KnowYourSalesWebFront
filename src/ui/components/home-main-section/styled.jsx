@@ -3,7 +3,7 @@ import { css } from "@emotion/react";
 
 const MainSectionContainer = styled.div`
   height: 100vh;
-  width: 1440px;
+  width: 1400px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -19,7 +19,7 @@ const TextContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: 60px;
+  font-size: clamp(2rem, 1.5rem + 1vw, 60px);
   height: 400px;
   line-height: 1.2;
   text-align: center;

@@ -5,13 +5,8 @@ import { useState, useEffect } from "react";
 
 const SelectOption = (props) => {
   const { name, data } = props;
-  data.map((item) => console.log(item.id + item.name));
 
   const [selectedValue, setSelectedValue] = useState("");
-
-  useEffect(() => {
-    console.log(selectedValue);
-  }, [selectedValue]);
 
   return (
     <FormControl>
