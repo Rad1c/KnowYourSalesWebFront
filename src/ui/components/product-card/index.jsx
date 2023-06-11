@@ -3,24 +3,31 @@ import {
   ProductLocationAndTime,
   ProductName,
   cardStyles,
-  descriptionStyles,
   imageStyles,
   OldPrice,
   NewPrice,
+  Description,
+  Discount,
 } from "./styled";
 
-const ProductCard = () => {
+const ProductCard = (props) => {
+  const { id, discount, productImg, commerceImg, oldPrice, newPrice, validFrom, validTo } = props;
+
   return (
     <div css={cardStyles}>
-      <img src="/img/product.png" alt="Proizvod" css={imageStyles} />
-      <CommerceImageContainer>
-        <img src="/img/product-commerce.png" alt="product-commerce" />
-      </CommerceImageContainer>
-      <ProductName>nike renew ride 3</ProductName>
-      <OldPrice>100.00</OldPrice>
-      <NewPrice>80.00</NewPrice>
-      <ProductLocationAndTime>Trg djece Sarajeva 1 (BBI centar)</ProductLocationAndTime>
-      <ProductLocationAndTime>24.02. - 24.03.2023</ProductLocationAndTime>
+      <Discount>{discount}%</Discount>
+      <img src={productImg} alt="product" css={imageStyles} />
+      <Description>
+        <CommerceImageContainer>
+          <img src={commerceImg} alt="product-commerce" />
+        </CommerceImageContainer>
+        <ProductName>nike renew ride 3</ProductName>
+        <OldPrice>{oldPrice} KM</OldPrice>
+        <NewPrice>{newPrice}KM</NewPrice>
+        <ProductLocationAndTime>
+          {validFrom} - {validTo}
+        </ProductLocationAndTime>
+      </Description>
     </div>
   );
 };

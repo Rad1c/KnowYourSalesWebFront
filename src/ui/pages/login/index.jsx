@@ -10,7 +10,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import { useState } from "react";
 
 const Login = () => {
-  const { login, isUserLoggedIn } = useAuthStore();
+  const { login } = useAuthStore();
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
 
@@ -28,8 +28,10 @@ const Login = () => {
       setOpen(true);
       await login(data.email, data.password);
       setOpen(false);
+
       navigate("/products");
     } catch (error) {
+      console.log("error" + error);
       setOpen(false);
       if (error.response?.status == 400) {
         setError("email", { type: "custom", message: "Provjerite email" });

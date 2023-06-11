@@ -3,37 +3,54 @@ import {
   AppBar,
   Toolbar,
   IconButton,
-  Typography,
   InputBase,
   MenuItem,
   Menu,
   Button,
   Hidden,
 } from "@mui/material";
-import { Container, AppBarStyle, InputBaseStyle, MenuItemStyle } from "./styled";
+import { Container, AppBarStyle, InputBaseStyle, MenuItemStyle, BtnSignStyle } from "./styled";
 import SearchIcon from "/img/search.svg";
 import { Diamond, DiamondContainer, DiamondText } from "../common/styled";
 import useProductsStore from "../../../store/productsStore";
+import useAuthStore from "../../../store/authStore";
+import { useNavigate } from "react-router-dom";
 
 const MainMenu = () => {
   const [categoriesLoaded, setCategoriesLoaded] = useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [searchTerm, setSearchTerm] = React.useState("");
   const { getCategories, categories } = useProductsStore();
+  const { isUserLoggedIn } = useAuthStore();
+  const [role, setRole] = useState("none");
+  const navigate = useNavigate();
+  const [backgroundColor, setBackgroundColor] = useState("#55347f");
 
   const handleMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
 
   useEffect(() => {
+    setRole(isUserLoggedIn());
     const fetchCities = async () => {
       await getCategories();
       setCategoriesLoaded(true);
     };
 
+    switch (role) {
+      case "User":
+        setBackgroundColor("#555555");
+        break;
+      case "Commerce":
+        setBackgroundColor("#25593B");
+        break;
+      default:
+        setBackgroundColor("#55347f");
+    }
+
     fetchCities();
     categories.sort((a, b) => a.displaySeq - b.displaySeq);
-  }, []);
+  }, [role]);
 
   const handleMenuClose = () => {
     setAnchorEl(null);
@@ -49,8 +66,8 @@ const MainMenu = () => {
   };
 
   return (
-    <Container>
-      <AppBar position="static" sx={AppBarStyle}>
+    <Container style={{ backgroundColor }}>
+      <AppBar position="static" sx={AppBarStyle} style={{ backgroundColor }}>
         <Toolbar sx={{ justifyContent: "space-between" }}>
           <Hidden mdUp>
             <IconButton
@@ -82,11 +99,31 @@ const MainMenu = () => {
               }
               sx={InputBaseStyle}
             />
-            <DiamondContainer css={{ background: "transparent" }}>
-              <Diamond css={{ background: "#777" }}>
-                <p css={DiamondText}>K</p>
-              </Diamond>
-            </DiamondContainer>
+            {role == "User" && (
+              <DiamondContainer css={{ background: "transparent" }}>
+                <Diamond css={{ background: "#777" }}>
+                  <p css={DiamondText}>K</p>
+                </Diamond>
+              </DiamondContainer>
+            )}
+            {role == "Commerce" && (
+              <DiamondContainer css={{ background: "transparent" }}>
+                <Diamond css={{ background: "#777" }}>
+                  <p css={DiamondText}>T</p>
+                </Diamond>
+              </DiamondContainer>
+            )}
+            {role == "none" && (
+              <Button
+                variant="outlined"
+                color="inherit"
+                size="small"
+                css={BtnSignStyle}
+                onClick={() => navigate("/login")}
+              >
+                Prijava
+              </Button>
+            )}
           </Hidden>
         </Toolbar>
       </AppBar>

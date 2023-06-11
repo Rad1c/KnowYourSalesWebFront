@@ -1,6 +1,7 @@
 import { axiosPrivate } from "../api/axios";
 import { create } from "zustand";
 import { isExpired } from "react-jwt";
+import extractUserDataFromToken from "../assets/helper";
 
 const REGISTER_USER_URL = "/user/register";
 const REGISTER_COMMERCE_URL = "/commerce/register";
@@ -8,7 +9,7 @@ const LOGIN_URL = "/login";
 
 const useAuthStore = create((set, get) => ({
   cities: [],
-  isUserLoggedIn: false,
+  role: "none",
   getCitiesByCountryCode: async (code) => {
     const response = await axiosPrivate.get("/country/cities", {
       params: {
@@ -77,14 +78,21 @@ const useAuthStore = create((set, get) => ({
     localStorage.setItem("access", accessToken);
     localStorage.setItem("refresh", refreshToken);
 
-    set({ isUserLoggedIn: true });
+    const userData = extractUserDataFromToken(accessToken);
+    console.log("role: " + userData?.role);
+    set({ role: userData.role });
 
     return response;
   },
-  isTokenExpired: () => {
+  isUserLoggedIn: () => {
     const token = localStorage.getItem("refresh");
+    if (!token && isExpired(token)) return "none";
 
-    return isExpired(token);
+    const userData = extractUserDataFromToken(token);
+
+    if (userData) return userData?.role;
+
+    return "none";
   },
 }));
 

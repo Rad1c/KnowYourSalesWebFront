@@ -3,7 +3,7 @@ import { css } from "@emotion/react";
 
 const AppBarStyle = css`
   background-image: url("img/header-wavy.png");
-  background-color: #55347f;
+  // background-color: #55347f;
   max-height: 70px;
   color: #fafafa;
 `;
@@ -35,4 +35,18 @@ const MenuItemStyle = styled.div`
   padding-right: 20px;
   flex-wrap: wrap;
 `;
-export { AppBarStyle, Container, InputBaseStyle, MenuItemStyle };
+
+const BtnSignStyle = css`
+  color: #593b83;
+  width: 150px;
+  height: 50px;
+  background-color: #fafafa;
+  font-size: 16px;
+
+  :hover {
+    color: #fafafa;
+    background-color: #593b83;
+  }
+`;
+
+export { AppBarStyle, Container, InputBaseStyle, MenuItemStyle, BtnSignStyle };

@@ -8,12 +8,16 @@ import CommerceRegistration from "./ui/pages/commerce-registration";
 import Login from "./ui/pages/login";
 import Products from "./ui/pages/products";
 import NonRequireAuth from "./ui/components/non-require";
+import Commerce from "./ui/pages/commerce";
+import User from "./ui/pages/user";
 
 function App() {
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
         {/*private*/}
+        <Route path="/commerce" element={<Commerce />} />
+        <Route path="/user" element={<User />} />
 
         {/* public */}
         <Route path="/" element={<Home />} />
