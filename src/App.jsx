@@ -10,6 +10,7 @@ import Products from "./ui/pages/products";
 import NonRequireAuth from "./ui/components/non-require";
 import Commerce from "./ui/pages/commerce";
 import User from "./ui/pages/user";
+import Product from "./ui/pages/product-details";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
         <Route path="/login" element={<Login />} />
 
         <Route path="/products" element={<Products />} />
+        <Route path="/product" element={<Product />} />
 
         {/* catch all */}
         <Route path="/not-found" element={<Error />} />

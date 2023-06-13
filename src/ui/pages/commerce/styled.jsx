@@ -1,4 +1,3 @@
-import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 
 const Container = styled.div`
@@ -13,6 +12,7 @@ const ShopContainer = styled.div`
   flex-wrap: wrap;
   margin-top: 25px;
   max-width: 1100px;
+  justify-content: center;
 `;
 
 const BtnAddShop = styled.div`
