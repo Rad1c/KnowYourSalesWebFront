@@ -28,6 +28,7 @@ const ProductCardContainer = styled.div`
   gap: 20px;
   flex-wrap: wrap;
   margin-top: 25px;
+  margin-bottom: 50px;
   max-width: 1100px;
   justify-content: center;
 `;
@@ -38,4 +39,10 @@ const Title = styled.p`
   color: #54357f;
 `;
 
-export { Container, MapContainer, ProductMapContainer, ProductCardContainer, Title };
+export {
+  Container,
+  MapContainer,
+  ProductMapContainer,
+  ProductCardContainer,
+  Title,
+};

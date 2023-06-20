@@ -1,5 +1,5 @@
 import { Button, TextField } from "@mui/material";
-import { Container, Form, BtnLoginStyle, Title } from "./styled";
+import { Container, Form, BtnLoginStyle, PassForgotten } from "./styled";
 import { validationLoginSchema } from "../../../validators/validator";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
@@ -42,11 +42,13 @@ const Login = () => {
 
   return (
     <Container>
-      <Backdrop sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }} open={open}>
+      <Backdrop
+        sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={open}
+      >
         <CircularProgress color="inherit" />
       </Backdrop>
       <Form onSubmit={handleSubmit(submitForm)}>
-        <Title>Prijava</Title>
         <TextField
           id="txtEmail"
           label="Email"
@@ -55,20 +57,21 @@ const Login = () => {
           {...register("email")}
           error={Boolean(errors.email)}
           helperText={errors?.email?.message}
-          sx={{ marginBottom: "25px" }}
+          sx={{ marginBottom: "2rem" }}
         />
         <TextField
           label="Lozinka"
           type="password"
           required
-          sx={{ marginBottom: "25px" }}
           {...register("password")}
           error={Boolean(errors.password)}
           helperText={errors?.password?.message}
+          sx={{ marginBottom: "2rem" }}
         />
         <Button variant="outlined" type="submit" sx={BtnLoginStyle}>
           Prijavite se
         </Button>
+        <div css={PassForgotten}>Zaboravili ste šifru?</div>
       </Form>
     </Container>
   );

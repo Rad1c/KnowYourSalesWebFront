@@ -2,84 +2,79 @@ import styled from "@emotion/styled";
 import { css } from "@emotion/react";
 
 const UsageSectionContainer = styled.div`
-  height: 100vh;
-  width: 1440px;
+  width: 100%;
   display: flex;
   flex-direction: column;
-  background-color: #fafafa;
   align-items: center;
+  margin-bottom: 16.6rem;
 `;
 
 const NumberLeft = styled.div`
   color: #d8c2ca;
-  font-size: 50px;
-  margin-right: 20px;
+  font-size: 7.8rem;
   line-height: 1.2;
-  display: inline;
 `;
 
-const NumberRgiht = styled.div`
-  color: #d8c2ca;
-  font-size: 50px;
-  margin-left: 20px;
+const NumberRight = styled.div`
+  color: #c2d9cc;
+  font-size: 7.8rem;
   line-height: 1.2;
-  display: inline;
 `;
 
 const ItemsColumnWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  text-aling: center;
+  text-align: center;
+  gap: 4.8rem;
 `;
 
 const P = styled.p`
-  color: #3b3b3b;
-  font-size: 40px;
+  color: #333;
+  margin-bottom: 3rem;
+  font-size: 4.8rem;
   font-weight: bold;
   line-height: 1.2;
 `;
 
 const SpanText = styled.span`
-  font-size: 30px;
-  color: #3b3b3b;
+  font-size: 2.2rem;
+  font-weight: 500;
+  color: #333;
   text-align: center;
   line-height: 1.2;
 `;
 
 const DivItem = styled.div`
-  margin-top: 40px;
-  margin-bottom: 40px;
   display: flex;
   align-items: center;
+  justify-content: space-between;
 `;
 
 const ContentWrapper = styled.div`
   display: flex;
-  max-width: 1200px;
+  justify-content: space-between;
+  max-width: 110rem;
 `;
 
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  height: 500px;
-  margin-top: 100px;
 `;
 
-const ImgSponzorsStyle = css`
-  margin-top: 50px;
-  max-width: 1300px;
+const ImgSponsorsStyle = css`
+  margin-top: 5rem;
+  margin-bottom: 10rem;
+  max-width: 130rem;
 `;
 
 const VerticalSeparatorContainer = styled.div`
-  margin-left: 20px;
-  margin-right: 20px;
-  margin-top: 90px;
+  margin: 0 2rem;
 `;
 
 export {
   UsageSectionContainer,
   NumberLeft,
-  NumberRgiht,
+  NumberRight,
   ItemsColumnWrapper,
   P,
   SpanText,
@@ -87,5 +82,5 @@ export {
   ContentWrapper,
   Container,
   VerticalSeparatorContainer,
-  ImgSponzorsStyle,
+  ImgSponsorsStyle,
 };

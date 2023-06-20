@@ -11,7 +11,16 @@ import {
 } from "./styled";
 
 const ProductCard = (props) => {
-  const { id, discount, productImg, commerceImg, oldPrice, newPrice, validFrom, validTo } = props;
+  const {
+    id,
+    discount,
+    productImg,
+    commerceImg,
+    oldPrice,
+    newPrice,
+    validFrom,
+    validTo,
+  } = props;
 
   return (
     <div css={cardStyles}>

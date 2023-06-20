@@ -3,12 +3,12 @@ import {
   RightBox,
   LeftBox,
   SocialContainer,
+  IconPointer,
   ColumnContainer,
   MainText,
   SecondaryText,
   ContentContainer,
   CopyTextBold,
-  CopyTextInit,
 } from "./styled";
 
 const Footer = () => {
@@ -16,13 +16,30 @@ const Footer = () => {
     <FooterContainer>
       <ContentContainer>
         <LeftBox>
-          <div style={{ padding: "100px" }}>
-            <img src="/img/kys-blue.png" width="350" height="100" />
+          <div>
+            <img src="/img/kys-blue.png" height="100" css={IconPointer} />
             <SocialContainer>
-              <img src="/img/instagram.png" />
-              <img src="/img/facebook.png" />
-              <img src="/img/twitter.png" />
+              <img
+                src="/img/facebook.png"
+                alt="Facebook logo"
+                css={IconPointer}
+              />
+              <img
+                src="/img/twitter.png"
+                alt="Twitter logo"
+                css={IconPointer}
+              />
+              <img
+                src="/img/instagram.png"
+                alt="Instagram logo"
+                css={IconPointer}
+              />
             </SocialContainer>
+          </div>
+          <div>
+            <CopyTextBold>
+              <strong>Copyright &copy;</strong> 2023 by KnowYourSales
+            </CopyTextBold>
           </div>
         </LeftBox>
         <RightBox>
@@ -44,10 +61,6 @@ const Footer = () => {
           </ColumnContainer>
         </RightBox>
       </ContentContainer>
-      <div style={{ marginBottom: "20px" }}>
-        <CopyTextBold>Copyright&copy;</CopyTextBold>
-        <CopyTextInit> 2023 by KnowYourSales</CopyTextInit>
-      </div>
     </FooterContainer>
   );
 };

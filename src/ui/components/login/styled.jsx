@@ -2,26 +2,25 @@ import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 
 const Container = styled.div`
-  display: flex;
-  align-items: center;
-  height: 100vh;
-  justify-content: center;
+  position: absolute;
+  top: 8rem;
+  right: 3rem;
 `;
 
 const Form = styled.form`
   display: flex;
   flex-direction: column;
-  width: 280px;
-  padding: 35px;
+  width: 20rem;
+  padding: 2.5rem;
   background-color: #fafafa;
-  border: 1px solid #c4c8d1;
+  border: 1px solid #777;
+  border-radius: 5px;
 `;
 
 const BtnLoginStyle = css`
-  padding-left: 30px;
-  padding-right: 30px;
-  padding-top: 10px;
-  padding-bottom: 10px;
+  height: 4.6rem;
+  font-size: 1.6rem;
+  text-align: center;
   background-image: url("/img/btn-wavy.png");
   background-color: #54357f;
   color: #fafafa;
@@ -31,10 +30,11 @@ const BtnLoginStyle = css`
   }
 `;
 
-const Title = styled.p`
-  font-size: 24px;
-  margin-bottom: 25px;
-  font-weight: bold;
+const PassForgotten = css`
+  font-size: 1.2rem;
   color: #54357f;
+  text-align: center;
+  cursor: pointer;
 `;
-export { Container, Form, BtnLoginStyle, Title };
+
+export { Container, Form, BtnLoginStyle, PassForgotten };

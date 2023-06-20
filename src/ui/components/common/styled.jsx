@@ -28,20 +28,22 @@ const MediumTitleHeight = css`
 
 const BigTitleHeight = styled.div`
   color: #3b3b3b;
-  font-size: 40px;
+  font-size: 5.2rem;
   font-weight: bold;
   line-height: 1.2;
-  margin-bottom: 25px;
+  margin-bottom: 3rem;
 `;
 
 const MaskDiv = styled.div`
   background-color: #fafafa;
+  width: 100%;
 `;
 
 const DiamondContainer = styled.div`
   display: flex;
-  align-items: center;
+  align-items: baseline;
   justify-content: center;
+  margin-top: 3rem;
 `;
 
 const Diamond = styled.div`

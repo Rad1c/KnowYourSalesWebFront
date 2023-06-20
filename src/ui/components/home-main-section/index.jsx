@@ -1,5 +1,10 @@
 /** @jsxImportSource @emotion/react */
-import { MainSectionContainer, TextContainer, SelectContainer, BtnSearch } from "./styled";
+import {
+  MainSectionContainer,
+  TextContainer,
+  SelectContainer,
+  BtnSearch,
+} from "./styled";
 import { MaskDiv } from "../common/styled";
 import { useState, useEffect } from "react";
 import Menu from "../menu";
@@ -26,11 +31,18 @@ const MainSection = () => {
       <MainSectionContainer id="main-section">
         <Menu />
         <TextContainer>
-          Uštedite novac.
-          <br /> Pronađite najbolje popuste
-          <p style={{ fontSize: "clamp(1.5rem, 1rem + 1vw, 50px)", marginTop: "30px" }}>
-            Pronađite najbolje i najnovije popuste u radnjama iz vašeg grada <br /> i uštedite sa
-            nama.
+          <h1 style={{ fontSize: "6.4rem" }}>
+            Uštedite novac
+            <br /> Pronađite najbolje popuste
+          </h1>
+          <p
+            style={{
+              fontSize: "clamp(3.6rem, 1rem + 1vw, 50px)",
+              marginTop: "4.5rem",
+            }}
+          >
+            Pronađite najbolje i najnovije popuste u radnjama iz vašeg grada{" "}
+            <br /> i uštedite sa nama.
           </p>
         </TextContainer>
         <SelectContainer>

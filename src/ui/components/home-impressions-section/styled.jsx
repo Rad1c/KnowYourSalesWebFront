@@ -1,37 +1,23 @@
 import styled from "@emotion/styled";
 
 const ImpressionsContainer = styled.div`
-  height: 100vh;
-  width: 1440px;
-  display: flex;
-  flex-direction: column;
+  width: 110rem;
   background-color: #fafafa;
-  align-items: center;
-  justify-content: center;
+  // display: flex;
+  // flex-direction: column;
+  // align-items: center;
+  // justify-content: center;
+  margin: auto;
+  margin-bottom: 16.6rem;
 `;
 
-const ContentWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  max-width: 1300px;
-  margin-top: 25px;
+const ContentWrapper = styled.div``;
+
+const ImpressionsGrid = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 3.5rem;
 `;
 
-const P = styled.p`
-  color: #3b3b3b;
-  font-size: 40px;
-  font-weight: bold;
-  line-height: 1.2;
-`;
-
-const ColumnContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
-const ContentContainer = styled.div`
-  display: flex;
-  width: 700px;
-`;
-
-export { ImpressionsContainer, ContentWrapper, P, ColumnContainer, ContentContainer };
+export { ImpressionsContainer, ContentWrapper, ImpressionsGrid };

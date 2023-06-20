@@ -1,73 +1,60 @@
 import styled from "@emotion/styled";
+import { css } from "@emotion/react";
 
 const FooterContainer = styled.div`
-  width: 1440px;
-  height: 500px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  background-image: url("/img/18px_wavy.png");
-  background-color: #f4f4f5;
-  margin-bottom: 50px;
-  margin-top: 50px;
+  width: 100%;
+  background-image: url("/img/18px-wavy.png");
+  background-color: #f5f5f5;
+`;
+
+const ContentContainer = styled.div`
+  margin: 9.6rem 13rem;
+  height: 30rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 `;
 
 const LeftBox = styled.div`
-  width: 40%;
   display: flex;
-  padding-right: 200px;
   flex-direction: column;
+  justify-content: space-between;
 `;
 const RightBox = styled.div`
-  width: 60%;
-  display: flex;
-  justify-content: space-around;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  font-size: 2.4rem;
 `;
 
 const SocialContainer = styled.div`
-  width: 200px;
+  height: 3.6rem;
   display: flex;
-  margin-left: 25px;
-  margin-top: 20px;
-  justify-content: space-between;
+  gap: 3.6rem;
+  margin-left: 2rem;
+`;
+
+const IconPointer = css`
+  cursor: pointer;
 `;
 
 const MainText = styled.p`
   color: #555555;
-  font-size: 20px;
-  letter-spacing: -1px;
+  font-size: 2.4rem;
   font-weight: bold;
-  margin-bottom: 40px;
+  margin-bottom: 5.2rem;
 `;
 
 const SecondaryText = styled.p`
   color: #777777;
-  font-size: 20px;
-  letter-spacing: -1px;
-  margin-bottom: 30px;
+  font-size: 2.4rem;
+  margin-bottom: 3rem;
+  cursor: pointer;
 `;
 
 const ColumnContainer = styled.div``;
 
-const ContentContainer = styled.div`
-  display: flex;
-  width: 1300px;
-  align-items: center;
-`;
-
 const CopyTextBold = styled.p`
   color: #555555;
-  font-size: 16px;
-  font-weight: bold;
-  display: inline;
-`;
-
-const CopyTextInit = styled.p`
-  color: #777777;
-  font-size: 16px;
-  font-weight: bold;
-  display: inline;
+  font-size: 2rem;
 `;
 
 export {
@@ -75,10 +62,10 @@ export {
   LeftBox,
   RightBox,
   SocialContainer,
+  IconPointer,
   ColumnContainer,
   MainText,
   SecondaryText,
   ContentContainer,
-  CopyTextInit,
   CopyTextBold,
 };
