@@ -1,4 +1,4 @@
-import { Wrapper, Section } from "../../components/common/styled";
+import { Wrapper } from "../../components/common/styled";
 import MainSection from "../../components/home-main-section";
 import UsageSection from "../../components/home-usage-section";
 import ImpressionsSection from "../../components/home-impressions-section";

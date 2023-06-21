@@ -6,7 +6,7 @@ import {
   BtnSearch,
 } from "./styled";
 import { MaskDiv } from "../common/styled";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Menu from "../menu";
 import SelectOption from "../select";
 import { Button } from "@mui/material";

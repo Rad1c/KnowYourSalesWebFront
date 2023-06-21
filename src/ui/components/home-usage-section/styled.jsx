@@ -1,6 +1,4 @@
 import styled from "@emotion/styled";
-import { css } from "@emotion/react";
-
 const UsageSectionContainer = styled.div`
   width: 100%;
   display: flex;
@@ -61,10 +59,16 @@ const Container = styled.div`
   flex-direction: column;
 `;
 
-const ImgSponsorsStyle = css`
+const SponsorsContainer = styled.div`
   margin-top: 5rem;
   margin-bottom: 10rem;
-  max-width: 130rem;
+`;
+
+const SponsorLogos = styled.div`
+  display: flex;
+  gap: 13rem;
+  height: 4.5rem;
+  color: #555;
 `;
 
 const VerticalSeparatorContainer = styled.div`
@@ -82,5 +86,6 @@ export {
   ContentWrapper,
   Container,
   VerticalSeparatorContainer,
-  ImgSponsorsStyle,
+  SponsorsContainer,
+  SponsorLogos,
 };

@@ -3,7 +3,6 @@ import { Button } from "@mui/material";
 import { MenuContainer, ContentContainer, A, BtnSign } from "./styled";
 import logo from "/img/icon.svg";
 import { css } from "@emotion/react";
-// dialog
 import { useState } from "react";
 import Login from "../login";
 import OutsideClickHandler from "react-outside-click-handler";
@@ -16,7 +15,7 @@ const Menu = () => {
         <div>
           <img
             src={logo}
-            alt="logo"
+            alt="KnowYourSales logo"
             style={{ height: "4.5rem", margin: "2.5rem" }}
           />
         </div>

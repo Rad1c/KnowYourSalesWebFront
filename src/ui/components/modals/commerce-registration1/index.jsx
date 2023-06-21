@@ -7,10 +7,10 @@ import {
   Header,
   Wrapper,
 } from "./styled";
-import useAuthStore from "../../../store/authStore";
+import useAuthStore from "../../../../store/authStore";
 import { useEffect } from "react";
 import { useState } from "react";
-import { validationCommerceRegisterSchema } from "../../../validators/validator";
+import { validationCommerceRegisterSchema } from "../../../../validators/validator";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
@@ -64,7 +64,10 @@ const CommerceRegistration = () => {
       setOpen(false);
       if (error.response?.status === 409) {
         if (error?.response?.data?.errors[0] == "Commerce.AlreadyExist")
-          setError("name", { type: "custom", message: "trgovina sa tim imenom vec postoji" });
+          setError("name", {
+            type: "custom",
+            message: "trgovina sa tim imenom vec postoji",
+          });
         else setError("email", { type: "custom", message: "Email je zauzet" });
       }
     }
@@ -72,7 +75,10 @@ const CommerceRegistration = () => {
 
   return (
     <Wrapper>
-      <Backdrop sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }} open={open}>
+      <Backdrop
+        sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={open}
+      >
         <CircularProgress color="inherit" />
       </Backdrop>
       <form onSubmit={handleSubmit(submitForm)}>

@@ -17,7 +17,12 @@ const Footer = () => {
       <ContentContainer>
         <LeftBox>
           <div>
-            <img src="/img/kys-blue.png" height="100" css={IconPointer} />
+            <img
+              src="/img/kys-blue.png"
+              alt="KnowYourSales logo"
+              height="100"
+              css={IconPointer}
+            />
             <SocialContainer>
               <img
                 src="/img/facebook.png"

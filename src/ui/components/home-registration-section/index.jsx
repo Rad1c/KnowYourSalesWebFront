@@ -1,7 +1,6 @@
 /** @jsxImportSource @emotion/react */
-import { Button } from "@mui/material";
+import { Button, Modal } from "@mui/material";
 import { MediumTitleHeight } from "../common/styled";
-import { useNavigate } from "react-router-dom";
 import {
   RegistrationSectionContainer,
   BoxLeftContainer,
@@ -11,10 +10,16 @@ import {
   BtnRegisterUser,
   ContentContainer,
   BtnRegisterCommerce,
+  ModalStyle,
 } from "./styled";
+import { useState } from "react";
+import CommerceRegistration from "../modals/commerce-registration1";
+import UserRegistration from "../modals/user-registration";
 
 const RegistrationSection = () => {
-  const navigate = useNavigate();
+  const [openComm, setOpenComm] = useState(false);
+  const [openUser, setOpenUser] = useState(false);
+
   return (
     <RegistrationSectionContainer id="registration-section">
       <div css={MediumTitleHeight} style={{ textAlign: "center" }}>
@@ -29,10 +34,16 @@ const RegistrationSection = () => {
           </Text>
           <Button
             css={BtnRegisterUser}
-            onClick={() => navigate("/user-registration")}
+            onClick={() => setOpenUser(true)}
+            // onClick={() => navigate("/user-registration")}
           >
             Započnite registraciju
           </Button>
+          <Modal open={openUser} onClose={() => setOpenUser(false)}>
+            <div css={ModalStyle}>
+              <UserRegistration />
+            </div>
+          </Modal>
         </BoxLeftContainer>
         <BoxRightContainer>
           <P>Registrujte nalog</P>
@@ -40,12 +51,14 @@ const RegistrationSection = () => {
             Registrujte vaš nalog i počnite dobijati obavještenja o popustima u
             vašim omiljenim radnjama
           </Text>
-          <Button
-            css={BtnRegisterCommerce}
-            onClick={() => navigate("/commerce-registration")}
-          >
+          <Button css={BtnRegisterCommerce} onClick={() => setOpenComm(true)}>
             Započnite registraciju
           </Button>
+          <Modal open={openComm} onClose={() => setOpenComm(false)}>
+            <div css={ModalStyle}>
+              <CommerceRegistration />
+            </div>
+          </Modal>
         </BoxRightContainer>
       </ContentContainer>
     </RegistrationSectionContainer>

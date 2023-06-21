@@ -1,4 +1,12 @@
-import { Button, FormControl, InputLabel, Link, MenuItem, Select, TextField } from "@mui/material";
+import {
+  Button,
+  FormControl,
+  InputLabel,
+  Link,
+  MenuItem,
+  Select,
+  TextField,
+} from "@mui/material";
 import {
   Container,
   RowContainer,
@@ -8,11 +16,11 @@ import {
   Wrapper,
 } from "./styled";
 import { useState } from "react";
-import { validationUserRegisterSchema } from "../../../validators/validator";
+import { validationUserRegisterSchema } from "../../../../validators/validator";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import useAuthStore from "../../../store/authStore";
+import useAuthStore from "../../../../store/authStore";
 import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
 
@@ -34,14 +42,32 @@ const UserRegistration = () => {
   });
 
   const submitForm = async (data) => {
-    const { firstName, lastName, email, password, confirmPassword, day, month, year, sex } = data;
+    const {
+      firstName,
+      lastName,
+      email,
+      password,
+      confirmPassword,
+      day,
+      month,
+      year,
+      sex,
+    } = data;
     const formattedDay = day.padStart(2, "0");
     const formattedMonth = month.padStart(2, "0");
     const dateOfBirth = `${year}-${formattedMonth}-${formattedDay} 00:00:00`;
 
     try {
       setOpen(true);
-      await registerUser(firstName, lastName, sex, email, dateOfBirth, password, confirmPassword);
+      await registerUser(
+        firstName,
+        lastName,
+        sex,
+        email,
+        dateOfBirth,
+        password,
+        confirmPassword
+      );
       setOpen(false);
       navigate("/login");
     } catch (error) {
@@ -56,7 +82,10 @@ const UserRegistration = () => {
   };
   return (
     <Wrapper>
-      <Backdrop sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }} open={open}>
+      <Backdrop
+        sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={open}
+      >
         <CircularProgress color="inherit" />
       </Backdrop>
       <Container>
@@ -73,7 +102,7 @@ const UserRegistration = () => {
                 required
                 {...register("firstName")}
                 error={Boolean(errors.firstName)}
-                sx={{ backgroundColor: "#fafafa" }}
+                sx={{ backgroundColor: "#fafafa", width: "45%" }}
                 helperText={errors?.firstName?.message}
               />
               <TextField
@@ -83,11 +112,12 @@ const UserRegistration = () => {
                 required
                 {...register("lastName")}
                 error={Boolean(errors.lastName)}
+                sx={{ width: "45%" }}
                 helperText={errors?.lastName?.message}
               />
             </RowContainer>
             <RowContainer>
-              <FormControl sx={{ width: "120px" }}>
+              <FormControl sx={{ width: "12rem" }}>
                 <InputLabel id="lbl-sex">Pol</InputLabel>
                 <Select
                   labelId="lbl-sex"
@@ -95,7 +125,7 @@ const UserRegistration = () => {
                   value={sex}
                   required
                   label="Pol"
-                  sx={{ width: "100px" }}
+                  sx={{ width: "80%" }}
                   {...register("sex")}
                   onChange={sexChange}
                 >
@@ -114,7 +144,7 @@ const UserRegistration = () => {
                 }}
                 required
                 {...register("day")}
-                sx={{ width: "100px" }}
+                sx={{ width: "20%" }}
               />
               <TextField
                 id="txtMonth"
@@ -127,7 +157,7 @@ const UserRegistration = () => {
                 }}
                 required
                 {...register("month")}
-                sx={{ width: "100px" }}
+                sx={{ width: "20%" }}
               />
               <TextField
                 id="txtYear"
@@ -140,7 +170,7 @@ const UserRegistration = () => {
                 }}
                 required
                 {...register("year")}
-                sx={{ width: "100px" }}
+                sx={{ width: "20%" }}
               />
             </RowContainer>
             <TextField
@@ -150,13 +180,13 @@ const UserRegistration = () => {
               {...register("email")}
               error={Boolean(errors.email)}
               helperText={errors?.email?.message}
-              sx={{ marginBottom: "25px" }}
+              sx={{ marginBottom: "2.5rem" }}
               required
             />
             <TextField
               label="Lozinka"
               type="password"
-              sx={{ marginBottom: "25px" }}
+              sx={{ marginBottom: "2.5rem" }}
               required
               {...register("password")}
               error={Boolean(errors.password)}
@@ -165,14 +195,14 @@ const UserRegistration = () => {
             <TextField
               label="Ponovi lozinku"
               type="password"
-              sx={{ marginBottom: "25px" }}
+              sx={{ marginBottom: "2.5rem" }}
               required
               {...register("confirmPassword")}
               error={Boolean(errors.confirmPassword)}
               helperText={errors?.confirmPassword?.message}
             />
             <RowContainer>
-              <Link href="/login" sx={{ fontSize: "16px" }}>
+              <Link href="/login" sx={{ fontSize: "1rem" }}>
                 Već imate nalog?
               </Link>
               <Button variant="outlined" css={BtnRegisterStyle} type="submit">

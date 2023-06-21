@@ -83,6 +83,14 @@ const BtnRegisterCommerce = css`
   }
 `;
 
+const ModalStyle = css`
+  width: 20rem;
+  height: 2rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+`;
+
 export {
   RegistrationSectionContainer,
   BoxLeftContainer,
@@ -92,4 +100,5 @@ export {
   BtnRegisterUser,
   BtnRegisterCommerce,
   ContentContainer,
+  ModalStyle,
 };

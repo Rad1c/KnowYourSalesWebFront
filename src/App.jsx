@@ -8,8 +8,6 @@ import Layout from "./ui/components/layout";
 import Error from "./ui/pages/error-page";
 import Home from "./ui/pages/home";
 import "./App.css";
-import UserRegistration from "./ui/pages/user-registration";
-import CommerceRegistration from "./ui/pages/commerce-registration";
 import Products from "./ui/pages/products";
 import NonRequireAuth from "./ui/components/non-require";
 import Commerce from "./ui/pages/commerce";
@@ -27,12 +25,6 @@ function App() {
         {/* public */}
         <Route path="/" element={<Home />} />
         <Route path="/home" element={<Home />} />
-
-        <Route path="/user-registration" element={<UserRegistration />} />
-        <Route
-          path="/commerce-registration"
-          element={<CommerceRegistration />}
-        />
 
         <Route path="/products" element={<Products />} />
         <Route path="/product" element={<Product />} />

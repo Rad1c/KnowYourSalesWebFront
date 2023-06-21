@@ -10,15 +10,33 @@ import {
   ContentWrapper,
   Container,
   VerticalSeparatorContainer,
-  ImgSponsorsStyle,
+  SponsorsContainer,
+  SponsorLogos,
 } from "./styled";
 import { MediumTitleHeight } from "../common/styled";
-import sponzors from "/img/sponsors.png";
 
 const UsageSection = () => {
   return (
     <UsageSectionContainer id="usage-section">
-      <img src={sponzors} css={ImgSponsorsStyle} />
+      <SponsorsContainer>
+        <p
+          css={MediumTitleHeight}
+          style={{ textAlign: "center", color: "#555" }}
+        >
+          U SARADNJI SA
+        </p>
+        <SponsorLogos>
+          <img
+            src="../../../../public/img/Sport_Vision.png"
+            alt="Sport Vision logo"
+          />
+          <img src="../../../../public/img/Shooter.png" alt="Shooter logo" />
+          <img src="../../../../public/img/Tropic.png" alt="Tropic logo" />
+          <img src="../../../../public/img/Bingo.png" alt="Bingo logo" />
+          <img src="../../../../public/img/Mona.png" alt="Mona logo" />
+        </SponsorLogos>
+      </SponsorsContainer>
+      {/* <img src={sponzors} css={ImgSponsorsStyle} /> */}
       <Container>
         <p css={MediumTitleHeight}>KAKO KORISTITI APLIKACIJU</p>
         <ContentWrapper>

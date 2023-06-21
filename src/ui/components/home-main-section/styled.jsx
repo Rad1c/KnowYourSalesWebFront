@@ -4,11 +4,11 @@ import { css } from "@emotion/react";
 const MainSectionContainer = styled.div`
   height: 100vh;
   width: 100%;
+  background-image: url("/img/wavy.png");
+  background-color: #543480;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background-image: url("/img/wavy.png");
-  background-color: #543480;
   --mask: conic-gradient(
       from -45deg at bottom,
       #0000,
@@ -26,7 +26,7 @@ const TextContainer = styled.div`
   align-items: center;
   justify-content: center;
   font-size: clamp(2rem, 1.5rem + 1vw, 60px);
-  height: 400px;
+  height: 40rem;
   line-height: 1.2;
   text-align: center;
   color: #fafafa;
@@ -42,7 +42,7 @@ const SelectContainer = styled.div`
 `;
 
 const SelectStyle = css`
-  width: 200px;
+  width: 20rem;
   color: #fafafa;
 `;
 
