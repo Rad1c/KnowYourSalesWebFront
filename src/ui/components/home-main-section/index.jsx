@@ -6,25 +6,36 @@ import {
   BtnSearch,
 } from "./styled";
 import { MaskDiv } from "../common/styled";
-import { useState } from "react";
+import { useEffect } from "react";
 import Menu from "../menu";
 import SelectOption from "../select";
 import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import useProductsStore from "../../../store/productsStore";
 
 const MainSection = () => {
-  const [selectedValue, setSelectedValue] = useState("");
+  const { cities, getCitiesByCountryCode, categories, getCategories } =
+    useProductsStore();
   const navigate = useNavigate();
-  const cityArr = [
-    { id: 1, name: "Banja Luka" },
-    { id: 2, name: "Sarajevo" },
-    { id: 3, name: "Zagreb" },
-  ];
 
-  const CategoryArr = [
-    { id: 1, name: "Telefoni" },
-    { id: 2, name: "Automobili" },
-  ];
+  useEffect(() => {
+    const fetchCitiesAndCategories = async () => {
+      await getCitiesByCountryCode("BA");
+      await getCategories();
+    };
+
+    fetchCitiesAndCategories();
+  }, []);
+
+  const citiesMap = cities.map((city) => ({
+    id: city.cityId,
+    name: city.cityName,
+  }));
+
+  const categoriesMap = categories.map((category) => ({
+    id: category.id,
+    name: category.name,
+  }));
 
   return (
     <MaskDiv>
@@ -46,8 +57,8 @@ const MainSection = () => {
           </p>
         </TextContainer>
         <SelectContainer>
-          <SelectOption name="Odaberite grad" data={cityArr} />
-          <SelectOption name="Odaberite kategoriju" data={CategoryArr} />
+          <SelectOption name="Odaberite grad" data={citiesMap} />
+          <SelectOption name="Odaberite kategoriju" data={categoriesMap} />
           <Button
             variant="outlined"
             color="inherit"

@@ -2,7 +2,6 @@
 import { Button } from "@mui/material";
 import { MenuContainer, ContentContainer, A, BtnSign } from "./styled";
 import logo from "/img/icon.svg";
-import { css } from "@emotion/react";
 import { useState } from "react";
 import Login from "../login";
 import OutsideClickHandler from "react-outside-click-handler";

@@ -6,12 +6,11 @@ import {
   // MenuItem,
   // rgbToHex,
 } from "@mui/material";
-// import { SelectStyle, SelectLabel } from "./styled";
-import { useState, useEffect } from "react";
+import { SelectStyle, SelectLabel } from "./styled";
+import { useState } from "react";
 
 const SelectOption = (props) => {
   const { name, data } = props;
-
   const [selectedValue, setSelectedValue] = useState("");
 
   return (
@@ -20,22 +19,18 @@ const SelectOption = (props) => {
         {name}
       </InputLabel> */}
       <select
-        name="select--grad"
-        style={{
-          width: "30rem",
-          height: "5rem",
-          fontSize: "2.6rem",
-          backgroundColor: "#3b2559",
-          opacity: "0.8",
-          borderRadius: "5px",
-          color: "#fff",
-          outline: "none",
-        }}
+        name="select"
+        css={SelectStyle}
         required
+        label={name}
+        value={selectedValue}
+        onChange={(event) => setSelectedValue(event.target.value)}
       >
-        <option value="">{name}</option>
+        <option value={name} css={SelectLabel}>
+          {name}
+        </option>
         {data.map((item) => (
-          <option key={item.id} value={item.id}>
+          <option css={SelectLabel} key={item.id} value={item.id}>
             {item.name}
           </option>
         ))}

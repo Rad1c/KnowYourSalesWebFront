@@ -9,7 +9,13 @@ import {
   Button,
   Hidden,
 } from "@mui/material";
-import { Container, AppBarStyle, InputBaseStyle, MenuItemStyle, BtnSignStyle } from "./styled";
+import {
+  Container,
+  AppBarStyle,
+  InputBaseStyle,
+  MenuItemStyle,
+  BtnSignStyle,
+} from "./styled";
 import SearchIcon from "/img/search.svg";
 import { Diamond, DiamondContainer, DiamondText } from "../common/styled";
 import useProductsStore from "../../../store/productsStore";
@@ -39,7 +45,7 @@ const MainMenu = () => {
 
     switch (role) {
       case "User":
-        setBackgroundColor("#555555");
+        setBackgroundColor("#7F3551");
         break;
       case "Commerce":
         setBackgroundColor("#25593B");
@@ -76,14 +82,30 @@ const MainMenu = () => {
               onClick={handleMenuOpen}
               sx={{ marginRight: 2 }}
             >
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+              >
                 <path d="M0 0h24v24H0z" fill="none" />
-                <path fill="white" d="M4 18h16v-2H4zm0-5h16v-2H4zm0-5h16V6H4z" />
+                <path
+                  fill="white"
+                  d="M4 18h16v-2H4zm0-5h16v-2H4zm0-5h16V6H4z"
+                />
               </svg>
             </IconButton>
           </Hidden>
-          <div css={{ paddingTop: "10px", paddingBottom: "10px" }}>
-            <img src="/img/kys-header.png" sx={{ maxWidth: "100%", height: "auto" }} />
+          <div
+            style={{
+              paddingTop: "10px",
+              paddingBottom: "10px",
+            }}
+          >
+            <img
+              src="/img/kys-header.png"
+              style={{ maxWidth: "100%", height: "5rem" }}
+            />
           </div>
 
           <Hidden smDown>
@@ -101,15 +123,33 @@ const MainMenu = () => {
             />
             {role == "User" && (
               <DiamondContainer css={{ background: "transparent" }}>
-                <Diamond css={{ background: "#777" }}>
-                  <p css={DiamondText}>K</p>
+                <Diamond css={{ background: "white" }}>
+                  <p
+                    css={DiamondText}
+                    style={{
+                      color: "#7F3551",
+                      fontWeight: "bold",
+                      fontSize: "2.6rem",
+                    }}
+                  >
+                    K
+                  </p>
                 </Diamond>
               </DiamondContainer>
             )}
             {role == "Commerce" && (
               <DiamondContainer css={{ background: "transparent" }}>
-                <Diamond css={{ background: "#777" }}>
-                  <p css={DiamondText}>T</p>
+                <Diamond css={{ background: "white" }}>
+                  <p
+                    css={DiamondText}
+                    style={{
+                      color: "#25593B",
+                      fontWeight: "bold",
+                      fontSize: "2.6rem",
+                    }}
+                  >
+                    T
+                  </p>
                 </Diamond>
               </DiamondContainer>
             )}
@@ -119,7 +159,7 @@ const MainMenu = () => {
                 color="inherit"
                 size="small"
                 css={BtnSignStyle}
-                onClick={() => navigate("/login")}
+                // onClick={() => navigate("/login")}
               >
                 Prijava
               </Button>
@@ -128,11 +168,19 @@ const MainMenu = () => {
         </Toolbar>
       </AppBar>
 
-      <Hidden smUp>
-        <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleMenuClose}>
+      {/* <Hidden smUp>
+        <Menu
+          anchorEl={anchorEl}
+          open={Boolean(anchorEl)}
+          onClose={handleMenuClose}
+        >
           {categoriesLoaded &&
             categories.map((category) => (
-              <MenuItem key={category.id} onClick={handleMenuClose} sx={{ color: "#fafafa" }}>
+              <MenuItem
+                key={category.id}
+                onClick={handleMenuClose}
+                sx={{ color: "#fafafa" }}
+              >
                 {category.name}
               </MenuItem>
             ))}
@@ -153,7 +201,7 @@ const MainMenu = () => {
               </Button>
             ))}
         </MenuItemStyle>
-      </Hidden>
+      </Hidden> */}
     </Container>
   );
 };

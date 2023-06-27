@@ -1,14 +1,17 @@
 import { css } from "@emotion/react";
 
-// visak kod
 const SelectStyle = css`
   width: 30rem;
-  color: #fafafa;
-  background-color: #472c68;
+  height: 5rem;
+  font-size: 2.6rem;
+  background-color: #3b2559;
+  opacity: 0.8;
+  border-radius: 5px;
+  color: #fff;
+  outline: none;
 `;
 
 const SelectLabel = css`
-  color: #fafafa;
   font-size: 2rem;
 `;
 

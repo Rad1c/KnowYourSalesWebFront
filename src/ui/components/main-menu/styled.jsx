@@ -4,17 +4,21 @@ import { css } from "@emotion/react";
 const AppBarStyle = css`
   background-image: url("img/header-wavy.png");
   // background-color: #55347f;
-  max-height: 70px;
+  height: 10rem;
   color: #fafafa;
 `;
 
 const Container = styled.div`
+  width: 100%;
   background-image: url("img/header-wavy.png");
   background-color: #55347f;
-  max-width: 1500px;
-  width: 100%;
-  padding-bottom: 10px;
-  --mask: conic-gradient(from -45deg at bottom, #0000, #000 1deg 90deg, #0000 91deg) 50% / 30px 100%;
+  --mask: conic-gradient(
+      from -45deg at bottom,
+      #0000,
+      #000 1deg 90deg,
+      #0000 91deg
+    )
+    50% / 30px 100%;
   -webkit-mask: var(--mask);
   mask: var(--mask);
 `;
