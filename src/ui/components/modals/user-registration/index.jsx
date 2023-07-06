@@ -69,7 +69,7 @@ const UserRegistration = () => {
         confirmPassword
       );
       setOpen(false);
-      navigate("/login");
+      navigate("/");
     } catch (error) {
       setOpen(false);
       if (error.response?.status === 409) {
@@ -202,7 +202,8 @@ const UserRegistration = () => {
               helperText={errors?.confirmPassword?.message}
             />
             <RowContainer>
-              <Link href="/login" sx={{ fontSize: "1rem" }}>
+              <Link href="/" sx={{ fontSize: "1rem" }}>
+                {/* zatvara se modal registracije, skroluje se na vrh i otvara se login */}
                 Već imate nalog?
               </Link>
               <Button variant="outlined" css={BtnRegisterStyle} type="submit">

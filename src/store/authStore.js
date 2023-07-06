@@ -19,7 +19,15 @@ const useAuthStore = create((set, get) => ({
 
     set({ cities: response.data });
   },
-  registerUser: async (firstName, lastName, sex, email, dateOfBirth, password, confirmPassword) => {
+  registerUser: async (
+    firstName,
+    lastName,
+    sex,
+    email,
+    dateOfBirth,
+    password,
+    confirmPassword
+  ) => {
     const response = await axiosPrivate.post(
       REGISTER_USER_URL,
       JSON.stringify(
@@ -82,6 +90,8 @@ const useAuthStore = create((set, get) => ({
     console.log("role: " + userData?.role);
     set({ role: userData.role });
 
+    window.location.href = "/products";
+
     return response;
   },
   isUserLoggedIn: () => {
@@ -93,6 +103,12 @@ const useAuthStore = create((set, get) => ({
     if (userData) return userData?.role;
 
     return "none";
+  },
+  logout: () => {
+    localStorage.removeItem("access");
+    localStorage.removeItem("refresh");
+
+    window.location.href = "/home";
   },
 }));
 

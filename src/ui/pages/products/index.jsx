@@ -87,16 +87,6 @@ const products = [
     validFrom: "24.02.2023",
     validTo: "24.03.2023",
   },
-  {
-    id: "c8200fb8-a86c-44f9-9934-e2c238b33bb3",
-    discount: 20,
-    productImg: "/img/product.png",
-    commerceImg: "/img/product-commerce.png",
-    oldPrice: 100.0,
-    newPrice: 80.0,
-    validFrom: "24.02.2023",
-    validTo: "24.03.2023",
-  },
 ];
 
 const Products = () => {

@@ -59,7 +59,7 @@ const CommerceRegistration = () => {
         data.confirmPassword
       );
       setOpen(false);
-      navigate("/login");
+      navigate("/");
     } catch (error) {
       setOpen(false);
       if (error.response?.status === 409) {
@@ -141,7 +141,8 @@ const CommerceRegistration = () => {
               helperText={errors?.confirmPassword?.message}
             />
             <RowContainer>
-              <Link href="/login" sx={{ fontSize: "16px" }}>
+              <Link href="/" sx={{ fontSize: "16px" }}>
+                {/* zatvara se modal registracije, skroluje se na vrh i otvara se login */}
                 Već imate nalog?
               </Link>
               <Button variant="outlined" css={BtnRegisterStyle} type="submit">

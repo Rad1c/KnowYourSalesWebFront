@@ -1,36 +1,35 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import {
   AppBar,
   Toolbar,
   IconButton,
   InputBase,
-  MenuItem,
-  Menu,
   Button,
   Hidden,
+  Modal,
 } from "@mui/material";
 import {
   Container,
   AppBarStyle,
   InputBaseStyle,
-  MenuItemStyle,
-  BtnSignStyle,
+  BtnSign,
+  AccountMenu,
 } from "./styled";
 import SearchIcon from "/img/search.svg";
 import { Diamond, DiamondContainer, DiamondText } from "../common/styled";
-import useProductsStore from "../../../store/productsStore";
 import useAuthStore from "../../../store/authStore";
-import { useNavigate } from "react-router-dom";
+import Login from "../login";
+import { useNavigate } from "react-router";
 
 const MainMenu = () => {
-  const [categoriesLoaded, setCategoriesLoaded] = useState(false);
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const [searchTerm, setSearchTerm] = React.useState("");
-  const { getCategories, categories } = useProductsStore();
-  const { isUserLoggedIn } = useAuthStore();
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [searchTerm, setSearchTerm] = useState("");
+  const { isUserLoggedIn, logout } = useAuthStore();
   const [role, setRole] = useState("none");
-  const navigate = useNavigate();
   const [backgroundColor, setBackgroundColor] = useState("#55347f");
+  const [searchColor, setSearchColor] = useState("rgba(59, 37, 89, 0.6)");
+  const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
 
   const handleMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -38,33 +37,26 @@ const MainMenu = () => {
 
   useEffect(() => {
     setRole(isUserLoggedIn());
-    const fetchCities = async () => {
-      await getCategories();
-      setCategoriesLoaded(true);
-    };
 
     switch (role) {
       case "User":
         setBackgroundColor("#7F3551");
+        setSearchColor("rgba(89, 37, 57, 0.6)");
         break;
       case "Commerce":
-        setBackgroundColor("#25593B");
+        setBackgroundColor("#357F54");
+        setSearchColor("rgba(37, 89, 59, 0.6)");
         break;
       default:
         setBackgroundColor("#55347f");
+        setSearchColor("rgba(59, 37, 89, 0.6)");
     }
-
-    fetchCities();
-    categories.sort((a, b) => a.displaySeq - b.displaySeq);
   }, [role]);
 
-  const handleMenuClose = () => {
-    setAnchorEl(null);
-  };
-
-  const handleCategoryClick = (categoryId) => {
-    console.log(categoryId);
-  };
+  // // TODO: ubaciti ikonicu ( X ) koja ce se prikazivati kad se meni otvori, iskoristiti funkc ispod za zatvaranje
+  // const handleMenuClose = () => {
+  //   setAnchorEl(null);
+  // };
 
   const handleSearchChange = (event) => {
     const searchTerm = event.target.value;
@@ -72,15 +64,51 @@ const MainMenu = () => {
   };
 
   return (
-    <Container style={{ backgroundColor }}>
+    <Container
+      style={{ backgroundColor, position: "sticky", top: 0, zIndex: 10 }}
+    >
       <AppBar position="static" sx={AppBarStyle} style={{ backgroundColor }}>
-        <Toolbar sx={{ justifyContent: "space-between" }}>
+        <Toolbar sx={{ justifyContent: "space-between", marginTop: ".5rem" }}>
           <Hidden mdUp>
+            <div
+              style={{
+                padding: "1rem 0",
+                marginTop: "0.5rem",
+              }}
+            >
+              <img
+                src="/img/kys-white-logo.png"
+                style={{
+                  minWidth: "100%",
+                  height: "5rem",
+                  // marginRight: "2rem",
+                }}
+              />
+            </div>
+          </Hidden>
+          <Hidden mdDown>
+            <div
+              style={{
+                padding: "1rem 0",
+              }}
+            >
+              <img
+                src="/img/kys-header.png"
+                style={{
+                  minWidth: "100%",
+                  height: "5rem",
+                  cursor: "pointer",
+                }}
+                onClick={() => navigate("/products")}
+              />
+            </div>
+          </Hidden>
+          <Hidden smUp>
             <IconButton
+              sx={{ marginTop: "0.5rem" }}
               color="inherit"
               edge="start"
               onClick={handleMenuOpen}
-              sx={{ marginRight: 2 }}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -96,22 +124,11 @@ const MainMenu = () => {
               </svg>
             </IconButton>
           </Hidden>
-          <div
-            style={{
-              paddingTop: "10px",
-              paddingBottom: "10px",
-            }}
-          >
-            <img
-              src="/img/kys-header.png"
-              style={{ maxWidth: "100%", height: "5rem" }}
-            />
-          </div>
 
           <Hidden smDown>
             <InputBase
               variant="outlined"
-              placeholder="Pretraga..."
+              placeholder="Pretražite..."
               value={searchTerm}
               onChange={handleSearchChange}
               endAdornment={
@@ -119,89 +136,182 @@ const MainMenu = () => {
                   <img src={SearchIcon} alt="Search Icon" />
                 </IconButton>
               }
-              sx={InputBaseStyle}
+              sx={InputBaseStyle({ searchColor })}
             />
             {role == "User" && (
-              <DiamondContainer css={{ background: "transparent" }}>
-                <Diamond css={{ background: "white" }}>
-                  <p
-                    css={DiamondText}
-                    style={{
-                      color: "#7F3551",
-                      fontWeight: "bold",
-                      fontSize: "2.6rem",
+              <div style={{ display: "flex", gap: "4rem" }}>
+                <img
+                  src="../../../../public/img/Fav-shop.svg"
+                  alt="Favorite shop logo"
+                  style={{
+                    marginTop: "2rem",
+                    height: "2.6rem",
+                    cursor: "pointer",
+                  }}
+                />
+                <img
+                  src="../../../../public/img/Fav-article.svg"
+                  alt="Favorite article logo"
+                  style={{
+                    marginTop: "2rem",
+                    height: "2.6rem",
+                    cursor: "pointer",
+                  }}
+                />
+                <DiamondContainer
+                  onClick={() => setOpen(true)}
+                  css={{
+                    background: "transparent",
+                    marginTop: "1rem",
+                    cursor: "pointer",
+                  }}
+                >
+                  <Diamond
+                    css={{
+                      background: "white",
+                      height: "4rem",
+                      width: "4rem",
+                      marginRight: "1.5rem",
                     }}
                   >
-                    K
-                  </p>
-                </Diamond>
-              </DiamondContainer>
+                    <p
+                      css={DiamondText}
+                      style={{
+                        color: "#7F3551",
+                        fontWeight: "bold",
+                        height: "4rem",
+                        width: "4rem",
+                      }}
+                    >
+                      K
+                    </p>
+                  </Diamond>
+                </DiamondContainer>
+                <Modal
+                  slotProps={{
+                    backdrop: {
+                      style: { backgroundColor: "rgba(0, 0, 0, 0)" },
+                    },
+                  }}
+                  open={open}
+                  onClose={() => setOpen(false)}
+                >
+                  <AccountMenu>
+                    <p
+                      style={{ cursor: "pointer" }}
+                      onClick={() => navigate("/user")}
+                    >
+                      Podešavanja naloga
+                    </p>
+                    <p
+                      style={{ marginTop: "1rem", cursor: "pointer" }}
+                      onClick={logout}
+                    >
+                      Odjavite se
+                    </p>
+                  </AccountMenu>
+                  {/* <Login /> */}
+                </Modal>
+              </div>
             )}
             {role == "Commerce" && (
-              <DiamondContainer css={{ background: "transparent" }}>
-                <Diamond css={{ background: "white" }}>
-                  <p
-                    css={DiamondText}
-                    style={{
-                      color: "#25593B",
-                      fontWeight: "bold",
-                      fontSize: "2.6rem",
+              <div>
+                <img
+                  src="../../../../public/img/Add-shop.svg"
+                  alt="Favorite shop logo"
+                  style={{
+                    marginTop: "2rem",
+                    height: "2.6rem",
+                    cursor: "pointer",
+                  }}
+                />
+                <img
+                  src="../../../../public/img/Add-article.svg"
+                  alt="Favorite article logo"
+                  style={{
+                    marginTop: "2rem",
+                    height: "2.6rem",
+                    cursor: "pointer",
+                  }}
+                />
+                <DiamondContainer
+                  css={{
+                    background: "transparent",
+                    marginTop: "1rem",
+                    cursor: "pointer",
+                  }}
+                >
+                  <Diamond
+                    css={{
+                      background: "white",
+                      height: "4rem",
+                      width: "4rem",
+                      marginRight: "1.5rem",
                     }}
                   >
-                    T
-                  </p>
-                </Diamond>
-              </DiamondContainer>
+                    <p
+                      css={DiamondText}
+                      style={{
+                        color: "#25593B",
+                        fontWeight: "bold",
+                        height: "4rem",
+                        width: "4rem",
+                      }}
+                    >
+                      T
+                    </p>
+                  </Diamond>
+                </DiamondContainer>
+                <Modal
+                  slotProps={{
+                    backdrop: {
+                      style: { backgroundColor: "rgba(0, 0, 0, 0)" },
+                    },
+                  }}
+                  open={open}
+                  onClose={() => setOpen(false)}
+                >
+                  <AccountMenu>
+                    <p style={{ cursor: "pointer" }}>Podešavanja naloga</p>
+                    <p
+                      style={{ marginTop: "1rem", cursor: "pointer" }}
+                      onClick={logout}
+                    >
+                      Odjavite se
+                    </p>
+                  </AccountMenu>
+                </Modal>
+              </div>
             )}
             {role == "none" && (
-              <Button
-                variant="outlined"
-                color="inherit"
-                size="small"
-                css={BtnSignStyle}
-                // onClick={() => navigate("/login")}
-              >
-                Prijava
-              </Button>
+              <div>
+                <Button
+                  variant="outlined"
+                  color="inherit"
+                  size="small"
+                  css={BtnSign}
+                  onClick={() => {
+                    setOpen(true);
+                  }}
+                >
+                  Prijavite se
+                </Button>
+                <Modal
+                  slotProps={{
+                    backdrop: {
+                      style: { backgroundColor: "rgba(0, 0, 0, 0)" },
+                    },
+                  }}
+                  open={open}
+                  onClose={() => setOpen(false)}
+                >
+                  <Login />
+                </Modal>
+              </div>
             )}
           </Hidden>
         </Toolbar>
       </AppBar>
-
-      {/* <Hidden smUp>
-        <Menu
-          anchorEl={anchorEl}
-          open={Boolean(anchorEl)}
-          onClose={handleMenuClose}
-        >
-          {categoriesLoaded &&
-            categories.map((category) => (
-              <MenuItem
-                key={category.id}
-                onClick={handleMenuClose}
-                sx={{ color: "#fafafa" }}
-              >
-                {category.name}
-              </MenuItem>
-            ))}
-        </Menu>
-      </Hidden>
-
-      <Hidden smDown>
-        <MenuItemStyle>
-          {categoriesLoaded &&
-            categories.map((category) => (
-              <Button
-                key={category.id}
-                color="inherit"
-                sx={{ color: "#fafafa" }}
-                onClick={() => handleCategoryClick(category.id)}
-              >
-                {category.name}
-              </Button>
-            ))}
-        </MenuItemStyle>
-      </Hidden> */}
     </Container>
   );
 };
