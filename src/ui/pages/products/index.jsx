@@ -96,6 +96,7 @@ const Products = () => {
     <ContentWrapper>
       <MainMenu />
       <SortProducts />
+      <hr style={{ width: "120rem", marginTop: "-2rem" }} />
       <CardContainer>
         {productsValue &&
           productsValue.map((product, _) => (
@@ -112,7 +113,21 @@ const Products = () => {
             />
           ))}
       </CardContainer>
-      <Pagination count={10} shape="rounded" size="large" />
+      <Pagination
+        count={10}
+        shape="rounded"
+        size="large"
+        sx={{
+          marginBottom: "8rem",
+          "& .Mui-selected": {
+            backgroundColor: "#55347f",
+            color: "#fafafa",
+          },
+          "& .Mui-selected:hover": {
+            backgroundColor: "#3B2559",
+          },
+        }}
+      />
       <Footer />
     </ContentWrapper>
   );

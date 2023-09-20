@@ -4,6 +4,7 @@ import { create } from "zustand";
 const useProductsStore = create((set, get) => ({
   categories: [],
   cities: [],
+  articles: [],
   getCategories: async () => {
     const response = await axiosPrivate.get("/categories");
 
@@ -17,6 +18,32 @@ const useProductsStore = create((set, get) => ({
     });
 
     set({ cities: response.data });
+  },
+  getArticles: async (
+    pageSize,
+    page,
+    name = "",
+    cityName = "",
+    categoryName = "",
+    commerceId = ""
+  ) => {
+    try {
+      const response = await axiosPrivate.get("/articles", {
+        params: {
+          pageSize,
+          page,
+          cityName,
+          categoryName,
+          name,
+          commerceId,
+        },
+      });
+
+      set({ articles: response.data });
+    } catch (error) {
+      console.error("Error fetching articles:", error);
+      set({ articles: [] });
+    }
   },
 }));
 
