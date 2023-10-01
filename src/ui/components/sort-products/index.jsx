@@ -1,4 +1,10 @@
-import { Autocomplete, TextField, NativeSelect, FormControl, InputLabel } from "@mui/material";
+import {
+  Autocomplete,
+  TextField,
+  NativeSelect,
+  FormControl,
+  InputLabel,
+} from "@mui/material";
 import { SortContainer } from "./styled";
 import { useState, useEffect } from "react";
 import useProductsStore from "../../../store/productsStore";
@@ -6,7 +12,8 @@ import useProductsStore from "../../../store/productsStore";
 const SortProducts = () => {
   const [cityValue, setCityValue] = useState();
   const [categoryValue, setCategoryValue] = useState();
-  const { cities, getCitiesByCountryCode, categories, getCategories } = useProductsStore();
+  const { cities, getCitiesByCountryCode, categories, getCategories } =
+    useProductsStore();
 
   useEffect(() => {
     const fetchCitiesAndCategories = async () => {
@@ -40,7 +47,9 @@ const SortProducts = () => {
           onChange={(_, value) => {
             setCityValue(value);
           }}
-          renderInput={(params) => <TextField {...params} label="Grad" variant="standard" />}
+          renderInput={(params) => (
+            <TextField {...params} label="Grad" variant="standard" />
+          )}
         />
         <Autocomplete
           disablePortal
@@ -52,7 +61,9 @@ const SortProducts = () => {
           onChange={(_, value) => {
             setCategoryValue(value);
           }}
-          renderInput={(params) => <TextField {...params} label="Kategorija" variant="standard" />}
+          renderInput={(params) => (
+            <TextField {...params} label="Kategorija" variant="standard" />
+          )}
         />
       </div>
       <div style={{ display: "flex", gap: "20px", alignItems: "center" }}>
@@ -82,12 +93,9 @@ const SortProducts = () => {
               id: "show",
             }}
           >
-            <option value={8}>8</option>
             <option value={16}>16</option>
             <option value={24}>24</option>
             <option value={32}>32</option>
-            <option value={40}>40</option>
-            <option value={48}>48</option>
           </NativeSelect>
         </FormControl>
         <InputLabel variant="standard">po strani</InputLabel>

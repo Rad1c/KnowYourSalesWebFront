@@ -48,20 +48,20 @@ const DiamondContainer = styled.div`
 
 const Diamond = styled.div`
   background: #644688;
-  height: 50px;
+  height: 5rem;
+  width: 5rem;
   text-align: center;
   transform: rotate(45deg);
-  width: 50px;
 `;
 
 const DiamondText = css`
   color: #fafafa;
   display: table-cell;
-  height: 50px;
-  transform: rotate(-45deg);
+  width: 5rem;
+  height: 5rem;
   vertical-align: middle;
-  font-size: 24px;
-  width: 60px;
+  font-size: 2.4rem;
+  transform: rotate(-45deg);
 `;
 
 export {

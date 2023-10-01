@@ -8,6 +8,9 @@ const cardStyles = css`
   border-radius: 4px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   text-align: center;
+  :hover {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  }
 `;
 
 const imageStyles = css`
@@ -75,8 +78,13 @@ const Discount = styled.span`
   color: #fafafa;
   padding: 5px;
   height: 50px;
-  --mask: conic-gradient(from -42.5deg at bottom, #0000, #000 1deg 84deg, #0000 85deg) 50%/27.49px
-    100%;
+  --mask: conic-gradient(
+      from -42.5deg at bottom,
+      #0000,
+      #000 1deg 84deg,
+      #0000 85deg
+    )
+    50%/27.49px 100%;
   -webkit-mask: var(--mask);
   mask: var(--mask);
 `;
@@ -86,7 +94,13 @@ const Description = styled.div`
   padding-top: 20px;
   padding-bottom: 10px;
   background-color: #efebf3;
-  --mask: conic-gradient(from 135deg at top, #0000, #000 1deg 89deg, #0000 90deg) 50%/30px 100%;
+  --mask: conic-gradient(
+      from 135deg at top,
+      #0000,
+      #000 1deg 89deg,
+      #0000 90deg
+    )
+    50%/30px 100%;
   -webkit-mask: var(--mask);
   mask: var(--mask);
 `;

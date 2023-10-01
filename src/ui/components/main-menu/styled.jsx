@@ -3,7 +3,6 @@ import { css } from "@emotion/react";
 
 const AppBarStyle = css`
   background-image: url("img/header-wavy.png");
-  // background-color: #55347f;
   height: 10rem;
   color: #fafafa;
 `;
@@ -23,11 +22,12 @@ const Container = styled.div`
   mask: var(--mask);
 `;
 
-const InputBaseStyle = css`
-  background-color: rgba(59, 39, 87, 0.5);
-  padding: 2x;
-  padding-left: 10px;
+const InputBaseStyle = ({ searchColor }) => css`
+  background-color: ${searchColor || "rgba(59, 37, 89, 0.6)"};
+  padding-left: 1rem;
+  margin-right: 20rem;
   border-radius: 5px;
+  font-size: 2rem;
   width: 30%;
   color: #fafafa;
 `;
@@ -40,17 +40,38 @@ const MenuItemStyle = styled.div`
   flex-wrap: wrap;
 `;
 
-const BtnSignStyle = css`
+const BtnSign = css`
   color: #593b83;
-  width: 150px;
-  height: 50px;
+  width: 15rem;
+  height: 5rem;
   background-color: #fafafa;
-  font-size: 16px;
+  font-size: 1.6rem;
 
   :hover {
-    color: #fafafa;
-    background-color: #593b83;
+    color: #593b83;
+    background-color: #fafafa;
+    box-shadow: 0px 4px 4px 3px rgba(0, 0, 0, 0.25);
   }
 `;
 
-export { AppBarStyle, Container, InputBaseStyle, MenuItemStyle, BtnSignStyle };
+const AccountMenu = styled.div`
+  background-color: #fafafa;
+  color: #1e1e1e;
+  font-size: 1.6rem;
+  border: 1px solid #777;
+  border-radius: 5px;
+  padding: 1rem 3rem;
+  position: absolute;
+  top: 8rem;
+  right: 3rem;
+  outline: 0;
+`;
+
+export {
+  AppBarStyle,
+  Container,
+  InputBaseStyle,
+  MenuItemStyle,
+  BtnSign,
+  AccountMenu,
+};
