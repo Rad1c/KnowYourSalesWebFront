@@ -1,7 +1,7 @@
 import { axiosPrivate } from "../api/axios";
 import { create } from "zustand";
 
-const useProductsStore = create((set, get) => ({
+const useProductsStore = create((set) => ({
   categories: [],
   cities: [],
   articles: [],
@@ -32,9 +32,9 @@ const useProductsStore = create((set, get) => ({
         params: {
           pageSize,
           page,
+          name,
           cityName,
           categoryName,
-          name,
           commerceId,
         },
       });

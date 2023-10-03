@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+/* eslint-disable react/no-unknown-property */
+/* eslint-disable react/prop-types */
 import {
   AppBar,
   Toolbar,
@@ -15,43 +16,26 @@ import {
   BtnSign,
   AccountMenu,
 } from "./styled";
-import SearchIcon from "/img/search.svg";
 import { Diamond, DiamondContainer, DiamondText } from "../common/styled";
-import useAuthStore from "../../../store/authStore";
+import SearchIcon from "/img/search.svg";
 import Login from "../login";
+import useAuthStore from "../../../store/authStore";
+import useHomeStore from "../../../store/homeStore";
+import { useMemo, useState } from "react";
 import { useNavigate } from "react-router";
 
-const MainMenu = () => {
-  const [anchorEl, setAnchorEl] = useState(null);
+const MainMenu = ({backgroundColor, searchColor, role}) => {
+  const [setAnchorEl] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
-  const { isUserLoggedIn, logout } = useAuthStore();
-  const [role, setRole] = useState("none");
-  const [backgroundColor, setBackgroundColor] = useState("#55347f");
-  const [searchColor, setSearchColor] = useState("rgba(59, 37, 89, 0.6)");
   const [open, setOpen] = useState(false);
+  const [name, setName] = useState("")
+  const { logout } = useAuthStore();
+  const { getUser, getCommerce } = useHomeStore();
   const navigate = useNavigate();
 
   const handleMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
-
-  useEffect(() => {
-    setRole(isUserLoggedIn());
-
-    switch (role) {
-      case "User":
-        setBackgroundColor("#7F3551");
-        setSearchColor("rgba(89, 37, 57, 0.6)");
-        break;
-      case "Commerce":
-        setBackgroundColor("#357F54");
-        setSearchColor("rgba(37, 89, 59, 0.6)");
-        break;
-      default:
-        setBackgroundColor("#55347f");
-        setSearchColor("rgba(59, 37, 89, 0.6)");
-    }
-  }, [role]);
 
   // // TODO: ubaciti ikonicu ( X ) koja ce se prikazivati kad se meni otvori, iskoristiti funkc ispod za zatvaranje
   // const handleMenuClose = () => {
@@ -62,6 +46,18 @@ const MainMenu = () => {
     const searchTerm = event.target.value;
     setSearchTerm(searchTerm);
   };
+
+  useMemo(() => {
+    const fetchUsersName = async () => {
+        await getUser().then(response => setName(response.data.firstName))
+    };
+    const fetchCommerceName = async () => {
+      await getCommerce().then(response => setName(response.data.name))
+    }
+
+    role === "User" ? fetchUsersName() : fetchCommerceName()
+    console.log(name)
+  }, [name])
 
   return (
     <Container
@@ -81,7 +77,6 @@ const MainMenu = () => {
                 style={{
                   minWidth: "100%",
                   height: "5rem",
-                  // marginRight: "2rem",
                 }}
               />
             </div>
@@ -141,7 +136,7 @@ const MainMenu = () => {
             {role == "User" && (
               <div style={{ display: "flex", gap: "4rem" }}>
                 <img
-                  src="../../../../public/img/Fav-shop.svg"
+                  src="/img/Fav-shop.svg"
                   alt="Favorite shop logo"
                   style={{
                     marginTop: "2rem",
@@ -150,7 +145,7 @@ const MainMenu = () => {
                   }}
                 />
                 <img
-                  src="../../../../public/img/Fav-article.svg"
+                  src="/img/Fav-article.svg"
                   alt="Favorite article logo"
                   style={{
                     marginTop: "2rem",
@@ -183,7 +178,7 @@ const MainMenu = () => {
                         width: "4rem",
                       }}
                     >
-                      K
+                      {name.slice(0, 1).toUpperCase()}
                     </p>
                   </Diamond>
                 </DiamondContainer>
@@ -210,31 +205,31 @@ const MainMenu = () => {
                       Odjavite se
                     </p>
                   </AccountMenu>
-                  {/* <Login /> */}
                 </Modal>
               </div>
             )}
             {role == "Commerce" && (
-              <div>
+              <div style={{ display: "flex", gap: "4rem" }}>
                 <img
-                  src="../../../../public/img/Add-shop.svg"
+                  src="/img/Add-shop.svg"
                   alt="Favorite shop logo"
                   style={{
-                    marginTop: "2rem",
-                    height: "2.6rem",
+                    marginTop: "1.5rem",
+                    height: "3.2rem",
                     cursor: "pointer",
                   }}
                 />
                 <img
-                  src="../../../../public/img/Add-article.svg"
+                  src="/img/Add-article.svg"
                   alt="Favorite article logo"
                   style={{
-                    marginTop: "2rem",
-                    height: "2.6rem",
+                    marginTop: "1.5rem",
+                    height: "3.2rem",
                     cursor: "pointer",
                   }}
                 />
                 <DiamondContainer
+                  onClick={() => setOpen(true)}
                   css={{
                     background: "transparent",
                     marginTop: "1rem",
@@ -258,7 +253,7 @@ const MainMenu = () => {
                         width: "4rem",
                       }}
                     >
-                      T
+                      {name.slice(0, 1).toUpperCase()}
                     </p>
                   </Diamond>
                 </DiamondContainer>
@@ -272,7 +267,12 @@ const MainMenu = () => {
                   onClose={() => setOpen(false)}
                 >
                   <AccountMenu>
-                    <p style={{ cursor: "pointer" }}>Podešavanja naloga</p>
+                    <p
+                      style={{ cursor: "pointer" }}
+                      onClick={() => navigate("/commerce")}
+                    >
+                      Podešavanja naloga
+                    </p>
                     <p
                       style={{ marginTop: "1rem", cursor: "pointer" }}
                       onClick={logout}

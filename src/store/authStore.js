@@ -7,7 +7,7 @@ const REGISTER_USER_URL = "/user/register";
 const REGISTER_COMMERCE_URL = "/commerce/register";
 const LOGIN_URL = "/login";
 
-const useAuthStore = create((set, get) => ({
+const useAuthStore = create((set) => ({
   cities: [],
   role: "none",
   getCitiesByCountryCode: async (code) => {

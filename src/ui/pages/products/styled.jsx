@@ -1,20 +1,20 @@
 import styled from "@emotion/styled";
 
 const CardContainer = styled.div`
+  max-width: 140rem;
+  padding: 5rem;
   display: flex;
   flex-wrap: wrap;
-  gap: 40px;
-  padding: 50px;
+  gap: 4rem;
   justify-content: center;
-  max-width: 1400px;
 `;
 
 const ContentWrapper = styled.div`
+  background-color: #fafafa;
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #fafafa;
 `;
 
 export { CardContainer, ContentWrapper };

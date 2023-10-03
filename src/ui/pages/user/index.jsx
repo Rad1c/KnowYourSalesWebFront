@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { Container, ItemsContainer, Title, Wrapper, ShopwItems } from "./styled";
 import CommerceCard from "../../components/commerce-card";
 import CommerceUserSection from "../../components/commerce-user-section";
-import MainMenu from "../../components/main-menu";
-import { Container, ItemsContainer, Title, Wrapper, ShopwItems } from "./styled";
 import Footer from "../../components/footer";
+import MainMenu from "../../components/main-menu";
 import ProductCard from "../../components/product-card";
+import { useEffect, useState } from "react";
+import useAuthStore from "../../../store/authStore";
 
 const name = "Aleksandar Radić";
 const img = "/img/user-generic.png";
@@ -150,10 +151,36 @@ const User = () => {
   const [showAllCommerces, setShowAllCommerces] = useState(false);
   const [productsValue, setproductsValue] = useState(favoriteProducts);
   const [showAllProducts, setshowAllProducts] = useState(false);
+  const [primaryColor, setPrimaryColor] = useState("#55347f")
+  const [secondaryColor, setSecondaryColor] = useState("#3B2559")
+  const [searchColor, setSearchColor] = useState("rgba(59, 37, 89, 0.6)")
+  const [role, setRole] = useState("none");
+  const { isUserLoggedIn } = useAuthStore()
+
+  useEffect(() => {
+    setRole(isUserLoggedIn())
+  
+    switch (role) {
+      case "User":
+        setPrimaryColor("#7F3551");
+        setSecondaryColor("#592539")
+        setSearchColor("rgba(89, 37, 57, 0.6)");
+        break;
+      case "Commerce":
+        setPrimaryColor("#357F54");
+        setSecondaryColor("#25593B")
+        setSearchColor("rgba(37, 89, 59, 0.6)");
+        break;
+      default:
+        setPrimaryColor("#55347f");
+        setSecondaryColor("#3B2559")
+        setSearchColor("rgba(59, 37, 89, 0.6)");
+    }
+  }, [role])
 
   return (
     <Container>
-      <MainMenu />
+      <MainMenu backgroundColor={primaryColor} searchColor={searchColor} role={role} />
       <CommerceUserSection name={name} img={img} />
       <div>
         <Title>omiljene trgovine</Title>
@@ -162,7 +189,7 @@ const User = () => {
             {commercesValue
               .slice(0, showAllCommerces ? commercesValue.length : 4)
               .map((commerce) => (
-                <CommerceCard name={commerce.name} img={commerce.img} />
+                <CommerceCard key={commerce.name} name={commerce.name} img={commerce.img} />
               ))}
           </ItemsContainer>
         </Wrapper>

@@ -1,12 +1,18 @@
 import styled from "@emotion/styled";
 
 const SortContainer = styled.div`
-  margin-top: 15px;
+  width: 100%;
+  max-width: 125rem;
+  margin-top: 1.5rem;
   display: flex;
   justify-content: space-between;
-  max-width: 1200px;
   align-items: center;
-  width: 100%;
 `;
 
-export { SortContainer };
+const Underline = styled.div`
+  height: .05rem;
+  width: 130rem;
+  background-color: #ddd;
+`
+
+export { SortContainer, Underline };

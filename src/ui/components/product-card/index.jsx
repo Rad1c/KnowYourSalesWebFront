@@ -1,3 +1,5 @@
+/* eslint-disable react/no-unknown-property */
+/* eslint-disable react/prop-types */
 import {
   CommerceImageContainer,
   ProductLocationAndTime,
@@ -16,23 +18,25 @@ const ProductCard = (props) => {
     discount,
     productImg,
     commerceImg,
+    name,
     oldPrice,
     newPrice,
     validFrom,
     validTo,
+    primaryColor
   } = props;
 
   return (
     <div css={cardStyles}>
-      <Discount>{discount}%</Discount>
+      <Discount style={{backgroundColor: primaryColor}}>{discount}%</Discount>
       <img src={productImg} alt="product" css={imageStyles} />
       <Description>
         <CommerceImageContainer>
           <img src={commerceImg} alt="product-commerce" />
         </CommerceImageContainer>
-        <ProductName>nike renew ride 3</ProductName>
+        <ProductName>{name}</ProductName>
         <OldPrice>{oldPrice} KM</OldPrice>
-        <NewPrice>{newPrice}KM</NewPrice>
+        <NewPrice style={{color: primaryColor}}>{newPrice}KM</NewPrice>
         <ProductLocationAndTime>
           {validFrom} - {validTo}
         </ProductLocationAndTime>

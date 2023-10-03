@@ -1,72 +1,57 @@
+/* eslint-disable react/no-unknown-property */
+/* eslint-disable react/prop-types */
 /** @jsxImportSource @emotion/react */
-import {
-  FormControl,
-  // InputLabel,
-  // Select,
-  // MenuItem,
-  // rgbToHex,
-} from "@mui/material";
-import { SelectStyle, SelectLabel } from "./styled";
-import { useState } from "react";
+import { SelectStyle, SelectLabel, SelectContainer, ArrowDown } from "./styled";
+import { useState, useEffect } from "react";
 
-const SelectOption = (props) => {
-  const { name, data } = props;
+const SelectOption = ({ name, data, backgroundColor, color, disabled }) => {
   const [selectedValue, setSelectedValue] = useState("");
+  const [selectData, setSelectData] = useState([]);
+
+  useEffect(() => {
+    setSelectData(data);
+  }, [data]);
 
   return (
-    <FormControl>
-      {/* <InputLabel id="lbl-select" css={SelectLabel}>
-        {name}
-      </InputLabel> */}
-      <select
-        name="select"
-        css={SelectStyle}
-        required
-        label={name}
-        value={selectedValue}
-        onChange={(event) => setSelectedValue(event.target.value)}
-      >
-        <option value={name} css={SelectLabel}>
-          {name}
-        </option>
-        {data.map((item) => (
-          <option css={SelectLabel} key={item.id} value={item.id}>
-            {item.name}
-          </option>
-        ))}
-      </select>
-      {/* <Select
-        labelId="lbl-select"
-        id="select"
-        label={name}
-        value={selectedValue}
-        onChange={(event) => setSelectedValue(event.target.value)}
-        css={SelectStyle}
-        sx={{
-          borderRadius: 1,
-          "& .MuiOutlinedInput-notchedOutline": {
-            border: 0,
-          },
-          "&.MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
-            {
-              border: "whitesmoke",
-            },
-          "&.css-1h123mg-MuiFormLabel-root-MuiInputLabel-root-SelectLabel.Mui-focused":
-            {
-              display: "none",
-            },
-          "&.MuiSelect-icon": {
-            color: "white",
-          },
-        }}
-      >
-        {data.map((item) => (
-          <MenuItem key={item.id} value={item.id}>
-            {item.name}
-          </MenuItem>
-        ))}
-      </Select> */}
-    </FormControl>
+        <SelectContainer 
+        style={{ color, backgroundColor }}
+        >
+          <select
+            name="select"
+            style={{
+              backgroundColor,
+              color,
+            }}
+            css={SelectStyle}
+            required
+            label={name}
+            value={selectedValue}
+            onChange={(event) => {
+              setSelectedValue(event.target.value);
+              console.log(event);
+            }}
+          >
+            <option
+              value={name}
+              style={{ backgroundColor, color }}
+              css={SelectLabel}
+              disabled={disabled}
+            >
+              {name}
+            </option>
+            {selectData?.map((item) => (
+              <option
+                style={{ backgroundColor, color }}
+                css={SelectLabel}
+                key={item.id}
+                value={item.id}
+              >
+                {item.name}
+              </option>
+            ))}
+          </select>
+          <ArrowDown style={{ color }}>›</ArrowDown>
+        </SelectContainer>
   );
 };
 

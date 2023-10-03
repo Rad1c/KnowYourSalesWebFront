@@ -1,4 +1,4 @@
-import { useLocation, Navigate, Outlet } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 
 const NonRequireAuth = () => {
   const refresh = localStorage.getItem("refresh");

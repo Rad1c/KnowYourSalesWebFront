@@ -1,9 +1,10 @@
+/* eslint-disable react-refresh/only-export-components */
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 
 const cardStyles = css`
   position: relative;
-  width: 250px;
+  width: 25rem;
   border: 1px solid #ddd;
   border-radius: 4px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -14,57 +15,53 @@ const cardStyles = css`
 `;
 
 const imageStyles = css`
-  z-index: 1;
   width: 100%;
   height: auto;
+  z-index: 1;
   border-radius: 4px;
 `;
 
 const descriptionStyles = css`
-  margin-top: 10px;
+  margin-top: 1rem;
 `;
 
 const CommerceImageContainer = styled.div`
-  display: flex;
-  padding-top: 5px;
-  aling-items: center;
-  height: 25px;
+  height: 2.5rem;
   width: 100%;
+  aling-items: center;
+  padding-top: .5rem;
+  margin-bottom: 1.2rem;
+  display: flex;
   justify-content: space-around;
-  margin-bottom: 12px;
 `;
 
 const ProductName = styled.p`
-  font-size: 18px;
+  font-size: 1.8rem;
   text-transform: uppercase;
-  font-weight: bold;
-  color: #777777;
+  color: #555;
   line-height: 1.2;
-  margin-bottom: 7px;
+  margin-bottom: .7rem;
 `;
 
 const ProductLocationAndTime = styled.p`
-  font-size: 16px;
-  color: #777777;
-  font-weight: bold;
-  margin-bottom: 5px;
+  font-size: 2rem;
+  color: #555;
+  margin-bottom: .5rem;
 `;
 
 const OldPrice = styled.p`
+  color: #777;
+  font-size: 1.8rem;
+  margin-top: 2rem;
   text-decoration: line-through;
-  color: red;
-  color: #777777;
-  font-size: 18px;
-  font-weight: bold;
-  margin-top: 20px;
 `;
 
 const NewPrice = styled.p`
   font-weight: bold;
-  margin-top: -2px;
-  font-size: 26px;
+  margin-top: -.2rem;
+  font-size: 3.2rem;
   color: #54357f;
-  margin-bottom: 20px;
+  margin-bottom: 2rem;
 `;
 
 const Discount = styled.span`
@@ -72,12 +69,12 @@ const Discount = styled.span`
   top: 0;
   left: 0;
   z-index: 2;
-  font-size: 18px;
+  font-size: 1.8rem;
   font-weight: bold;
   background-color: #54357f;
   color: #fafafa;
-  padding: 5px;
-  height: 50px;
+  padding: .5rem;
+  height: 5rem;
   --mask: conic-gradient(
       from -42.5deg at bottom,
       #0000,
@@ -90,9 +87,9 @@ const Discount = styled.span`
 `;
 
 const Description = styled.div`
-  margin-top: -22px;
-  padding-top: 20px;
-  padding-bottom: 10px;
+  margin-top: -2.2rem;
+  padding-top: 2rem;
+  padding-bottom: 1rem;
   background-color: #efebf3;
   --mask: conic-gradient(
       from 135deg at top,
