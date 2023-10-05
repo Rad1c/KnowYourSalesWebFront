@@ -1,53 +1,54 @@
-import { Container, ItemsContainer, Title, Wrapper, ShopwItems } from "./styled";
+/* eslint-disable react/prop-types */
+import { Container, ItemsContainer, Title, Wrapper, ShowItems } from "./styled";
 import CommerceCard from "../../components/commerce-card";
 import CommerceUserSection from "../../components/commerce-user-section";
 import Footer from "../../components/footer";
 import MainMenu from "../../components/main-menu";
 import ProductCard from "../../components/product-card";
-import { useEffect, useState } from "react";
-import useAuthStore from "../../../store/authStore";
+import { useState } from "react";
+import { useColor } from "../../../hooks/useColors";
 
 const name = "Aleksandar Radić";
 const img = "/img/user-generic.png";
 
 const favoriteCommerces = [
   {
-    id: "6fe1248b-c594-44a6-8a74-2e7119aa085c",
+    id: "1",
     name: "Sport Reality",
     img: "/img/product-commerce.png",
   },
   {
-    id: "6fe1248b-c594-44a6-8a74-2e7119aa085c",
+    id: "2",
     name: "Sport Reality",
     img: "/img/product-commerce.png",
   },
   {
-    id: "6fe1248b-c594-44a6-8a74-2e7119aa085c",
+    id: "3",
     name: "Sport Reality",
     img: "/img/product-commerce.png",
   },
   {
-    id: "6fe1248b-c594-44a6-8a74-2e7119aa085c",
+    id: "4",
     name: "Sport Reality",
     img: "/img/product-commerce.png",
   },
   {
-    id: "6fe1248b-c594-44a6-8a74-2e7119aa085c",
+    id: "5",
     name: "Sport Reality",
     img: "/img/product-commerce.png",
   },
   {
-    id: "6fe1248b-c594-44a6-8a74-2e7119aa085c",
+    id: "6",
     name: "Sport Reality",
     img: "/img/product-commerce.png",
   },
   {
-    id: "6fe1248b-c594-44a6-8a74-2e7119aa085c",
+    id: "7",
     name: "Sport Reality",
     img: "/img/product-commerce.png",
   },
   {
-    id: "6fe1248b-c594-44a6-8a74-2e7119aa085c",
+    id: "8",
     name: "Sport Reality",
     img: "/img/product-commerce.png",
   },
@@ -55,7 +56,7 @@ const favoriteCommerces = [
 
 const favoriteProducts = [
   {
-    id: "c8200fb8-a86c-44f9-9934-e2c238b33bb3",
+    id: "1",
     discount: 20,
     productImg: "/img/product.png",
     commerceImg: "/img/product-commerce.png",
@@ -65,7 +66,7 @@ const favoriteProducts = [
     validTo: "24.03.2023",
   },
   {
-    id: "c8200fb8-a86c-44f9-9934-e2c238b33bb3",
+    id: "2",
     discount: 20,
     productImg: "/img/product.png",
     commerceImg: "/img/product-commerce.png",
@@ -75,7 +76,7 @@ const favoriteProducts = [
     validTo: "24.03.2023",
   },
   {
-    id: "c8200fb8-a86c-44f9-9934-e2c238b33bb3",
+    id: "3",
     discount: 20,
     productImg: "/img/product.png",
     commerceImg: "/img/product-commerce.png",
@@ -85,7 +86,7 @@ const favoriteProducts = [
     validTo: "24.03.2023",
   },
   {
-    id: "c8200fb8-a86c-44f9-9934-e2c238b33bb3",
+    id: "4",
     discount: 20,
     productImg: "/img/product.png",
     commerceImg: "/img/product-commerce.png",
@@ -95,7 +96,7 @@ const favoriteProducts = [
     validTo: "24.03.2023",
   },
   {
-    id: "c8200fb8-a86c-44f9-9934-e2c238b33bb3",
+    id: "5",
     discount: 20,
     productImg: "/img/product.png",
     commerceImg: "/img/product-commerce.png",
@@ -105,7 +106,7 @@ const favoriteProducts = [
     validTo: "24.03.2023",
   },
   {
-    id: "c8200fb8-a86c-44f9-9934-e2c238b33bb3",
+    id: "6",
     discount: 20,
     productImg: "/img/product.png",
     commerceImg: "/img/product-commerce.png",
@@ -115,7 +116,7 @@ const favoriteProducts = [
     validTo: "24.03.2023",
   },
   {
-    id: "c8200fb8-a86c-44f9-9934-e2c238b33bb3",
+    id: "7",
     discount: 20,
     productImg: "/img/product.png",
     commerceImg: "/img/product-commerce.png",
@@ -125,7 +126,7 @@ const favoriteProducts = [
     validTo: "24.03.2023",
   },
   {
-    id: "c8200fb8-a86c-44f9-9934-e2c238b33bb3",
+    id: "8",
     discount: 20,
     productImg: "/img/product.png",
     commerceImg: "/img/product-commerce.png",
@@ -135,7 +136,7 @@ const favoriteProducts = [
     validTo: "24.03.2023",
   },
   {
-    id: "c8200fb8-a86c-44f9-9934-e2c238b33bb3",
+    id: "9",
     discount: 20,
     productImg: "/img/product.png",
     commerceImg: "/img/product-commerce.png",
@@ -146,64 +147,41 @@ const favoriteProducts = [
   },
 ];
 
-const User = () => {
-  const [commercesValue, setCommercesValue] = useState(favoriteCommerces);
+const User = ({ role }) => {
+  const [commercesValue] = useState(favoriteCommerces);
   const [showAllCommerces, setShowAllCommerces] = useState(false);
-  const [productsValue, setproductsValue] = useState(favoriteProducts);
+  const [productsValue] = useState(favoriteProducts);
   const [showAllProducts, setshowAllProducts] = useState(false);
-  const [primaryColor, setPrimaryColor] = useState("#55347f")
-  const [secondaryColor, setSecondaryColor] = useState("#3B2559")
-  const [searchColor, setSearchColor] = useState("rgba(59, 37, 89, 0.6)")
-  const [role, setRole] = useState("none");
-  const { isUserLoggedIn } = useAuthStore()
-
-  useEffect(() => {
-    setRole(isUserLoggedIn())
-  
-    switch (role) {
-      case "User":
-        setPrimaryColor("#7F3551");
-        setSecondaryColor("#592539")
-        setSearchColor("rgba(89, 37, 57, 0.6)");
-        break;
-      case "Commerce":
-        setPrimaryColor("#357F54");
-        setSecondaryColor("#25593B")
-        setSearchColor("rgba(37, 89, 59, 0.6)");
-        break;
-      default:
-        setPrimaryColor("#55347f");
-        setSecondaryColor("#3B2559")
-        setSearchColor("rgba(59, 37, 89, 0.6)");
-    }
-  }, [role])
+  const { primaryColor, searchColor } = useColor(role);
 
   return (
     <Container>
       <MainMenu backgroundColor={primaryColor} searchColor={searchColor} role={role} />
-      <CommerceUserSection name={name} img={img} />
+      <CommerceUserSection name={name} img={img} role={role} allowed={"User"}/>
       <div>
-        <Title>omiljene trgovine</Title>
+        <Title>Omiljene trgovine</Title>
         <Wrapper>
           <ItemsContainer>
             {commercesValue
               .slice(0, showAllCommerces ? commercesValue.length : 4)
               .map((commerce) => (
-                <CommerceCard key={commerce.name} name={commerce.name} img={commerce.img} />
+                <CommerceCard key={commerce.id} name={commerce.name} img={commerce.img} />
               ))}
           </ItemsContainer>
         </Wrapper>
       </div>
-      {!showAllCommerces && (
-        <ShopwItems onClick={() => setShowAllCommerces(true)}>
-          Prikaži listu omiljenih radnji
-        </ShopwItems>
-      )}
-      {showAllCommerces && (
-        <ShopwItems onClick={() => setShowAllCommerces(false)}>
-          Sakrij listu omiljenih radnji
-        </ShopwItems>
-      )}
+      <div style={{ marginTop: "1rem", marginBottom: "8rem" }}>
+        {!showAllCommerces && (
+          <ShowItems onClick={() => setShowAllCommerces(true)}>
+            Prikaži listu omiljenih radnji
+          </ShowItems>
+        )}
+        {showAllCommerces && (
+          <ShowItems onClick={() => setShowAllCommerces(false)}>
+            Sakrij listu omiljenih radnji
+          </ShowItems>
+        )}
+      </div>
       <div>
         <Title>Omiljeni artikli</Title>
         <Wrapper>
@@ -219,21 +197,24 @@ const User = () => {
                 newPrice={product.newPrice}
                 validFrom={product.validFrom}
                 validTo={product.validTo}
+                primaryColor={primaryColor}
               />
             ))}
           </ItemsContainer>
         </Wrapper>
       </div>
-      {!showAllProducts && (
-        <ShopwItems onClick={() => setshowAllProducts(true)}>
-          Prikaži listu omiljenih radnji
-        </ShopwItems>
-      )}
-      {showAllProducts && (
-        <ShopwItems onClick={() => setshowAllProducts(false)}>
-          Sakrij listu omiljenih artikala
-        </ShopwItems>
-      )}
+      <div style={{ marginTop: "1rem", marginBottom: "11.8rem" }}>
+        {!showAllProducts && (
+          <ShowItems onClick={() => setshowAllProducts(true)}>
+            Prikaži listu omiljenih radnji
+          </ShowItems>
+        )}
+        {showAllProducts && (
+          <ShowItems onClick={() => setshowAllProducts(false)}>
+            Sakrij listu omiljenih artikala
+          </ShowItems>
+        )}
+      </div>
       <Footer />
     </Container>
   );

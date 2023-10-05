@@ -1,14 +1,12 @@
-import { ErrorPageContainer, ErrorDiv, ErrorText } from "./styled";
+import { Container, FourOFour, Text } from "./styled";
 
-const Error = () => {
+const Not_Found = () => {
   return (
-    <ErrorPageContainer>
-      <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-        <ErrorDiv />
-        <ErrorText>Page Not Found</ErrorText>
-      </div>
-    </ErrorPageContainer>
-  );
-};
+    <Container>
+      <FourOFour>4<img src="/img/kys-white-logo.png" alt="CourseApp Logo" height={"80rem"}/>4</FourOFour>
+      <Text>Page Not Found</Text>
+    </Container>
+  )
+}
 
-export default Error;
+export default Not_Found

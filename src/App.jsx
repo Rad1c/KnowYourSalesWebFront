@@ -1,37 +1,50 @@
 import {
-  BrowserRouter as Router,
   Routes,
   Route,
-  useLocation,
 } from "react-router-dom";
 import Layout from "./ui/components/layout";
-import Error from "./ui/pages/error-page";
+import Not_Found from "./ui/pages/error-page";
 import Home from "./ui/pages/home";
 import "./App.css";
 import Products from "./ui/pages/products";
-import NonRequireAuth from "./ui/components/non-require";
 import Commerce from "./ui/pages/commerce";
 import User from "./ui/pages/user";
 import Product from "./ui/pages/product-details";
+import ProtectedRoute from "./ui/components/protected-route";
+import { useEffect, useState } from "react";
+import useAuthStore from "./store/authStore";
 
 function App() {
+  const [role, setRole] = useState("none");
+  const { isUserLoggedIn } = useAuthStore();
+
+  useEffect(() => {
+    setRole(isUserLoggedIn());
+  }, [role])
+
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
         {/*private*/}
-        <Route path="/commerce" element={<Commerce />} />
-        <Route path="/user" element={<User />} />
+        <Route path="/user" element={
+          <ProtectedRoute role={role} isAllowed={"User"} >
+            <User role={role} />
+          </ProtectedRoute>
+        } />
 
         {/* public */}
         <Route path="/" element={<Home />} />
         <Route path="/home" element={<Home />} />
 
-        <Route path="/products" element={<Products />} />
-        <Route path="/product" element={<Product />} />
+        <Route path="/products" element={<Products role={role} />} />
+        <Route path="/product" element={<Product role={role} />} />
+
+        {/* treba rolu proslijedit i na osnovu nje renderovat stvari */}
+        <Route path="/commerce" element={<Commerce role={role} />} />
 
         {/* catch all */}
-        <Route path="/not-found" element={<Error />} />
-        <Route path="*" element={<Error />} />
+        <Route path="/not-found" element={<Not_Found />} />
+        <Route path="*" element={<Not_Found />} />
       </Route>
     </Routes>
   );

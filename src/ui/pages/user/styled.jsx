@@ -7,32 +7,36 @@ const Container = styled.div`
 `;
 
 const Title = styled.p`
+  color: #7F3551;
+  font-size: 2rem;
+  font-weight: bold;
   text-transform: uppercase;
-  color: #357f54;
 `;
 
 const Wrapper = styled.div`
   display: flex;
-  gap: 50px;
+  gap: 5rem;
 `;
 
 const ItemsContainer = styled.div`
+  width: 110rem;
+  margin-top: 2.5rem;
   display: flex;
+  justify-content: space-between;
   gap: 20px;
   flex-wrap: wrap;
-  margin-top: 25px;
-  max-width: 1100px;
 `;
 
-const ShopwItems = styled.a`
-  margin-top: 10px;
-  color: #333333;
+const ShowItems = styled.a`
+  margin-top: 1rem;
+  color: #777;
+  font-size: 1.4rem;
   cursor: pointer;
 
   &:hover {
-    color: #ff0000;
+    color: #333;
     text-decoration: underline;
   }
 `;
 
-export { Container, Title, Wrapper, ItemsContainer, ShopwItems };
+export { Container, Title, Wrapper, ItemsContainer, ShowItems };
