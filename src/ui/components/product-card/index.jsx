@@ -23,12 +23,12 @@ const ProductCard = (props) => {
     newPrice,
     validFrom,
     validTo,
-    primaryColor
+    primaryColor,
   } = props;
 
   return (
     <div css={cardStyles}>
-      <Discount style={{backgroundColor: primaryColor}}>{discount}%</Discount>
+      <Discount style={{ backgroundColor: primaryColor }}>{discount}%</Discount>
       <img src={productImg} alt="product" css={imageStyles} />
       <Description>
         <CommerceImageContainer>
@@ -36,7 +36,7 @@ const ProductCard = (props) => {
         </CommerceImageContainer>
         <ProductName>{name}</ProductName>
         <OldPrice>{oldPrice} KM</OldPrice>
-        <NewPrice style={{color: primaryColor}}>{newPrice}KM</NewPrice>
+        <NewPrice style={{ color: primaryColor }}>{newPrice}KM</NewPrice>
         <ProductLocationAndTime>
           {validFrom} - {validTo}
         </ProductLocationAndTime>
