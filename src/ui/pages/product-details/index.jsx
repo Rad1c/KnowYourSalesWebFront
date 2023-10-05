@@ -1,16 +1,17 @@
 /* eslint-disable react/prop-types */
 import {
   Container,
-  MapContainer,
   ProductMapContainer,
   ProductCardContainer,
   Title,
+  MapContainerWrapper,
 } from "./styled";
 import MainMenu from "../../components/main-menu";
 import ProductDetails from "../../components/product-details";
 import ProductCard from "../../components/product-card";
 import Footer from "../../components/footer";
 import { useColor } from "../../../hooks/useColors";
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 
 const productsFromCategory = [
   {
@@ -98,6 +99,8 @@ const productsFromShop = [
   },
 ];
 
+const position = [44.77108, 17.20588];
+
 const Product = ({ role }) => {
   const { primaryColor, searchColor } = useColor(role);
 
@@ -106,9 +109,22 @@ const Product = ({ role }) => {
       <MainMenu backgroundColor={primaryColor} searchColor={searchColor} role={role} />
       <ProductMapContainer>
         <ProductDetails />
-        <MapContainer>
-          <img src="/img/map.png" width="100%" height="100%" />
-        </MapContainer>
+        <MapContainerWrapper>
+          <MapContainer
+            center={position}
+            zoom={16}
+            scrollWheelZoom={true}
+            style={{ height: "100%", width: "100%", zIndex: "1" }}
+          >
+            <TileLayer
+              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            />
+            <Marker position={position}>
+              <Popup>Sport Vision</Popup>
+            </Marker>
+          </MapContainer>
+        </MapContainerWrapper>
       </ProductMapContainer>
       <div>
         <Title>Još popusta iz ove kategorije</Title>

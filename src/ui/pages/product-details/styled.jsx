@@ -6,7 +6,7 @@ const Container = styled.div`
   align-items: center;
 `;
 
-const MapContainer = styled.div`
+const MapContainerWrapper = styled.div`
   padding-top: 30px;
   padding-bottom: 25px;
   width: 450px;
@@ -39,10 +39,4 @@ const Title = styled.p`
   color: #54357f;
 `;
 
-export {
-  Container,
-  MapContainer,
-  ProductMapContainer,
-  ProductCardContainer,
-  Title,
-};
+export { Container, MapContainerWrapper, ProductMapContainer, ProductCardContainer, Title };
