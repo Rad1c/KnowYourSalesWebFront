@@ -1,63 +1,60 @@
 import styled from "@emotion/styled";
 
 const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+display: flex;
+flex-direction: column;
+align-items: center;
+`;
+
+const Title = styled.p`
+  font-size: 2rem;
+  font-weight: bold;
+  text-transform: uppercase;
 `;
 
 const ShopContainer = styled.div`
-  display: flex;
-  gap: 20px;
-  flex-wrap: wrap;
-  margin-top: 25px;
-  max-width: 1100px;
-  justify-content: center;
+  width: 110rem;
+  margin-top: 2.5rem;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  justify-items: center;
+  gap: 2rem;
 `;
 
 const BtnAddShop = styled.div`
-  margin-top: 20px;
-  background-image: url("/img/add-shop.png");
-  width: 100px;
-  height: 100px;
+  align-self: center;
+  justify-self: center;
+
+  width: 10rem;
+  height: 10rem;
+  background: url("/img/add-shop.png") no-repeat center;
   background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
   border: none;
   cursor: pointer;
 `;
 
 const BtnAddProduct = styled.div`
-  margin-top: 20px;
-  background-image: url("/img/add-product.png");
-  width: 100px;
-  height: 100px;
+  align-self: center;
+  justify-self: center;
+
+  width: 10rem;
+  height: 10rem;
+  background: url("/img/add-product.png") no-repeat center;
   background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
   border: none;
   cursor: pointer;
 `;
 
-const ShopWrapper = styled.div`
-  display: flex;
-  gap: 50px;
-`;
-
-const Title = styled.p`
-  text-transform: uppercase;
-  color: #357f54;
-`;
-
-const ShopwItems = styled.a`
-  margin-top: 10px;
-  color: #333333;
+const ShowItems = styled.a`
+  margin-top: 1rem;
+  color: #777;
+  font-size: 1.4rem;
   cursor: pointer;
 
   &:hover {
-    color: #ff0000;
+    color: #333;
     text-decoration: underline;
   }
 `;
 
-export { Container, ShopContainer, BtnAddShop, ShopWrapper, Title, ShopwItems, BtnAddProduct };
+export { Container, ShopContainer, BtnAddShop, Title, ShowItems, BtnAddProduct };

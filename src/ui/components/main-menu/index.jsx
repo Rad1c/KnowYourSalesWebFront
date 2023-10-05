@@ -20,7 +20,7 @@ import { Diamond, DiamondContainer, DiamondText } from "../common/styled";
 import SearchIcon from "/img/search.svg";
 import Login from "../login";
 import useAuthStore from "../../../store/authStore";
-import useHomeStore from "../../../store/homeStore";
+import useAccountStore from "../../../store/accountStore";
 import { useMemo, useState } from "react";
 import { useNavigate } from "react-router";
 
@@ -30,7 +30,7 @@ const MainMenu = ({backgroundColor, searchColor, role}) => {
   const [open, setOpen] = useState(false);
   const [name, setName] = useState("")
   const { logout } = useAuthStore();
-  const { getUser, getCommerce } = useHomeStore();
+  const { getUser, getCommerce } = useAccountStore();
   const navigate = useNavigate();
 
   const handleMenuOpen = (event) => {
@@ -48,16 +48,18 @@ const MainMenu = ({backgroundColor, searchColor, role}) => {
   };
 
   useMemo(() => {
-    const fetchUsersName = async () => {
+    const fetchUserName = async (role) => {
+      if(role === "User"){
         await getUser().then(response => setName(response.data.firstName))
-    };
-    const fetchCommerceName = async () => {
-      await getCommerce().then(response => setName(response.data.name))
+      }
+
+      if(role === "Commerce"){
+        await getCommerce().then(response => setName(response.data.name))
+      }
     }
 
-    role === "User" ? fetchUsersName() : fetchCommerceName()
-    console.log(name)
-  }, [name])
+    fetchUserName(role)
+  }, [role])
 
   return (
     <Container

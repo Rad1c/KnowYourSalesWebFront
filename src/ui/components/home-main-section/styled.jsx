@@ -4,8 +4,7 @@ import { css } from "@emotion/react";
 const MainSectionContainer = styled.div`
   height: 100vh;
   width: 100%;
-  background-image: url("/img/wavy.png");
-  background-color: #543480;
+  background: #543480 url("/img/wavy.png");
   display: flex;
   flex-direction: column;
   justify-content: space-between;

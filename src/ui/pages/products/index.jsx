@@ -1,19 +1,15 @@
+/* eslint-disable react/prop-types */
+import { CardContainer, ContentWrapper } from "./styled";
 import { Pagination } from "@mui/material";
 import Footer from "../../components/footer";
 import MainMenu from "../../components/main-menu";
 import ProductCard from "../../components/product-card";
-import { CardContainer, ContentWrapper } from "./styled";
 import SortProducts from "../../components/sort-products";
-import { useState, useEffect } from "react";
-import useAuthStore from "../../../store/authStore";
 import useProductsStore from "../../../store/productsStore";
+import { useColor } from "../../../hooks/useColors";
+import { useEffect } from "react";
 
-const Products = () => {
-  const [primaryColor, setPrimaryColor] = useState("#55347f")
-  const [secondaryColor, setSecondaryColor] = useState("#3B2559")
-  const [searchColor, setSearchColor] = useState("rgba(59, 37, 89, 0.6)")
-  const [role, setRole] = useState("none");
-  const { isUserLoggedIn } = useAuthStore();
+const Products = ({ role }) => {
   const { articles, getArticles } = useProductsStore();
 
   useEffect(() => {
@@ -23,28 +19,8 @@ const Products = () => {
 
     fetchArticles();
   }, [])
-
-  useEffect(() => {
-    setRole(isUserLoggedIn())
   
-    switch (role) {
-      case "User":
-        setPrimaryColor("#7F3551");
-        setSecondaryColor("#592539")
-        setSearchColor("rgba(89, 37, 57, 0.6)");
-        break;
-      case "Commerce":
-        setPrimaryColor("#357F54");
-        setSecondaryColor("#25593B")
-        setSearchColor("rgba(37, 89, 59, 0.6)");
-        break;
-      default:
-        setPrimaryColor("#55347f");
-        setSecondaryColor("#3B2559")
-        setSearchColor("rgba(59, 37, 89, 0.6)");
-    }
-  }, [role])
-  
+  const { primaryColor, secondaryColor, searchColor } = useColor(role)
 
   return (
     <ContentWrapper>

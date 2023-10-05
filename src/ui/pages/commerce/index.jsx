@@ -1,18 +1,19 @@
-import { useState } from "react";
-import CommerceUserSection from "../../components/commerce-user-section";
-import Footer from "../../components/footer";
-import MainMenu from "../../components/main-menu";
-import ShopCard from "../../components/shop-card";
+/* eslint-disable react/prop-types */
 import {
   Container,
   ShopContainer,
   BtnAddShop,
-  ShopWrapper,
   Title,
-  ShopwItems,
+  ShowItems,
   BtnAddProduct,
 } from "./styled";
+import MainMenu from "../../components/main-menu";
 import ProductCard from "../../components/product-card";
+import ShopCard from "../../components/shop-card";
+import CommerceUserSection from "../../components/commerce-user-section";
+import Footer from "../../components/footer";
+import { useState } from "react";
+import { useColor } from "../../../hooks/useColors";
 
 const shops = [
   { city: "Sarajevo", address: "Dobrinja 1" },
@@ -26,7 +27,7 @@ const shops = [
 
 const products = [
   {
-    id: "c8200fb8-a86c-44f9-9934-e2c238b33bb3",
+    id: "1",
     discount: 20,
     productImg: "/img/product.png",
     commerceImg: "/img/product-commerce.png",
@@ -36,7 +37,7 @@ const products = [
     validTo: "24.03.2023",
   },
   {
-    id: "c8200fb8-a86c-44f9-9934-e2c238b33bb3",
+    id: "2",
     discount: 20,
     productImg: "/img/product.png",
     commerceImg: "/img/product-commerce.png",
@@ -46,7 +47,7 @@ const products = [
     validTo: "24.03.2023",
   },
   {
-    id: "c8200fb8-a86c-44f9-9934-e2c238b33bb3",
+    id: "3",
     discount: 20,
     productImg: "/img/product.png",
     commerceImg: "/img/product-commerce.png",
@@ -56,7 +57,7 @@ const products = [
     validTo: "24.03.2023",
   },
   {
-    id: "c8200fb8-a86c-44f9-9934-e2c238b33bb3",
+    id: "4",
     discount: 20,
     productImg: "/img/product.png",
     commerceImg: "/img/product-commerce.png",
@@ -66,7 +67,7 @@ const products = [
     validTo: "24.03.2023",
   },
   {
-    id: "c8200fb8-a86c-44f9-9934-e2c238b33bb3",
+    id: "5",
     discount: 20,
     productImg: "/img/product.png",
     commerceImg: "/img/product-commerce.png",
@@ -76,7 +77,7 @@ const products = [
     validTo: "24.03.2023",
   },
   {
-    id: "c8200fb8-a86c-44f9-9934-e2c238b33bb3",
+    id: "6",
     discount: 20,
     productImg: "/img/product.png",
     commerceImg: "/img/product-commerce.png",
@@ -86,7 +87,7 @@ const products = [
     validTo: "24.03.2023",
   },
   {
-    id: "c8200fb8-a86c-44f9-9934-e2c238b33bb3",
+    id: "7",
     discount: 20,
     productImg: "/img/product.png",
     commerceImg: "/img/product-commerce.png",
@@ -96,7 +97,7 @@ const products = [
     validTo: "24.03.2023",
   },
   {
-    id: "c8200fb8-a86c-44f9-9934-e2c238b33bb3",
+    id: "8",
     discount: 20,
     productImg: "/img/product.png",
     commerceImg: "/img/product-commerce.png",
@@ -106,7 +107,7 @@ const products = [
     validTo: "24.03.2023",
   },
   {
-    id: "c8200fb8-a86c-44f9-9934-e2c238b33bb3",
+    id: "9",
     discount: 20,
     productImg: "/img/product.png",
     commerceImg: "/img/product-commerce.png",
@@ -120,64 +121,66 @@ const products = [
 const name = "Sport Reality";
 const img = "/img/product-commerce.png";
 
-const Commerce = () => {
-  const [shopsValue, setShops] = useState(shops);
-  const [productsValue, setProducts] = useState(products);
+const Commerce = ({ role }) => {
+  const [shopsValue] = useState(shops);
+  const [productsValue] = useState(products);
   const [showAllShops, setShowAllShops] = useState(false);
   const [showAllProducts, setShowAllProducts] = useState(false);
+  const { primaryColor, searchColor } = useColor(role);
 
   return (
     <Container>
-      <MainMenu />
-      <CommerceUserSection name={name} img={img} />
+      <MainMenu backgroundColor={primaryColor} searchColor={searchColor} role={role}/>
+      <CommerceUserSection name={name} img={img} role={role} allowed={"Commerce"}/>
       <div>
-        <Title>Radnje</Title>
-        <ShopWrapper>
-          <ShopContainer>
-            {shopsValue.slice(0, showAllShops ? shopsValue.length : 4).map((shop, index) => (
-              <ShopCard key={index} city={shop.city} address={shop.address} />
-            ))}
-          </ShopContainer>
-          <BtnAddShop />
-        </ShopWrapper>
+        <Title style={{ color: primaryColor }}>Radnje</Title>
+        <ShopContainer>
+          {role === "Commerce" && <BtnAddShop /> }
+          {shopsValue.slice(0, showAllShops ? shopsValue.length : role === "Commerce" ? 3 : 4).map((shop, index) => (
+            <ShopCard key={index} city={shop.city} address={shop.address} role={role} />
+          ))}
+        </ShopContainer>
       </div>
-      {!showAllShops && (
-        <ShopwItems onClick={() => setShowAllShops(true)}>Prikaži listu dodanih radnji</ShopwItems>
-      )}
-      {showAllShops && (
-        <ShopwItems onClick={() => setShowAllShops(false)}>Sakrij listu dodanih radnji</ShopwItems>
-      )}
+      <div style={{ marginTop: "1rem", marginBottom: "8rem" }}>
+        {!showAllShops && (
+          <ShowItems onClick={() => setShowAllShops(true)}>Prikaži listu dodanih radnji</ShowItems>
+          )}
+        {showAllShops && (
+          <ShowItems onClick={() => setShowAllShops(false)}>Sakrij listu dodanih radnji</ShowItems>
+          )}
+      </div>
       <div>
-        <Title>Artikli</Title>
-        <ShopWrapper>
-          <ShopContainer>
-            {productsValue.slice(0, showAllProducts ? shopsValue.length : 4).map((product, _) => (
-              <ProductCard
-                key={product.id}
-                id={product.id}
-                discount={product.discount}
-                productImg={product.productImg}
-                commerceImg={product.commerceImg}
-                oldPrice={product.oldPrice}
-                newPrice={product.newPrice}
-                validFrom={product.validFrom}
-                validTo={product.validTo}
-              />
-            ))}
-          </ShopContainer>
-          <BtnAddProduct />
-        </ShopWrapper>
+        <Title style={{ color: primaryColor }}>Artikli</Title>
+        <ShopContainer>
+          {role === "Commerce" && <BtnAddProduct /> }
+          {productsValue.slice(0, showAllProducts ? productsValue.length : role === "Commerce" ? 3 : 4).map(product => (
+            <ProductCard
+              key={product.id}
+              id={product.id}
+              discount={product.discount}
+              productImg={product.productImg}
+              commerceImg={product.commerceImg}
+              oldPrice={product.oldPrice}
+              newPrice={product.newPrice}
+              validFrom={product.validFrom}
+              validTo={product.validTo}
+              primaryColor={primaryColor}
+            />
+          ))}
+        </ShopContainer>
       </div>
-      {!showAllProducts && (
-        <ShopwItems onClick={() => setShowAllProducts(true)}>
-          Prikaži listu dodanih artikala
-        </ShopwItems>
-      )}
-      {showAllProducts && (
-        <ShopwItems onClick={() => setShowAllProducts(false)}>
-          Sakrij listu dodanih artikala
-        </ShopwItems>
-      )}
+      <div style={{ marginTop: "1rem", marginBottom: "11.8rem" }}>
+        {!showAllProducts && (
+          <ShowItems onClick={() => setShowAllProducts(true)}>
+            Prikaži listu dodanih artikala
+          </ShowItems>
+        )}
+        {showAllProducts && (
+          <ShowItems onClick={() => setShowAllProducts(false)}>
+            Sakrij listu dodanih artikala
+          </ShowItems>
+        )}
+      </div>
       <Footer />
     </Container>
   );

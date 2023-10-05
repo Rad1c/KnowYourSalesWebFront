@@ -9,19 +9,14 @@ const Wrapper = styled.div`
 
 const Section = styled.div`
   height: 100vh;
-  width: 1440px;
-  // background: linear-gradient(135deg, #2c1c3e 25%, transparent 25%) -10px 0,
-  //   linear-gradient(225deg, #2c1c3e 20%, transparent 25%) -10px 0,
-  //   linear-gradient(315deg, #2c1c3e 25%, transparent 25%),
-  //   linear-gradient(45deg, #2c1c3e 25%, transparent 25%);
-  // background-size: 20px 20px;
+  width: 144rem;
   background-color: #543480;
 `;
 
 const MediumTitleHeight = css`
   color: #644688;
-  margin-bottom: 20px;
-  font-size: 20px;
+  margin-bottom: 2rem;
+  font-size: 2rem;
   font-weight: bold;
   text-transform: uppercase;
 `;
@@ -40,10 +35,10 @@ const MaskDiv = styled.div`
 `;
 
 const DiamondContainer = styled.div`
+  margin-top: 3rem;
   display: flex;
   align-items: baseline;
   justify-content: center;
-  margin-top: 3rem;
 `;
 
 const Diamond = styled.div`

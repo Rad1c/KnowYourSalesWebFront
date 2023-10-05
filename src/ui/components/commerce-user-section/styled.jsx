@@ -2,55 +2,59 @@ import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 
 const Container = styled.div`
-  margin-top: 25px;
-  margin-bottom: 25px;
+  margin-top: 7.4rem;
+  margin-bottom: 2.6rem;
   display: flex;
   flex-direction: column;
   align-items: center;
 `;
 const P = styled.p`
-  font-size: 36px;
   color: #1e1e1e;
+  font-size: 5rem;
   font-weight: bold;
 `;
 
 const ImgContainer = styled.div`
-  width: 100px;
-  height: 80px;
+  height: 8rem;
   overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
 `;
 
-const imgStyle = css`
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
+const BtnEditUser = styled.div`
+  margin-top: 2rem;
+  width: 5rem;
+  height: 5rem;
+  background: url("/img/Edit-User.svg") no-repeat center;
+  background-size: cover;
+  border: none;
+  cursor: pointer;
 `;
 
-const BtnEdit = styled.div`
-  margin-top: 20px;
-  background-image: url("/img/edit.png");
-  width: 50px;
-  height: 50px;
+const BtnEditCommerce = styled.div`
+  margin-top: 2rem;
+  width: 5rem;
+  height: 5rem;
+  background: url("/img/Edit-Commerce.svg") no-repeat center;
   background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
   border: none;
   cursor: pointer;
 `;
 
 const BtnDeactivate = styled.div`
-  background-image: url("/img/deactivate.png");
-  width: 50px;
-  height: 50px;
+  width: 5rem;
+  height: 5rem;
+  background: url("/img/deactivate.png") no-repeat center;
   background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
   border: none;
   cursor: pointer;
 `;
+
+const BtnFavorite = styled.img`
+  margin-top: 2rem;
+  cursor: pointer;
+`
 
 const ControlsContainer = styled.div`
   display: flex;
@@ -60,18 +64,20 @@ const ControlsContainer = styled.div`
 `;
 
 const delimiterStyle = css`
-  max-width: 400px;
+  max-width: 65rem;
   max-height: auto;
+  margin-bottom: 5.6rem;
   object-fit: contain;
 `;
 
 export {
   P,
-  ImgContainer,
-  imgStyle,
-  BtnEdit,
-  ControlsContainer,
-  BtnDeactivate,
   Container,
+  ImgContainer,
+  BtnEditUser,
+  BtnEditCommerce,
+  BtnDeactivate,
+  BtnFavorite,
+  ControlsContainer,
   delimiterStyle,
 };

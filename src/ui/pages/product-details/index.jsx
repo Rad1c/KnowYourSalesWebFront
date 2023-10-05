@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import {
   Container,
   MapContainer,
@@ -9,6 +10,7 @@ import MainMenu from "../../components/main-menu";
 import ProductDetails from "../../components/product-details";
 import ProductCard from "../../components/product-card";
 import Footer from "../../components/footer";
+import { useColor } from "../../../hooks/useColors";
 
 const productsFromCategory = [
   {
@@ -96,10 +98,12 @@ const productsFromShop = [
   },
 ];
 
-const Product = () => {
+const Product = ({ role }) => {
+  const { primaryColor, searchColor } = useColor(role);
+
   return (
     <Container>
-      <MainMenu />
+      <MainMenu backgroundColor={primaryColor} searchColor={searchColor} role={role} />
       <ProductMapContainer>
         <ProductDetails />
         <MapContainer>

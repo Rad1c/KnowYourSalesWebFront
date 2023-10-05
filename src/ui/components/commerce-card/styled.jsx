@@ -1,41 +1,26 @@
 import styled from "@emotion/styled";
 
 const Container = styled.div`
+  height: 25rem;
+  width: 23rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  padding-top: 10px;
-  padding-bottom: 20px;
-  padding-left: 20px;
-  padding-right: 20px;
-  gap: 20px;
-  width: 250px;
-  box-sizing: border-box;
+  padding: 1rem;
   background-color: #eeebf2;
+  cursor: pointer;
 `;
 
 const NameHolder = styled.p`
-  margin-top: 50px;
-  color: #555555;
-  font-size: 24px;
+  margin-top: 5rem;
+  color: #555;
+  font-size: 2.4rem;
   font-weight: bold;
 `;
 
-const ImageContainer = styled.div`
-  width: 230px;
-  height: 150px;
-  position: relative;
-  overflow: hidden;
-`;
-
 const Image = styled.img`
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  max-width: 100%;
-  max-height: 100%;
+  margin-top: 2rem;
 `;
 
-export { Container, NameHolder, Image, ImageContainer };
+export { Container, NameHolder, Image };
