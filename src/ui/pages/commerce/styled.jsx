@@ -1,9 +1,9 @@
 import styled from "@emotion/styled";
 
 const Container = styled.div`
-display: flex;
-flex-direction: column;
-align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 const Title = styled.p`
@@ -21,17 +21,30 @@ const ShopContainer = styled.div`
   gap: 2rem;
 `;
 
-const BtnAddShop = styled.div`
+const BtnContainer = styled.div`
   align-self: center;
   justify-self: center;
 
-  width: 10rem;
-  height: 10rem;
-  background: url("/img/add-shop.png") no-repeat center;
-  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 8rem;
+  height: 8rem;
+  background-color: #eeebf2;
   border: none;
+  rotate: -45deg;
   cursor: pointer;
+
+  :hover {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  }
 `;
+
+const BtnAdd = styled.img`
+  height: 6rem;
+  width: 6rem;
+  rotate: 45deg;
+`
 
 const BtnAddProduct = styled.div`
   align-self: center;
@@ -43,6 +56,10 @@ const BtnAddProduct = styled.div`
   background-size: cover;
   border: none;
   cursor: pointer;
+
+  :hover {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
 `;
 
 const ShowItems = styled.a`
@@ -57,4 +74,4 @@ const ShowItems = styled.a`
   }
 `;
 
-export { Container, ShopContainer, BtnAddShop, Title, ShowItems, BtnAddProduct };
+export { Container, ShopContainer, BtnContainer, BtnAdd, Title, ShowItems, BtnAddProduct };

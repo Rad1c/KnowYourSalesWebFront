@@ -213,21 +213,23 @@ const MainMenu = ({backgroundColor, searchColor, role}) => {
             {role == "Commerce" && (
               <div style={{ display: "flex", gap: "4rem" }}>
                 <img
-                  src="/img/Add-shop.svg"
+                  src="/img/add-shop.svg"
                   alt="Favorite shop logo"
                   style={{
                     marginTop: "1.5rem",
                     height: "3.2rem",
                     cursor: "pointer",
+                    filter: "brightness(500%)",
                   }}
                 />
                 <img
-                  src="/img/Add-article.svg"
+                  src="/img/add-article.svg"
                   alt="Favorite article logo"
                   style={{
                     marginTop: "1.5rem",
                     height: "3.2rem",
                     cursor: "pointer",
+                    filter: "brightness(500%)",
                   }}
                 />
                 <DiamondContainer

@@ -6,37 +6,39 @@ const Container = styled.div`
   align-items: center;
 `;
 
+const ProductMapContainer = styled.div`
+  margin-top: 6rem;
+  width: 110rem;
+  height: 70rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  justify-items: center;
+`;
+
 const MapContainerWrapper = styled.div`
-  padding-top: 30px;
-  padding-bottom: 25px;
-  width: 450px;
+  width: 45rem;
+  padding: 3rem 0;
   overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
 `;
 
-const ProductMapContainer = styled.div`
-  display: flex;
-  gap: 20px;
-  flex-wrap: wrap;
-  justify-content: center;
-`;
-
 const ProductCardContainer = styled.div`
+  margin: 2.5rem 0;
+  width: 110rem;
   display: flex;
-  gap: 20px;
+  gap: 2rem;
   flex-wrap: wrap;
-  margin-top: 25px;
-  margin-bottom: 50px;
-  max-width: 1100px;
-  justify-content: center;
+  justify-content: space-between;
 `;
 
 const Title = styled.p`
-  margin-top: 30px;
+  margin-top: 6rem;
+  font-size: 2rem;
+  font-weight: bold;
   text-transform: uppercase;
-  color: #54357f;
 `;
 
 export { Container, MapContainerWrapper, ProductMapContainer, ProductCardContainer, Title };

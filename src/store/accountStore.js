@@ -4,11 +4,8 @@ import extractUserDataFromToken from "../assets/helper";
 
 const useAccountStore = create(() => ({
     getUser: async () => {
-        const token = localStorage.getItem("refresh")
-        const { id } = extractUserDataFromToken(token)
-    
         try {
-          const response = await axiosPrivate.get(`/user/${id}`)
+          const response = await axiosPrivate.get(`/user`)
           
           return response
         } catch (error) {

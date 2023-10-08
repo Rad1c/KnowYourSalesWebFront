@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import {
   OldPriceHolder,
   Container,
@@ -8,16 +9,15 @@ import {
   Discount,
 } from "./styled";
 
-const ProductPrice = (props) => {
-  const { oldPrice, newPrice, discount } = props;
+const ProductPrice = ({ oldPrice, newPrice, discount, primaryColor }) => {
 
   return (
     <Container>
       <PriceContainer>
-        <OldPriceHolder>{oldPrice}</OldPriceHolder>
-        <NewPriceHolder>{newPrice}</NewPriceHolder>
+        <OldPriceHolder>{oldPrice} KM</OldPriceHolder>
+        <NewPriceHolder style={{ color: primaryColor }}>{newPrice} KM</NewPriceHolder>
       </PriceContainer>
-      <DicountContainer>
+      <DicountContainer style={{ backgroundColor: primaryColor }}>
         <DicountTitle>popust od</DicountTitle>
         <Discount>{discount} %</Discount>
       </DicountContainer>

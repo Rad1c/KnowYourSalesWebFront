@@ -2,18 +2,19 @@
 import {
   Container,
   ShopContainer,
-  BtnAddShop,
+  BtnContainer,
+  BtnAdd,
   Title,
   ShowItems,
-  BtnAddProduct,
 } from "./styled";
 import MainMenu from "../../components/main-menu";
 import ProductCard from "../../components/product-card";
 import ShopCard from "../../components/shop-card";
 import CommerceUserSection from "../../components/commerce-user-section";
 import Footer from "../../components/footer";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useColor } from "../../../hooks/useColors";
+import useAccountStore from "../../../store/accountStore";
 
 const shops = [
   { city: "Sarajevo", address: "Dobrinja 1" },
@@ -118,7 +119,6 @@ const products = [
   },
 ];
 
-const name = "Sport Reality";
 const img = "/img/product-commerce.png";
 
 const Commerce = ({ role }) => {
@@ -126,16 +126,32 @@ const Commerce = ({ role }) => {
   const [productsValue] = useState(products);
   const [showAllShops, setShowAllShops] = useState(false);
   const [showAllProducts, setShowAllProducts] = useState(false);
+  const [counter, setCounter] = useState(0)
+  const [user, setUser] = useState({})
+  const { getCommerce } = useAccountStore()
   const { primaryColor, searchColor } = useColor(role);
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      await getCommerce().then(response => setUser(response.data))
+    }
+
+    if(!counter){
+      fetchUser();
+      setCounter(1)
+    }
+
+    console.log(user)
+  }, [user])
 
   return (
     <Container>
       <MainMenu backgroundColor={primaryColor} searchColor={searchColor} role={role}/>
-      <CommerceUserSection name={name} img={img} role={role} allowed={"Commerce"}/>
+      <CommerceUserSection name={user?.name} img={img} role={role} allowed={"Commerce"}/>
       <div>
         <Title style={{ color: primaryColor }}>Radnje</Title>
         <ShopContainer>
-          {role === "Commerce" && <BtnAddShop /> }
+          {role === "Commerce" && <BtnContainer><BtnAdd src="/img/add-shop.svg" alt="Button for shop adding" /></BtnContainer> }
           {shopsValue.slice(0, showAllShops ? shopsValue.length : role === "Commerce" ? 3 : 4).map((shop, index) => (
             <ShopCard key={index} city={shop.city} address={shop.address} role={role} />
           ))}
@@ -152,7 +168,7 @@ const Commerce = ({ role }) => {
       <div>
         <Title style={{ color: primaryColor }}>Artikli</Title>
         <ShopContainer>
-          {role === "Commerce" && <BtnAddProduct /> }
+          {role === "Commerce" && <BtnContainer><BtnAdd src="/img/add-article.svg" alt="Button for shop adding" /></BtnContainer> }
           {productsValue.slice(0, showAllProducts ? productsValue.length : role === "Commerce" ? 3 : 4).map(product => (
             <ProductCard
               key={product.id}

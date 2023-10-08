@@ -203,7 +203,6 @@ const UserRegistration = () => {
             />
             <RowContainer>
               <Link href="/" sx={{ fontSize: "1rem" }}>
-                {/* zatvara se modal registracije, skroluje se na vrh i otvara se login */}
                 Već imate nalog?
               </Link>
               <Button variant="outlined" css={BtnRegisterStyle} type="submit">

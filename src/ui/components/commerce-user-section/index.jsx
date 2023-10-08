@@ -5,9 +5,8 @@ import {
   P,
   Container,
   ImgContainer,
-  BtnEditUser,
-  BtnEditCommerce,
-  BtnDeactivate,
+  BtnContainer,
+  BtnEdit,
   BtnFavorite,
   ControlsContainer,
   delimiterStyle,
@@ -18,7 +17,7 @@ const CommerceUserSection = ({ name, img, role, allowed }) => {
 
   return (
     <Container>
-      <div style={{ display: "flex", marginBottom: "1.6rem" }}>
+      <div style={{ display: "flex", gap: "2rem", marginBottom: "1.6rem" }}>
         <ControlsContainer>
           <ImgContainer>
             <img src={img} alt="commerce-img" style={{ height: `${role === "User" ? "4.5rem" : "3rem"}` }} />
@@ -28,12 +27,20 @@ const CommerceUserSection = ({ name, img, role, allowed }) => {
         {role !== "none" &&
           <ControlsContainer>
             { role !== "Commerce" && ((role === "User" && allowed === role) ? 
-                <BtnEditUser />
+                <BtnContainer style={{backgroundColor: "#7F3551"}}>
+                  <BtnEdit src="/img/edit.svg" alt="Button for user editing"/>
+                </BtnContainer>
               : !liked ? <BtnFavorite src="/img/Favorite.svg" alt="Favorite icon" onClick={() => {setLiked(true)}}/> 
               : <BtnFavorite src="/img/Favorite-clicked.svg" alt="Favorite icon" onClick={() => setLiked(false)}/>)
             }
-            {(role === "Commerce" && allowed === role) && <BtnEditCommerce />}
-            {allowed === role && <BtnDeactivate />}
+            {(role === "Commerce" && allowed === role) && 
+                <BtnContainer style={{backgroundColor: "#357F54"}}>
+                  <BtnEdit src="/img/edit.svg" alt="Button for user editing"/>
+                </BtnContainer>}
+            {allowed === role && 
+                <BtnContainer style={{backgroundColor: "#eeebf2"}}>
+                  <BtnEdit src="/img/deactivate.svg" alt="Button for user editing"/>
+                </BtnContainer>}
           </ControlsContainer>
         }
       </div>

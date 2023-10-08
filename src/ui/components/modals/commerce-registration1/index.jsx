@@ -90,7 +90,7 @@ const CommerceRegistration = () => {
             <TextField
               id="txtName"
               label="Naziv trgovine"
-              sx={{ marginBottom: "25px" }}
+              sx={{ marginBottom: "2.5rem" }}
               required
               {...register("name")}
               error={Boolean(errors?.name)}
@@ -101,7 +101,7 @@ const CommerceRegistration = () => {
                 disablePortal
                 id="txtCity"
                 options={citiesMap}
-                sx={{ marginBottom: "25px" }}
+                sx={{ marginBottom: "2.5rem" }}
                 getOptionLabel={(option) => option.label}
                 isOptionEqualToValue={(option, value) => option.id === value.id}
                 onChange={(_, value) => {
@@ -116,7 +116,7 @@ const CommerceRegistration = () => {
             <TextField
               id="txtEmail"
               label="Email"
-              sx={{ marginBottom: "25px", backgroundColor: "#fafafa" }}
+              sx={{ marginBottom: "2.5rem", backgroundColor: "#fafafa" }}
               {...register("email")}
               error={Boolean(errors?.email)}
               helperText={errors?.email?.message}
@@ -125,7 +125,7 @@ const CommerceRegistration = () => {
             <TextField
               label="Lozinka"
               type="password"
-              sx={{ marginBottom: "25px" }}
+              sx={{ marginBottom: "2.5rem" }}
               required
               {...register("password")}
               error={Boolean(errors?.password)}
@@ -134,15 +134,14 @@ const CommerceRegistration = () => {
             <TextField
               label="Ponovi lozinku"
               type="password"
-              sx={{ marginBottom: "25px" }}
+              sx={{ marginBottom: "2.5rem" }}
               required
               {...register("confirmPassword")}
               error={Boolean(errors?.confirmPassword)}
               helperText={errors?.confirmPassword?.message}
             />
             <RowContainer>
-              <Link href="/" sx={{ fontSize: "16px" }}>
-                {/* zatvara se modal registracije, skroluje se na vrh i otvara se login */}
+              <Link href="/" sx={{ fontSize: "1rem" }}>
                 Već imate nalog?
               </Link>
               <Button variant="outlined" css={BtnRegisterStyle} type="submit">

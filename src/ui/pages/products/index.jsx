@@ -31,6 +31,7 @@ const Products = ({ role }) => {
           articles.map((article) => (
             <ProductCard
               key={article.artileId}
+              role={role}
               id={article.artileId}
               discount={article.sale}
               productImg={"/img/product.png"}

@@ -1,19 +1,21 @@
 import styled from "@emotion/styled";
 
 const Container = styled.div`
-  border-top: 1px solid #cccccc;
-  margin-top: 5px;
+  margin-top: .5rem;
   display: flex;
+  justify-content: space-between;
+  border-top: 1px solid #cccccc;
 `;
 const OldPriceHolder = styled.p`
-  font-size: 27px;
+  margin-top: 1rem;
+  font-size: 2.4rem;
   line-height: 1.2;
-  color: #777777;
+  color: #ccc;
   text-decoration: line-through;
 `;
 
 const NewPriceHolder = styled.p`
-  font-size: 32px;
+  font-size: 4rem;
   color: #54357f;
   font-weight: bold;
   line-height: 1.2;
@@ -22,27 +24,26 @@ const NewPriceHolder = styled.p`
 const PriceContainer = styled.div`
   display: flex;
   flex-direction: column;
-  margin-right: 300px;
 `;
 
 const DicountContainer = styled.div`
-  max-width: 100px;
-  background-color: red;
+  width: 6rem;
   text-align: center;
   background-color: #54357f;
   --mask: conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) 50%/30px 100%;
   -webkit-mask: var(--mask);
   mask: var(--mask);
+  border-bottom: 1px solid #fafafa;
 `;
 
 const DicountTitle = styled.p`
-  margin-top: 5px;
+  margin-top: .5rem;
   color: #fafafa;
 `;
 
 const Discount = styled.p`
-  margin: 15px 5px 25px 5px;
-  font-size: 22px;
+  margin: 1.5rem .5rem 2.5rem .5rem;
+  font-size: 2.2rem;
   font-weight: bold;
   color: #fafafa;
 `;
