@@ -1,7 +1,4 @@
-import {
-  Routes,
-  Route,
-} from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Layout from "./ui/components/layout";
 import Not_Found from "./ui/pages/error-page";
 import Home from "./ui/pages/home";
@@ -13,6 +10,7 @@ import Product from "./ui/pages/product-details";
 import ProtectedRoute from "./ui/components/protected-route";
 import { useEffect, useState } from "react";
 import useAuthStore from "./store/authStore";
+import VerifyAccount from "./ui/pages/verify-account";
 
 function App() {
   const [role, setRole] = useState("none");
@@ -20,21 +18,25 @@ function App() {
 
   useEffect(() => {
     setRole(isUserLoggedIn());
-  }, [role])
+  }, [role]);
 
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
         {/*private*/}
-        <Route path="/user" element={
-          <ProtectedRoute role={role} isAllowed={"User"} >
-            <User role={role} />
-          </ProtectedRoute>
-        } />
+        <Route
+          path="/user"
+          element={
+            <ProtectedRoute role={role} isAllowed={"User"}>
+              <User role={role} />
+            </ProtectedRoute>
+          }
+        />
 
         {/* public */}
         <Route path="/" element={<Home />} />
         <Route path="/home" element={<Home />} />
+        <Route path="/verify-account/:verificationCode" element={<VerifyAccount />} />
 
         <Route path="/products" element={<Products role={role} />} />
         <Route path="/product" element={<Product role={role} />} />

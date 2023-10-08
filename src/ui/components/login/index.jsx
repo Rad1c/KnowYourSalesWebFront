@@ -31,21 +31,20 @@ const Login = () => {
 
       navigate("/products");
     } catch (error) {
-      console.log("error" + error);
       setOpen(false);
       if (error.response?.status == 400) {
         setError("email", { type: "custom", message: "Provjerite email" });
         setError("password", { type: "custom", message: "Provjerite lozinku" });
+      }
+      if (error.response?.status == 403) {
+        setError("password", { type: "custom", message: "Verifikujte vašu email adresu!" });
       }
     }
   };
 
   return (
     <Container>
-      <Backdrop
-        sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
-        open={open}
-      >
+      <Backdrop sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }} open={open}>
         <CircularProgress color="inherit" />
       </Backdrop>
       <Form onSubmit={handleSubmit(submitForm)}>

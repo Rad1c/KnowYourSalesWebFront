@@ -29,8 +29,8 @@ const RegistrationSection = () => {
         <BoxLeftContainer>
           <P>Registrujte nalog</P>
           <Text>
-            Registrujte vaš nalog i počnite dobijati obavještenja o popustima u
-            vašim omiljenim radnjama
+            Registrujte vaš nalog i počnite dobijati obavještenja o popustima u vašim omiljenim
+            radnjama
           </Text>
           <Button
             css={BtnRegisterUser}
@@ -41,15 +41,15 @@ const RegistrationSection = () => {
           </Button>
           <Modal open={openUser} onClose={() => setOpenUser(false)}>
             <div css={ModalStyle}>
-              <UserRegistration />
+              <UserRegistration setIsModalOpen={setOpenUser} />
             </div>
           </Modal>
         </BoxLeftContainer>
         <BoxRightContainer>
           <P>Registrujte nalog</P>
           <Text>
-            Registrujte vaš nalog i počnite dobijati obavještenja o popustima u
-            vašim omiljenim radnjama
+            Registrujte vaš nalog i počnite dobijati obavještenja o popustima u vašim omiljenim
+            radnjama
           </Text>
           <Button css={BtnRegisterCommerce} onClick={() => setOpenComm(true)}>
             Započnite registraciju
