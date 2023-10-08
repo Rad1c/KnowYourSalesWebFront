@@ -5,14 +5,13 @@ import styled from "@emotion/styled";
 const cardStyles = css`
   position: relative;
   width: 25rem;
-  border: 1px solid #ddd;
-  border-radius: 4px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   text-align: center;
+  cursor: pointer;
+  
   :hover {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
   }
-  cursor: pointer;
 `;
 
 const imageStyles = css`
@@ -103,6 +102,25 @@ const Description = styled.div`
   mask: var(--mask);
 `;
 
+const FavoriteContainer = styled.div`
+  position: absolute;
+  top: 45%;
+  transform: translate(-50%, 0, 0, 0);
+  height: 3rem;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+`;
+
+const Favorite = styled.img`
+  margin-right: 1rem;
+  background-color: white;
+  height: 3rem;
+  width: 3rem;
+  padding: 1rem;
+  border-radius: 50%;
+`;
+
 export {
   descriptionStyles,
   Description,
@@ -114,4 +132,6 @@ export {
   OldPrice,
   NewPrice,
   Discount,
+  FavoriteContainer,
+  Favorite,
 };

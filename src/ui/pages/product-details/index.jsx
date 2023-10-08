@@ -108,7 +108,7 @@ const Product = ({ role }) => {
     <Container>
       <MainMenu backgroundColor={primaryColor} searchColor={searchColor} role={role} />
       <ProductMapContainer>
-        <ProductDetails />
+        <ProductDetails primaryColor={primaryColor} role={role} />
         <MapContainerWrapper>
           <MapContainer
             center={position}
@@ -127,11 +127,12 @@ const Product = ({ role }) => {
         </MapContainerWrapper>
       </ProductMapContainer>
       <div>
-        <Title>Još popusta iz ove kategorije</Title>
+        <Title style={{color: primaryColor}}>Još popusta iz ove kategorije</Title>
         <ProductCardContainer>
           {productsFromShop.map((product) => (
             <ProductCard
               key={product.id}
+              role={role}
               id={product.id}
               discount={product.discount}
               productImg={product.productImg}
@@ -140,16 +141,18 @@ const Product = ({ role }) => {
               newPrice={product.newPrice}
               validFrom={product.validFrom}
               validTo={product.validTo}
+              primaryColor={primaryColor}
             />
           ))}
         </ProductCardContainer>
       </div>
-      <div>
-        <Title>Još popusta iz ove trgovine</Title>
+      <div style={{marginBottom: "6rem"}}>
+        <Title style={{color: primaryColor}}>Još popusta iz ove trgovine</Title>
         <ProductCardContainer>
           {productsFromCategory.map((product) => (
             <ProductCard
               key={product.id}
+              role={role}
               id={product.id}
               discount={product.discount}
               productImg={product.productImg}
@@ -158,6 +161,7 @@ const Product = ({ role }) => {
               newPrice={product.newPrice}
               validFrom={product.validFrom}
               validTo={product.validTo}
+              primaryColor={primaryColor}
             />
           ))}
         </ProductCardContainer>

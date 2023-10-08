@@ -7,9 +7,8 @@ const Container = styled.div`
 `;
 
 const ImgMainContainer = styled.div`
-  width: 300px;
-  margin-top: 20px;
-  height: 220px;
+  width: 35rem;
+  height: 28rem;
   overflow: hidden;
   display: flex;
   justify-content: center;
@@ -17,8 +16,8 @@ const ImgMainContainer = styled.div`
 `;
 
 const MainImg = styled.img`
-  max-width: 100%;
-  max-height: 100%;
+  width: 100%;
+  height: 100%;
   object-fit: contain;
   transition: transform 0.3s ease-in-out;
 
@@ -28,9 +27,9 @@ const MainImg = styled.img`
 `;
 
 const ImgSecondContainer = styled.div`
-  width: 60px;
-  margin-top: 20px;
-  height: 50px;
+  width: 8rem;
+  margin-top: 2rem;
+  height: 6rem;
   overflow: hidden;
   display: flex;
   justify-content: center;
@@ -42,24 +41,11 @@ const ImgsSecondWrapper = styled.div`
   gap: 10px;
 `;
 
-const ArrowLeft = styled.div`
-  background-image: url("/img/expand-left.png");
-  width: 30px;
-  height: 30px;
+const Arrow = styled.div`
+  width: 3rem;
+  height: 3rem;
+  background: no-repeat center;
   background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  border: none;
-  cursor: pointer;
-`;
-
-const ArrowRight = styled.div`
-  background-image: url("/img/expand-right.png");
-  width: 30px;
-  height: 30px;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
   border: none;
   cursor: pointer;
 `;
@@ -74,8 +60,7 @@ export {
   ImgMainContainer,
   ImgSecondContainer,
   ImgsSecondWrapper,
-  ArrowLeft,
-  ArrowRight,
+  Arrow,
   ControlsHolder,
   MainImg,
 };

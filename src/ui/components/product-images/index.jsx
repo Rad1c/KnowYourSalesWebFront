@@ -4,8 +4,7 @@ import {
   ImgMainContainer,
   ImgSecondContainer,
   ImgsSecondWrapper,
-  ArrowLeft,
-  ArrowRight,
+  Arrow,
   ControlsHolder,
   MainImg,
 } from "./styled";
@@ -32,7 +31,7 @@ const productsImages = [
 const ProductImages = () => {
   const [mainImgIndexValue, setMainImgIndexValue] = useState(0);
 
-  const ArrowLeftClickHandler = (e) => {
+  const ArrowLeftClickHandler = () => {
     if (mainImgIndexValue === 0) {
       setMainImgIndexValue(productsImages.length - 1);
     } else {
@@ -47,19 +46,19 @@ const ProductImages = () => {
   return (
     <Container>
       <ControlsHolder>
-        <ArrowLeft onClick={ArrowLeftClickHandler} />
+        <Arrow style={{backgroundImage: `url("/img/expand-left.png")`}} onClick={ArrowLeftClickHandler} />
         <ImgMainContainer>
           <MainImg
             src={productsImages[mainImgIndexValue % productsImages.length].img}
             alt="commerce-img"
           />
         </ImgMainContainer>
-        <ArrowRight onClick={ArrowRightClickHandler} />
+        <Arrow style={{backgroundImage: `url("/img/expand-right.png")`}} onClick={ArrowRightClickHandler} />
       </ControlsHolder>
       <Box>
         <ImgsSecondWrapper>
-          {productsImages.map((productImage) => (
-            <ImgSecondContainer>
+          {productsImages.map((productImage, index) => (
+            <ImgSecondContainer key={index}>
               <img
                 src={productImage.img}
                 alt="commerce-img"

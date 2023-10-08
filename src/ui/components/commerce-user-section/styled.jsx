@@ -8,6 +8,7 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
 `;
+
 const P = styled.p`
   color: #1e1e1e;
   font-size: 5rem;
@@ -22,45 +23,38 @@ const ImgContainer = styled.div`
   align-items: center;
 `;
 
-const BtnEditUser = styled.div`
+const BtnContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin-top: 2rem;
-  width: 5rem;
-  height: 5rem;
-  background: url("/img/Edit-User.svg") no-repeat center;
-  background-size: cover;
-  border: none;
+  width: 3rem;
+  height: 3rem;
+  background-color: #eeebf2;
+  rotate: -45deg;
   cursor: pointer;
+
+  :hover {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  }
 `;
 
-const BtnEditCommerce = styled.div`
-  margin-top: 2rem;
-  width: 5rem;
-  height: 5rem;
-  background: url("/img/Edit-Commerce.svg") no-repeat center;
-  background-size: cover;
-  border: none;
-  cursor: pointer;
-`;
-
-const BtnDeactivate = styled.div`
-  width: 5rem;
-  height: 5rem;
-  background: url("/img/deactivate.png") no-repeat center;
-  background-size: cover;
-  border: none;
-  cursor: pointer;
-`;
+const BtnEdit = styled.img`
+  height: 2rem;
+  width: 2rem;
+  rotate: 45deg;
+`
 
 const BtnFavorite = styled.img`
-  margin-top: 2rem;
   cursor: pointer;
 `
 
 const ControlsContainer = styled.div`
+  margin-left: .5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-left: 5px;
+  justify-content: space-around;
 `;
 
 const delimiterStyle = css`
@@ -74,9 +68,8 @@ export {
   P,
   Container,
   ImgContainer,
-  BtnEditUser,
-  BtnEditCommerce,
-  BtnDeactivate,
+  BtnContainer,
+  BtnEdit,
   BtnFavorite,
   ControlsContainer,
   delimiterStyle,

@@ -5,11 +5,9 @@ import CommerceUserSection from "../../components/commerce-user-section";
 import Footer from "../../components/footer";
 import MainMenu from "../../components/main-menu";
 import ProductCard from "../../components/product-card";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useColor } from "../../../hooks/useColors";
-
-const name = "Aleksandar Radić";
-const img = "/img/user-generic.png";
+import useAccountStore from "../../../store/accountStore";
 
 const favoriteCommerces = [
   {
@@ -152,12 +150,30 @@ const User = ({ role }) => {
   const [showAllCommerces, setShowAllCommerces] = useState(false);
   const [productsValue] = useState(favoriteProducts);
   const [showAllProducts, setshowAllProducts] = useState(false);
+  const [counter, setCounter] = useState(0)
+  const [name, setName] = useState("")
+  const [user, setUser] = useState({})
+  const { getUser } = useAccountStore()
   const { primaryColor, searchColor } = useColor(role);
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      await getUser().then(response => setUser(response.data))
+    }
+
+    if(!counter){
+      fetchUser();
+      setCounter(1)
+    }
+
+    setName(user?.firstName + " " + user?.lastName)
+    console.log(user)
+  }, [user])
 
   return (
     <Container>
       <MainMenu backgroundColor={primaryColor} searchColor={searchColor} role={role} />
-      <CommerceUserSection name={name} img={img} role={role} allowed={"User"}/>
+      <CommerceUserSection name={name} img={"/img/user-generic.png"} role={role} allowed={"User"}/>
       <div>
         <Title>Omiljene trgovine</Title>
         <Wrapper>

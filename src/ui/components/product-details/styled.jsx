@@ -1,31 +1,38 @@
 import styled from "@emotion/styled";
-import { css } from "@emotion/react";
 
 const Container = styled.div`
-  margin-top: 25px;
+  width: 60rem;
+  padding: 2rem 0;
   display: flex;
   flex-direction: column;
-  max-width: 430pxx;
+  justify-content: space-between;
 `;
 
 const ProductNameHolder = styled.p`
-  color: #333333;
+  color: #333;
   text-transform: uppercase;
-  font-size: 20px;
+  font-weight: bold;
+  font-size: 2.4rem;
+  display: flex;
+  justify-content: space-between;
 `;
+
+const BtnFavorite = styled.img`
+  height: 2.5rem;
+  width: 6rem;
+  cursor: pointer;
+`
 
 const Description = styled.div`
   color: #333333;
-  max-width: 430px;
+  font-size: 1.4rem;
 `;
 
 const ImgContainer = styled.div`
-  width: 100px;
-  height: 80px;
   overflow: hidden;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
 `;
 
-export { Container, ProductNameHolder, Description, ImgContainer };
+export { Container, ProductNameHolder, BtnFavorite, Description, ImgContainer };
