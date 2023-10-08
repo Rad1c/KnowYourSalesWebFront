@@ -1,7 +1,7 @@
 import axios from "axios";
 import useRefreshToken from "../hooks/useRefreshToken";
 
-const baseURL = "https://localhost:7197";
+const baseURL = import.meta.env.VITE_BASE_URL_STATE;
 const refresh = useRefreshToken();
 
 export default axios.create({ baseURL });

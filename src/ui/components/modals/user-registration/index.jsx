@@ -1,12 +1,4 @@
-import {
-  Button,
-  FormControl,
-  InputLabel,
-  Link,
-  MenuItem,
-  Select,
-  TextField,
-} from "@mui/material";
+import { Button, FormControl, InputLabel, Link, MenuItem, Select, TextField } from "@mui/material";
 import {
   Container,
   RowContainer,
@@ -23,10 +15,11 @@ import { useNavigate } from "react-router-dom";
 import useAuthStore from "../../../../store/authStore";
 import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
+import { ToastContainer, toast } from "react-toastify";
 
 const currentTime = new Date();
 
-const UserRegistration = () => {
+const UserRegistration = ({ setIsModalOpen }) => {
   const [sex, setSex] = useState("M");
   const navigate = useNavigate();
   const { registerUser } = useAuthStore();
@@ -42,34 +35,16 @@ const UserRegistration = () => {
   });
 
   const submitForm = async (data) => {
-    const {
-      firstName,
-      lastName,
-      email,
-      password,
-      confirmPassword,
-      day,
-      month,
-      year,
-      sex,
-    } = data;
+    const { firstName, lastName, email, password, confirmPassword, day, month, year, sex } = data;
     const formattedDay = day.padStart(2, "0");
     const formattedMonth = month.padStart(2, "0");
     const dateOfBirth = `${year}-${formattedMonth}-${formattedDay} 00:00:00`;
 
     try {
       setOpen(true);
-      await registerUser(
-        firstName,
-        lastName,
-        sex,
-        email,
-        dateOfBirth,
-        password,
-        confirmPassword
-      );
+      await registerUser(firstName, lastName, sex, email, dateOfBirth, password, confirmPassword);
       setOpen(false);
-      navigate("/");
+      setIsModalOpen(false);
     } catch (error) {
       setOpen(false);
       if (error.response?.status === 409) {
@@ -80,12 +55,10 @@ const UserRegistration = () => {
   const sexChange = (e) => {
     setSex(e.target.value);
   };
+
   return (
     <Wrapper>
-      <Backdrop
-        sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
-        open={open}
-      >
+      <Backdrop sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }} open={open}>
         <CircularProgress color="inherit" />
       </Backdrop>
       <Container>
