@@ -151,7 +151,7 @@ const Commerce = ({ role }) => {
       <div>
         <Title style={{ color: primaryColor }}>Radnje</Title>
         <ShopContainer>
-          {role === "Commerce" && <BtnContainer><BtnAdd src="/img/add-shop.svg" alt="Button for shop adding" /></BtnContainer> }
+          {role === "Commerce" && <BtnContainer><BtnAdd src="/img/Add-shop.svg" alt="Button for shop adding" /></BtnContainer> }
           {shopsValue.slice(0, showAllShops ? shopsValue.length : role === "Commerce" ? 3 : 4).map((shop, index) => (
             <ShopCard key={index} city={shop.city} address={shop.address} role={role} />
           ))}
@@ -168,7 +168,7 @@ const Commerce = ({ role }) => {
       <div>
         <Title style={{ color: primaryColor }}>Artikli</Title>
         <ShopContainer>
-          {role === "Commerce" && <BtnContainer><BtnAdd src="/img/add-article.svg" alt="Button for shop adding" /></BtnContainer> }
+          {role === "Commerce" && <BtnContainer><BtnAdd src="/img/Add-article.svg" alt="Button for shop adding" /></BtnContainer> }
           {productsValue.slice(0, showAllProducts ? productsValue.length : role === "Commerce" ? 3 : 4).map(product => (
             <ProductCard
               key={product.id}

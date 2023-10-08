@@ -213,7 +213,7 @@ const MainMenu = ({backgroundColor, searchColor, role}) => {
             {role == "Commerce" && (
               <div style={{ display: "flex", gap: "4rem" }}>
                 <img
-                  src="/img/add-shop.svg"
+                  src="/img/Add-shop.svg"
                   alt="Favorite shop logo"
                   style={{
                     marginTop: "1.5rem",
@@ -223,7 +223,7 @@ const MainMenu = ({backgroundColor, searchColor, role}) => {
                   }}
                 />
                 <img
-                  src="/img/add-article.svg"
+                  src="/img/Add-article.svg"
                   alt="Favorite article logo"
                   style={{
                     marginTop: "1.5rem",
