@@ -32,12 +32,26 @@ const InputBaseStyle = ({ searchColor }) => css`
   color: #fafafa;
 `;
 
+// izgl da se ne koristi nigdje
 const MenuItemStyle = styled.div`
   display: flex;
   gap: 5px;
   padding-left: 20px;
   padding-right: 20px;
   flex-wrap: wrap;
+`;
+
+const UserIcon = styled.img `
+  margin-top: 2rem;
+  height: 2.6rem;
+  cursor: pointer;
+`;
+
+const CommerceIcon = styled.img`
+  margin-top: 1.5rem;
+  height: 3.2rem;
+  filter: brightness(500%);
+  cursor: pointer;
 `;
 
 const BtnSign = css`
@@ -67,11 +81,22 @@ const AccountMenu = styled.div`
   outline: 0;
 `;
 
+const ModalContainer = styled.div`
+  width: 20rem;
+  height: 20rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
 export {
   AppBarStyle,
   Container,
   InputBaseStyle,
   MenuItemStyle,
+  UserIcon,
+  CommerceIcon,
   BtnSign,
   AccountMenu,
+  ModalContainer,
 };
