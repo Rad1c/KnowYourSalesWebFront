@@ -11,12 +11,9 @@ import {
   Container,
   Header,
   ControlsContainer,
-  MapContainerWrapper,
-  HelperText,
   RowContainer,
   BtnSaveStyle,
 } from "./styled";
-import { MapContainer, Marker, Popup, TileLayer, useMapEvents } from "react-leaflet";
 import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
 import useProductsStore from "../../../../store/productsStore";
@@ -26,10 +23,13 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useEffect, useState } from "react";
 // import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import MapElement from "../../map";
 
 const AddShop = () => {
   const [open, setOpen] = useState(false); // for backdrop
   const [selectedCity, setSelectedCity] = useState("");
+  const [city, setCity] = useState("")
+  const [cityPosition, setCityPosition] = useState([]);
   const [markerPosition, setMarkerPosition] = useState(null);
   const { cities, getCitiesByCountryCode } = useProductsStore();
   const { addShop } = useCommerceStore();
@@ -54,16 +54,23 @@ const AddShop = () => {
   const citiesMap = cities.map((city) => ({
     id: city.cityId,
     name: city.cityName,
+    latitude: city.latitude,
+    longitude: city.longitude,
   }));
-  
-  function AddMarkerOnClick() {
-    useMapEvents({
-      click(e) {
-        setMarkerPosition(e.latlng);
-      },
-    });
 
-    return null;
+  const marker = markerPosition => setMarkerPosition(markerPosition);
+
+  const selectOnChange = (event) => {
+    setSelectedCity(event.target.value);
+    setMarkerPosition(null);
+    cities.map(city => {
+      if(city.cityId === event.target.value) {
+        setCity(city.cityName)
+        setCityPosition([city.latitude, city.longitude])
+        return [city.latitude, city.longitude]
+      }
+      else return "none"
+    })
   }
 
   const submitForm = async (data) => {
@@ -73,7 +80,7 @@ const AddShop = () => {
       shopAddress,
     } = data;
 
-    console.log(shopName, shopCity, shopAddress)
+    console.log(shopName, shopCity, shopAddress, markerPosition)
 
     try {
       setOpen(true);
@@ -81,8 +88,8 @@ const AddShop = () => {
         shopName,
         shopCity,
         shopAddress,
-        markerPosition.lat,
-        markerPosition.lng,
+        markerPosition.lat.toFixed(6),
+        markerPosition.lng.toFixed(6),
       )
       setOpen(false);
     } catch (error) {
@@ -134,12 +141,10 @@ const AddShop = () => {
                     },
                   },
                 }}
-                onChange={(event) => {
-                  setSelectedCity(event.target.value);
-                }}
+                onChange={selectOnChange}
                 >
                 {citiesMap.map(city => (
-                  <MenuItem key={city.id} value={city.id}>{city.name}</MenuItem>))
+                  <MenuItem key={city.id} value={city.id} >{city.name}</MenuItem>))
                 }
               </Select>
             </FormControl>
@@ -153,29 +158,51 @@ const AddShop = () => {
               helperText={errors?.shopAddress?.message}
               sx={{ marginBottom: "2.5rem" }}
             />
-            <MapContainerWrapper>
-              <MapContainer
-                center={[44.77085, 17.19096]}
-                zoom={13}
-                scrollWheelZoom
-                style={{ height: "100%" }}
-              >
-                <TileLayer
-                  attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                  url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                />
-                {markerPosition && (
-                  <Marker position={markerPosition}>
-                    <Popup>
-                      Latitude: {markerPosition.lat.toFixed(5)} 
-                      Longitude: {markerPosition.lng.toFixed(5)}
-                    </Popup>
-                  </Marker>
-                )}
-                <AddMarkerOnClick />
-              </MapContainer>
-            </MapContainerWrapper>
-            {!markerPosition && <HelperText>Lokacija na mapi je obavezna</HelperText>}
+            {
+              city === "Sarajevo" && <MapElement cityPosition={cityPosition} marker={marker}/>
+            }
+            {
+              city === "Banja Luka" && <MapElement cityPosition={cityPosition} marker={marker}/>
+            }
+            {
+              city === "Tuzla" && <MapElement cityPosition={cityPosition} marker={marker}/>
+            }
+            {
+              city === "Istočno Sarajevo" && <MapElement cityPosition={cityPosition} marker={marker}/>
+            }
+            {
+              city === "Mostar" && <MapElement cityPosition={cityPosition} marker={marker}/>
+            }
+            {
+              city === "Bijeljina" && <MapElement cityPosition={cityPosition} marker={marker}/>
+            }
+            {
+              city === "Brčko" && <MapElement cityPosition={cityPosition} marker={marker}/>
+            }
+            {
+              city === "Zenica" && <MapElement cityPosition={cityPosition} marker={marker}/>
+            }
+            {
+              city === "Trebinje" && <MapElement cityPosition={cityPosition} marker={marker}/>
+            }
+            {
+              city === "Doboj" && <MapElement cityPosition={cityPosition} marker={marker}/>
+            }
+            {
+              city === "Zvornik" && <MapElement cityPosition={cityPosition} marker={marker}/>
+            }
+            {
+              city === "Foča" && <MapElement cityPosition={cityPosition} marker={marker}/>
+            }
+            {
+              city === "Prijedor" && <MapElement cityPosition={cityPosition} marker={marker}/>
+            }
+            {
+              city === "Bihać" && <MapElement cityPosition={cityPosition} marker={marker}/>
+            }
+            {
+              city === "Višegrad" && <MapElement cityPosition={cityPosition} marker={marker}/>
+            }
             <RowContainer style={{justifyContent: "flex-end"}}>
               <Button variant="outlined" css={BtnSaveStyle} type="submit" 
                 style={{ backgroundColor: `${(!markerPosition) ? "#ccc" : "#357F54" }` }} disabled={!markerPosition}>

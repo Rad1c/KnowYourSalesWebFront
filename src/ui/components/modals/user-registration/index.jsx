@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { Button, FormControl, InputLabel, Link, MenuItem, Select, TextField } from "@mui/material";
 import {
   Container,
@@ -11,7 +12,7 @@ import { useState } from "react";
 import { validationUserRegisterSchema } from "../../../../validators/validator";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import useAuthStore from "../../../../store/authStore";
 import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
@@ -20,7 +21,7 @@ const currentTime = new Date();
 
 const UserRegistration = ({ setIsModalOpen }) => {
   const [sex, setSex] = useState("M");
-  const navigate = useNavigate();
+  //const navigate = useNavigate(); // navigaciju odraditi na home tj. ponovo ucitat home stranicu
   const { registerUser } = useAuthStore();
   const [open, setOpen] = useState(false);
 
