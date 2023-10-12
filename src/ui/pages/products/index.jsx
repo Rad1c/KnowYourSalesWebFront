@@ -39,7 +39,7 @@ const Products = ({ role }) => {
               name={article.name}
               oldPrice={article.oldPrice}
               newPrice={article.newPrice}
-              validFrom={article.created.slice(0, 10).split("/").join(".")}
+              validFrom={article.created.slice(0, 6).split("/").join(".")}
               validTo={article.validDate.slice(0, 10).split("/").join(".")}
               primaryColor={primaryColor}
             />

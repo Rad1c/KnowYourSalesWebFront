@@ -13,8 +13,11 @@ import {
   Container,
   AppBarStyle,
   InputBaseStyle,
+  UserIcon,
+  CommerceIcon,
   BtnSign,
   AccountMenu,
+  ModalContainer,
 } from "./styled";
 import { Diamond, DiamondContainer, DiamondText } from "../common/styled";
 import SearchIcon from "/img/search.svg";
@@ -23,24 +26,22 @@ import useAuthStore from "../../../store/authStore";
 import useAccountStore from "../../../store/accountStore";
 import { useMemo, useState } from "react";
 import { useNavigate } from "react-router";
+import AddShop from "../modals/add-shop";
 
 const MainMenu = ({backgroundColor, searchColor, role}) => {
   const [setAnchorEl] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [open, setOpen] = useState(false);
+  const [openAddShopModal, setOpenAddShopModal] = useState(false);
   const [name, setName] = useState("")
   const { logout } = useAuthStore();
   const { getUser, getCommerce } = useAccountStore();
   const navigate = useNavigate();
 
+  // TODO: za search meni funkcionalnost; treba je dovrsiti
   const handleMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
-
-  // // TODO: ubaciti ikonicu ( X ) koja ce se prikazivati kad se meni otvori, iskoristiti funkc ispod za zatvaranje
-  // const handleMenuClose = () => {
-  //   setAnchorEl(null);
-  // };
 
   const handleSearchChange = (event) => {
     const searchTerm = event.target.value;
@@ -137,23 +138,13 @@ const MainMenu = ({backgroundColor, searchColor, role}) => {
             />
             {role == "User" && (
               <div style={{ display: "flex", gap: "4rem" }}>
-                <img
+                <UserIcon
                   src="/img/Fav-shop.svg"
                   alt="Favorite shop logo"
-                  style={{
-                    marginTop: "2rem",
-                    height: "2.6rem",
-                    cursor: "pointer",
-                  }}
                 />
-                <img
+                <UserIcon
                   src="/img/Fav-article.svg"
                   alt="Favorite article logo"
-                  style={{
-                    marginTop: "2rem",
-                    height: "2.6rem",
-                    cursor: "pointer",
-                  }}
                 />
                 <DiamondContainer
                   onClick={() => setOpen(true)}
@@ -212,25 +203,14 @@ const MainMenu = ({backgroundColor, searchColor, role}) => {
             )}
             {role == "Commerce" && (
               <div style={{ display: "flex", gap: "4rem" }}>
-                <img
+                <CommerceIcon
                   src="/img/Add-shop.svg"
                   alt="Favorite shop logo"
-                  style={{
-                    marginTop: "1.5rem",
-                    height: "3.2rem",
-                    cursor: "pointer",
-                    filter: "brightness(500%)",
-                  }}
+                  onClick={() => setOpenAddShopModal(true)}
                 />
-                <img
+                <CommerceIcon
                   src="/img/Add-article.svg"
                   alt="Favorite article logo"
-                  style={{
-                    marginTop: "1.5rem",
-                    height: "3.2rem",
-                    cursor: "pointer",
-                    filter: "brightness(500%)",
-                  }}
                 />
                 <DiamondContainer
                   onClick={() => setOpen(true)}
@@ -316,6 +296,12 @@ const MainMenu = ({backgroundColor, searchColor, role}) => {
           </Hidden>
         </Toolbar>
       </AppBar>
+      <Modal open={openAddShopModal} onClose={() => setOpenAddShopModal(false)} disableAutoFocus 
+        style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
+        <ModalContainer>
+          <AddShop />
+        </ModalContainer>
+      </Modal>
     </Container>
   );
 };

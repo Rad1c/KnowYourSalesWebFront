@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unknown-property */
 /* eslint-disable react/prop-types */
 import {
   Container,
@@ -6,6 +7,7 @@ import {
   BtnAdd,
   Title,
   ShowItems,
+  ModalContainer,
 } from "./styled";
 import MainMenu from "../../components/main-menu";
 import ProductCard from "../../components/product-card";
@@ -15,6 +17,8 @@ import Footer from "../../components/footer";
 import { useEffect, useState } from "react";
 import { useColor } from "../../../hooks/useColors";
 import useAccountStore from "../../../store/accountStore";
+import { Modal } from "@mui/material";
+import AddShop from "../../components/modals/add-shop";
 
 const shops = [
   { city: "Sarajevo", address: "Dobrinja 1" },
@@ -126,6 +130,7 @@ const Commerce = ({ role }) => {
   const [productsValue] = useState(products);
   const [showAllShops, setShowAllShops] = useState(false);
   const [showAllProducts, setShowAllProducts] = useState(false);
+  const [openAddShopModal, setOpenAddShopModal] = useState(false);
   const [counter, setCounter] = useState(0)
   const [user, setUser] = useState({})
   const { getCommerce } = useAccountStore()
@@ -151,7 +156,10 @@ const Commerce = ({ role }) => {
       <div>
         <Title style={{ color: primaryColor }}>Radnje</Title>
         <ShopContainer>
-          {role === "Commerce" && <BtnContainer><BtnAdd src="/img/Add-shop.svg" alt="Button for shop adding" /></BtnContainer> }
+          {role === "Commerce" && 
+            <BtnContainer onClick={() => setOpenAddShopModal(true)}>
+              <BtnAdd src="/img/Add-shop.svg" alt="Button for shop adding" />
+            </BtnContainer> }
           {shopsValue.slice(0, showAllShops ? shopsValue.length : role === "Commerce" ? 3 : 4).map((shop, index) => (
             <ShopCard key={index} city={shop.city} address={shop.address} role={role} />
           ))}
@@ -168,7 +176,10 @@ const Commerce = ({ role }) => {
       <div>
         <Title style={{ color: primaryColor }}>Artikli</Title>
         <ShopContainer>
-          {role === "Commerce" && <BtnContainer><BtnAdd src="/img/Add-article.svg" alt="Button for shop adding" /></BtnContainer> }
+          {role === "Commerce" && 
+            <BtnContainer>
+              <BtnAdd src="/img/Add-article.svg" alt="Button for shop adding"/>
+            </BtnContainer> }
           {productsValue.slice(0, showAllProducts ? productsValue.length : role === "Commerce" ? 3 : 4).map(product => (
             <ProductCard
               key={product.id}
@@ -198,6 +209,12 @@ const Commerce = ({ role }) => {
         )}
       </div>
       <Footer />
+      <Modal open={openAddShopModal} onClose={() => setOpenAddShopModal(false)} disableAutoFocus 
+        style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
+        <ModalContainer>
+          <AddShop />
+        </ModalContainer>
+      </Modal>
     </Container>
   );
 };
