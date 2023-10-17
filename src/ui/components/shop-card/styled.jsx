@@ -23,7 +23,7 @@ const ImageHolder = styled.img`
 
 const CityHolder = styled.p`
   margin-bottom: 1rem;
-  color: #555555;
+  color: #777;
   font-size: 1.6rem;
   font-weight: bold;
   text-align: center;
@@ -32,8 +32,9 @@ const CityHolder = styled.p`
 
 const AddressHolder = styled.p`
   font-weight: bold;
-  font-size: 2.2rem;
-  color: #555555;
+  font-size: 2rem;
+  color: #555;
+  text-align: center;
   text-transform: capitalize;
 `;
 

@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { Autocomplete, Button, Link, TextField } from "@mui/material";
 import {
   Container,
@@ -13,17 +14,15 @@ import { useState } from "react";
 import { validationCommerceRegisterSchema } from "../../../../validators/validator";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
 import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
 
-const CommerceRegistration = () => {
+const CommerceRegistration = ({ setIsModalOpen }) => {
   const { cities, getCitiesByCountryCode } = useAuthStore();
   const [citiesLoaded, setCitiesLoaded] = useState(false);
   const [cityValue, setCityValue] = useState();
   const { registerCommerce } = useAuthStore();
   const [open, setOpen] = useState(false);
-  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchCities = async () => {
@@ -59,7 +58,7 @@ const CommerceRegistration = () => {
         data.confirmPassword
       );
       setOpen(false);
-      navigate("/");
+      setIsModalOpen(false);
     } catch (error) {
       setOpen(false);
       if (error.response?.status === 409) {

@@ -2,12 +2,14 @@ import { Box } from "@mui/material";
 import {
   Container,
   ImgMainContainer,
-  ImgSecondContainer,
+  ImgSecondaryContainer,
   ImgsSecondWrapper,
   Arrow,
   ControlsHolder,
   MainImg,
+  SecondaryImg,
 } from "./styled";
+import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 import { useState } from "react";
 
 const productsImages = [
@@ -48,23 +50,28 @@ const ProductImages = () => {
       <ControlsHolder>
         <Arrow style={{backgroundImage: `url("/img/expand-left.png")`}} onClick={ArrowLeftClickHandler} />
         <ImgMainContainer>
-          <MainImg
-            src={productsImages[mainImgIndexValue % productsImages.length].img}
-            alt="commerce-img"
-          />
+          <TransformWrapper initialScale={1} doubleClick={true} smooth>
+            <TransformComponent>
+              <div style={{cursor: "zoom-in"}}>
+                <MainImg
+                  src={productsImages[mainImgIndexValue % productsImages.length].img}
+                  alt="commerce-img"
+                />
+              </div>
+            </TransformComponent>
+          </TransformWrapper>
         </ImgMainContainer>
         <Arrow style={{backgroundImage: `url("/img/expand-right.png")`}} onClick={ArrowRightClickHandler} />
       </ControlsHolder>
       <Box>
         <ImgsSecondWrapper>
           {productsImages.map((productImage, index) => (
-            <ImgSecondContainer key={index}>
-              <img
+            <ImgSecondaryContainer key={index}>
+              <SecondaryImg
                 src={productImage.img}
                 alt="commerce-img"
-                style={{ maxWidth: "100%", maxHeight: "100%", objectFit: "contain" }}
               />
-            </ImgSecondContainer>
+            </ImgSecondaryContainer>
           ))}
         </ImgsSecondWrapper>
       </Box>
