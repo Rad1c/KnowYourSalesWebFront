@@ -2,7 +2,6 @@ import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 
 const Wrapper = styled.div`
-  transform: translate(-125%, -50%);
 `;
 
 const Container = styled.div`
@@ -12,6 +11,7 @@ const Container = styled.div`
   flex-direction: column;
   border: 1px solid #777;
   border-radius: 5px;
+  overflow: hidden;
 `;
 
 const RowContainer = styled.div`

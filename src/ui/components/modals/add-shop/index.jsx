@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import {
   Button,
   FormControl,
@@ -16,16 +17,15 @@ import {
 } from "./styled";
 import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
+import MapElement from "../../map";
 import useProductsStore from "../../../../store/productsStore";
 import useCommerceStore from "../../../../store/commerceStore";
 import { validationAddShopSchema } from "../../../../validators/validator";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useEffect, useState } from "react";
-// import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import MapElement from "../../map";
 
-const AddShop = () => {
+const AddShop = ({ setIsModalOpen }) => {
   const [open, setOpen] = useState(false); // for backdrop
   const [selectedCity, setSelectedCity] = useState("");
   const [city, setCity] = useState("")
@@ -33,7 +33,6 @@ const AddShop = () => {
   const [markerPosition, setMarkerPosition] = useState(null);
   const { cities, getCitiesByCountryCode } = useProductsStore();
   const { addShop } = useCommerceStore();
-  // const navigate = useNavigate();
   
   useEffect(() => {
     const fetchCities = async () => {
@@ -80,18 +79,17 @@ const AddShop = () => {
       shopAddress,
     } = data;
 
-    console.log(shopName, shopCity, shopAddress, markerPosition)
-
     try {
       setOpen(true);
       await addShop(
         shopName,
         shopCity,
+        markerPosition.lng,
+        markerPosition.lat,
         shopAddress,
-        markerPosition.lat.toFixed(6),
-        markerPosition.lng.toFixed(6),
       )
       setOpen(false);
+      setIsModalOpen(false);
     } catch (error) {
       setOpen(false)
     }

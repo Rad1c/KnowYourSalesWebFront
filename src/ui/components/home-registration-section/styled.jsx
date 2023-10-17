@@ -83,12 +83,12 @@ const BtnRegisterCommerce = css`
   }
 `;
 
-const ModalStyle = css`
+const ModalContainer = styled.div`
   width: 20rem;
-  height: 2rem;
-  position: absolute;
-  top: 50%;
-  left: 50%;
+  height: 20rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 export {
@@ -100,5 +100,5 @@ export {
   BtnRegisterUser,
   BtnRegisterCommerce,
   ContentContainer,
-  ModalStyle,
+  ModalContainer,
 };

@@ -11,7 +11,7 @@ import {
   BtnRegisterUser,
   ContentContainer,
   BtnRegisterCommerce,
-  ModalStyle,
+  ModalContainer,
 } from "./styled";
 import { useState } from "react";
 import CommerceRegistration from "../modals/commerce-registration1";
@@ -40,10 +40,11 @@ const RegistrationSection = () => {
           >
             Započnite registraciju
           </Button>
-          <Modal open={openUser} onClose={() => setOpenUser(false)}>
-            <div css={ModalStyle}>
-              <UserRegistration setIsModalOpen={setOpenUser} />
-            </div>
+          <Modal open={openUser} onClose={() => setOpenUser(false)} disableAutoFocus 
+            style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
+            <ModalContainer>
+              <UserRegistration setIsModalOpen={isModalOpen => setOpenUser(isModalOpen)} />
+            </ModalContainer>
           </Modal>
         </BoxLeftContainer>
         <BoxRightContainer>
@@ -55,10 +56,11 @@ const RegistrationSection = () => {
           <Button css={BtnRegisterCommerce} onClick={() => setOpenComm(true)}>
             Započnite registraciju
           </Button>
-          <Modal open={openComm} onClose={() => setOpenComm(false)}>
-            <div css={ModalStyle}>
-              <CommerceRegistration />
-            </div>
+          <Modal open={openComm} onClose={() => setOpenComm(false)} disableAutoFocus 
+            style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
+            <ModalContainer>
+              <CommerceRegistration setIsModalOpen={isModalOpen => setOpenUser(isModalOpen)} />
+            </ModalContainer>
           </Modal>
         </BoxRightContainer>
       </ContentContainer>

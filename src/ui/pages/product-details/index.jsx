@@ -99,8 +99,6 @@ const productsFromShop = [
   },
 ];
 
-const position = [44.77108, 17.20588];
-
 const Product = ({ role }) => {
   const { primaryColor, searchColor } = useColor(role);
 
@@ -111,8 +109,8 @@ const Product = ({ role }) => {
         <ProductDetails primaryColor={primaryColor} role={role} />
         <MapContainerWrapper>
           <MapContainer
-            center={position}
-            zoom={16}
+            center={[44.77108, 17.20588]}
+            zoom={15}
             scrollWheelZoom={true}
             style={{ height: "100%", width: "100%", zIndex: "1" }}
           >
@@ -120,8 +118,11 @@ const Product = ({ role }) => {
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
-            <Marker position={position}>
-              <Popup>Sport Vision</Popup>
+            <Marker position={[44.771080, 17.205880]}>
+              <Popup>Sport Reality 1<br />Bulevar Zivojina Misica 5</Popup>
+            </Marker>
+            <Marker position={[44.772310, 17.206000]}>
+              <Popup>Sport Reality 2<br />Knezepoljska 7</Popup>
             </Marker>
           </MapContainer>
         </MapContainerWrapper>

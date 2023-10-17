@@ -1,10 +1,10 @@
-import axios, { axiosPrivate } from "../api/axios";
+import { axiosPrivate } from "../api/axios";
 import { create } from "zustand";
 import extractUserDataFromToken from "../assets/helper";
 
 const VERIFY_ACCOUNT_URL = "/verify-account";
 
-const useAccountStore = create((set, get) => ({
+const useAccountStore = create((set) => ({
   status: 0,
   getUser: async () => {
     try {

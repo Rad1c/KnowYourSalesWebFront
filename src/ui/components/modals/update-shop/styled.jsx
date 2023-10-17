@@ -12,7 +12,7 @@ const Container = styled.div`
   border: 1px solid #777;
   border-radius: 5px;
   overflow: hidden;
-`;
+  `;
   
   const Header = styled.div`
   background-color: #f5f5f5;
@@ -22,7 +22,7 @@ const Container = styled.div`
   font-size: 1.6rem;
   padding: 1.5rem 0;
   margin-bottom: 2rem;
-`;
+  `;
   
 const ControlsContainer = styled.div`
   margin: 0 3rem;

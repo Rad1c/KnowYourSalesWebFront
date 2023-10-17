@@ -9,7 +9,6 @@ const Container = styled.div`
 const ImgMainContainer = styled.div`
   width: 35rem;
   height: 28rem;
-  overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -19,14 +18,20 @@ const MainImg = styled.img`
   width: 100%;
   height: 100%;
   object-fit: contain;
-  transition: transform 0.3s ease-in-out;
-
-  &:hover {
-    transform: scale(1.5);
-  }
 `;
 
-const ImgSecondContainer = styled.div`
+const SecondaryImg = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  cursor: pointer;
+
+  :hover {
+    scale: 1.2;
+  }
+`
+
+const ImgSecondaryContainer = styled.div`
   width: 8rem;
   margin-top: 2rem;
   height: 6rem;
@@ -52,15 +57,17 @@ const Arrow = styled.div`
 
 const ControlsHolder = styled.div`
   display: flex;
+  justify-content: space-between;
   align-items: center;
 `;
 
 export {
   Container,
   ImgMainContainer,
-  ImgSecondContainer,
+  ImgSecondaryContainer,
   ImgsSecondWrapper,
   Arrow,
   ControlsHolder,
   MainImg,
+  SecondaryImg,
 };

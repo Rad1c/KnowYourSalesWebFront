@@ -19,16 +19,8 @@ import { useColor } from "../../../hooks/useColors";
 import useAccountStore from "../../../store/accountStore";
 import { Modal } from "@mui/material";
 import AddShop from "../../components/modals/add-shop";
-
-const shops = [
-  { city: "Sarajevo", address: "Dobrinja 1" },
-  { city: "Sarajevo", address: "Dobrinja 1" },
-  { city: "Sarajevo", address: "Dobrinja 1" },
-  { city: "Sarajevo", address: "Dobrinja 1" },
-  { city: "Sarajevo", address: "Dobrinja 1" },
-  { city: "Sarajevo", address: "Dobrinja 1" },
-  { city: "Sarajevo", address: "Dobrinja 1" },
-];
+import useCommerceStore from "../../../store/commerceStore";
+import UpdateShop from "../../components/modals/update-shop";
 
 const products = [
   {
@@ -126,15 +118,17 @@ const products = [
 const img = "/img/product-commerce.png";
 
 const Commerce = ({ role }) => {
-  const [shopsValue] = useState(shops);
   const [productsValue] = useState(products);
   const [showAllShops, setShowAllShops] = useState(false);
   const [showAllProducts, setShowAllProducts] = useState(false);
   const [openAddShopModal, setOpenAddShopModal] = useState(false);
-  const [counter, setCounter] = useState(0)
-  const [user, setUser] = useState({})
-  const { getCommerce } = useAccountStore()
+  const [openUpdateShopModal, setOpenUpdateShopModal] = useState(false);
+  const [shop, setShop] = useState({});
+  const [counter, setCounter] = useState(0);
+  const [user, setUser] = useState({});
+  const { getCommerce } = useAccountStore();
   const { primaryColor, searchColor } = useColor(role);
+  const { shops, getShops } = useCommerceStore();
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -145,9 +139,16 @@ const Commerce = ({ role }) => {
       fetchUser();
       setCounter(1)
     }
-
-    console.log(user)
   }, [user])
+
+  useEffect(() => {
+    const fetchShops = async () => {
+      await getShops();
+    }
+
+    fetchShops();
+    console.log(shops)
+  }, [])
 
   return (
     <Container>
@@ -160,9 +161,18 @@ const Commerce = ({ role }) => {
             <BtnContainer onClick={() => setOpenAddShopModal(true)}>
               <BtnAdd src="/img/Add-shop.svg" alt="Button for shop adding" />
             </BtnContainer> }
-          {shopsValue.slice(0, showAllShops ? shopsValue.length : role === "Commerce" ? 3 : 4).map((shop, index) => (
-            <ShopCard key={index} city={shop.city} address={shop.address} role={role} />
-          ))}
+          {shops && 
+            shops.slice(0, showAllShops ? shops.length : role === "Commerce" ? 3 : 4).map((shop) => (
+              <div key={shop.id} 
+              onClick={() => 
+                {
+                  setShop(shop);
+                  setOpenUpdateShopModal(true);
+                }}>
+                <ShopCard key={shop.id} city={shop.cityName} address={shop.address} role={role} />
+              </div>
+            ))
+          }
         </ShopContainer>
       </div>
       <div style={{ marginTop: "1rem", marginBottom: "8rem" }}>
@@ -212,8 +222,12 @@ const Commerce = ({ role }) => {
       <Modal open={openAddShopModal} onClose={() => setOpenAddShopModal(false)} disableAutoFocus 
         style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
         <ModalContainer>
-          <AddShop />
+          <AddShop setIsModalOpen={isModalOpen => setOpenAddShopModal(isModalOpen)} />
         </ModalContainer>
+      </Modal>
+      <Modal open={openUpdateShopModal} onClose={() => setOpenUpdateShopModal(false)} disableAutoFocus
+        style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
+          <UpdateShop shop={shop} setIsModalOpen={isModalOpen => setOpenUpdateShopModal(isModalOpen)}/>
       </Modal>
     </Container>
   );

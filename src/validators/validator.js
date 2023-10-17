@@ -63,4 +63,16 @@ const validationAddShopSchema = Yup.object().shape({
     .required("Adresa je obavezna"),
 })
 
-export { validationUserRegisterSchema, validationCommerceRegisterSchema, validationLoginSchema, validationAddShopSchema };
+const validationUpdateShopSchema = Yup.object().shape({
+  shopName: Yup.string()
+    .min(5, "Minimalni broj karakter je 5")
+    .max(50, "Maksimalni broj karaktera je 50")
+    .required("Ime je obavezno"),
+
+  shopAddress: Yup.string()
+    .min(5, "Minimalni broj karakter je 5")
+    .max(50, "Maksimalni broj karaktera je 50")
+    .required("Adresa je obavezna"),
+})
+
+export { validationUserRegisterSchema, validationCommerceRegisterSchema, validationLoginSchema, validationAddShopSchema, validationUpdateShopSchema };

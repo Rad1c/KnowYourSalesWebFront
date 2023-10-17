@@ -58,6 +58,7 @@ const favoriteProducts = [
     discount: 20,
     productImg: "/img/product.png",
     commerceImg: "/img/product-commerce.png",
+    name: "PATIKE 1",
     oldPrice: 100.0,
     newPrice: 80.0,
     validFrom: "24.02.2023",
@@ -68,6 +69,7 @@ const favoriteProducts = [
     discount: 20,
     productImg: "/img/product.png",
     commerceImg: "/img/product-commerce.png",
+    name: "PATIKE 2",
     oldPrice: 100.0,
     newPrice: 80.0,
     validFrom: "24.02.2023",
@@ -78,6 +80,7 @@ const favoriteProducts = [
     discount: 20,
     productImg: "/img/product.png",
     commerceImg: "/img/product-commerce.png",
+    name: "PATIKE 3",
     oldPrice: 100.0,
     newPrice: 80.0,
     validFrom: "24.02.2023",
@@ -88,6 +91,7 @@ const favoriteProducts = [
     discount: 20,
     productImg: "/img/product.png",
     commerceImg: "/img/product-commerce.png",
+    name: "PATIKE 4",
     oldPrice: 100.0,
     newPrice: 80.0,
     validFrom: "24.02.2023",
@@ -98,6 +102,7 @@ const favoriteProducts = [
     discount: 20,
     productImg: "/img/product.png",
     commerceImg: "/img/product-commerce.png",
+    name: "PATIKE 5",
     oldPrice: 100.0,
     newPrice: 80.0,
     validFrom: "24.02.2023",
@@ -108,6 +113,7 @@ const favoriteProducts = [
     discount: 20,
     productImg: "/img/product.png",
     commerceImg: "/img/product-commerce.png",
+    name: "PATIKE 6",
     oldPrice: 100.0,
     newPrice: 80.0,
     validFrom: "24.02.2023",
@@ -118,6 +124,7 @@ const favoriteProducts = [
     discount: 20,
     productImg: "/img/product.png",
     commerceImg: "/img/product-commerce.png",
+    name: "PATIKE 7",
     oldPrice: 100.0,
     newPrice: 80.0,
     validFrom: "24.02.2023",
@@ -128,6 +135,7 @@ const favoriteProducts = [
     discount: 20,
     productImg: "/img/product.png",
     commerceImg: "/img/product-commerce.png",
+    name: "PATIKE 8",
     oldPrice: 100.0,
     newPrice: 80.0,
     validFrom: "24.02.2023",
@@ -138,6 +146,7 @@ const favoriteProducts = [
     discount: 20,
     productImg: "/img/product.png",
     commerceImg: "/img/product-commerce.png",
+    name: "PATIKE 9",
     oldPrice: 100.0,
     newPrice: 80.0,
     validFrom: "24.02.2023",
@@ -209,11 +218,13 @@ const User = ({ role }) => {
                 discount={product.discount}
                 productImg={product.productImg}
                 commerceImg={product.commerceImg}
+                name={product.name}
                 oldPrice={product.oldPrice}
                 newPrice={product.newPrice}
                 validFrom={product.validFrom}
                 validTo={product.validTo}
                 primaryColor={primaryColor}
+                role={role}
               />
             ))}
           </ItemsContainer>
