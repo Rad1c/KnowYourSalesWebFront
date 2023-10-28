@@ -49,13 +49,6 @@ const AddShop = ({ setIsModalOpen }) => {
   } = useForm({
     resolver: yupResolver(validationAddShopSchema),
   });
-  
-  const citiesMap = cities.map((city) => ({
-    id: city.cityId,
-    name: city.cityName,
-    latitude: city.latitude,
-    longitude: city.longitude,
-  }));
 
   const marker = markerPosition => setMarkerPosition(markerPosition);
 
@@ -120,10 +113,10 @@ const AddShop = ({ setIsModalOpen }) => {
               sx={{ marginBottom: "2.5rem" }}
             />
             <FormControl fullWidth>
-              <InputLabel id="city-select-label">Sjedište radnje *</InputLabel>
+              <InputLabel id="citySelectLabel">Sjedište radnje *</InputLabel>
               <Select
-                labelId="city-select-label"
-                id="city-select"
+                labelId="citySelectLabel"
+                id="citySelect"
                 value={selectedCity}
                 label="Sjedište radnje"
                 variant="outlined"
@@ -141,8 +134,8 @@ const AddShop = ({ setIsModalOpen }) => {
                 }}
                 onChange={selectOnChange}
                 >
-                {citiesMap.map(city => (
-                  <MenuItem key={city.id} value={city.id} >{city.name}</MenuItem>))
+                {cities.map(city => (
+                  <MenuItem key={city.cityId} value={city.cityId} >{city.cityName}</MenuItem>))
                 }
               </Select>
             </FormControl>

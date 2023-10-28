@@ -7,7 +7,7 @@ import {
   BtnAdd,
   Title,
   ShowItems,
-  ModalContainer,
+  // ModalContainer, // TODO: obrisati komponentu u styled
 } from "./styled";
 import MainMenu from "../../components/main-menu";
 import ProductCard from "../../components/product-card";
@@ -21,6 +21,7 @@ import { Modal } from "@mui/material";
 import AddShop from "../../components/modals/add-shop";
 import useCommerceStore from "../../../store/commerceStore";
 import UpdateShop from "../../components/modals/update-shop";
+import AddArticle from "../../components/modals/add-article";
 
 const products = [
   {
@@ -123,6 +124,8 @@ const Commerce = ({ role }) => {
   const [showAllProducts, setShowAllProducts] = useState(false);
   const [openAddShopModal, setOpenAddShopModal] = useState(false);
   const [openUpdateShopModal, setOpenUpdateShopModal] = useState(false);
+  const [openAddArticleModal, setOpenAddArticleModal] = useState(false);
+  // const [openUpdateArticleModal, setOpenUpdateArticleModal] = useState(false);
   const [shop, setShop] = useState({});
   const [counter, setCounter] = useState(0);
   const [user, setUser] = useState({});
@@ -187,7 +190,7 @@ const Commerce = ({ role }) => {
         <Title style={{ color: primaryColor }}>Artikli</Title>
         <ShopContainer>
           {role === "Commerce" && 
-            <BtnContainer>
+            <BtnContainer onClick={() => setOpenAddArticleModal(true)}>
               <BtnAdd src="/img/Add-article.svg" alt="Button for shop adding"/>
             </BtnContainer> }
           {productsValue.slice(0, showAllProducts ? productsValue.length : role === "Commerce" ? 3 : 4).map(product => (
@@ -221,13 +224,15 @@ const Commerce = ({ role }) => {
       <Footer />
       <Modal open={openAddShopModal} onClose={() => setOpenAddShopModal(false)} disableAutoFocus 
         style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
-        <ModalContainer>
-          <AddShop setIsModalOpen={isModalOpen => setOpenAddShopModal(isModalOpen)} />
-        </ModalContainer>
+        <AddShop setIsModalOpen={isModalOpen => setOpenAddShopModal(isModalOpen)} />
       </Modal>
       <Modal open={openUpdateShopModal} onClose={() => setOpenUpdateShopModal(false)} disableAutoFocus
         style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
-          <UpdateShop shop={shop} setIsModalOpen={isModalOpen => setOpenUpdateShopModal(isModalOpen)}/>
+        <UpdateShop shop={shop} setIsModalOpen={isModalOpen => setOpenUpdateShopModal(isModalOpen)}/>
+      </Modal>
+      <Modal open={openAddArticleModal} onClose={() => setOpenAddArticleModal(false)} disableAutoFocus
+        style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
+        <AddArticle shop={shop} setIsModalOpen={isModalOpen => setOpenAddArticleModal(isModalOpen)}/>
       </Modal>
     </Container>
   );

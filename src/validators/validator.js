@@ -75,4 +75,42 @@ const validationUpdateShopSchema = Yup.object().shape({
     .required("Adresa je obavezna"),
 })
 
-export { validationUserRegisterSchema, validationCommerceRegisterSchema, validationLoginSchema, validationAddShopSchema, validationUpdateShopSchema };
+const validationAddArticleSchema = Yup.object().shape({
+  articleName: Yup.string()
+    .min(5, "Minimalni broj karakter je 5")
+    .max(50, "Maksimalni broj karaktera je 50")
+    .required("Ime je obavezno"),
+  
+  description: Yup.string()
+    .min(16, "Minimalni broj karakter je 16")
+    .max(160, "Maksimalni broj karaktera je 160")
+    .required("Opis je obavezan"),
+
+  oldPrice: Yup.number()
+    .min(0, "Cijena artikla mora biti pozitivan broj")  
+    .required("Stara cijena je obavezna"),
+
+  newPrice: Yup.number()
+    .max(Yup.ref('oldPrice'), "Nova cijena artikla mora biti manja od stare cijene")
+    .required("Nova cijena je obavezna"),
+
+  articleShops: Yup.array()
+    .required("Obavezno je dodati prodavnice u kojima je artikal dostupan"),
+
+  articleCategory: Yup.string()
+    .required("Kategorija artikla je obavezna"),
+
+  titlePicture: Yup.object().shape({
+    size: Yup.number()
+      .max(5242880, "Maksimalna velicina slike je 5 MB")
+  }).required()
+})
+
+export { 
+  validationUserRegisterSchema, 
+  validationCommerceRegisterSchema, 
+  validationLoginSchema, 
+  validationAddShopSchema, 
+  validationUpdateShopSchema,
+  validationAddArticleSchema
+};
