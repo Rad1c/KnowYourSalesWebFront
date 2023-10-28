@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/no-unknown-property */
 /* eslint-disable react/prop-types */
 import {
@@ -27,12 +28,14 @@ import useAccountStore from "../../../store/accountStore";
 import { useMemo, useState } from "react";
 import { useNavigate } from "react-router";
 import AddShop from "../modals/add-shop";
+import AddArticle from "../modals/add-article";
 
 const MainMenu = ({backgroundColor, searchColor, role}) => {
   const [setAnchorEl] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [open, setOpen] = useState(false);
   const [openAddShopModal, setOpenAddShopModal] = useState(false);
+  const [openAddArticleModal, setOpenAddArticleModal] = useState(false);
   const [name, setName] = useState("")
   const { logout } = useAuthStore();
   const { getUser, getCommerce } = useAccountStore();
@@ -211,6 +214,7 @@ const MainMenu = ({backgroundColor, searchColor, role}) => {
                 <CommerceIcon
                   src="/img/Add-article.svg"
                   alt="Favorite article logo"
+                  onClick={() => setOpenAddArticleModal(true)}
                 />
                 <DiamondContainer
                   onClick={() => setOpen(true)}
@@ -300,6 +304,12 @@ const MainMenu = ({backgroundColor, searchColor, role}) => {
         style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
         <ModalContainer>
           <AddShop />
+        </ModalContainer>
+      </Modal>
+      <Modal open={openAddArticleModal} onClose={() => setOpenAddArticleModal(false)} disableAutoFocus 
+        style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
+        <ModalContainer>
+          <AddArticle />
         </ModalContainer>
       </Modal>
     </Container>
