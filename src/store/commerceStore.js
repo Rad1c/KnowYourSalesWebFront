@@ -79,8 +79,7 @@ const useCommerceStore = create((set) => ({
         {
           headers: { "Content-Type": "application/json" },
         }
-      )
-      );
+      ));
     } catch (error) {
       console.log("Error updating shop", error);
     }

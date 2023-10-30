@@ -176,13 +176,12 @@ const User = ({ role }) => {
     }
 
     setName(user?.firstName + " " + user?.lastName)
-    console.log(user)
   }, [user])
 
   return (
     <Container>
       <MainMenu backgroundColor={primaryColor} searchColor={searchColor} role={role} />
-      <CommerceUserSection name={name} img={"/img/user-generic.png"} role={role} allowed={"User"}/>
+      <CommerceUserSection name={name} img={"/img/user-generic.png"} role={role} user={user} allowed={"User"}/>
       <div>
         <Title>Omiljene trgovine</Title>
         <Wrapper>
