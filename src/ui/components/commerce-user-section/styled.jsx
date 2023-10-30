@@ -57,6 +57,14 @@ const ControlsContainer = styled.div`
   justify-content: space-around;
 `;
 
+const ModalContainer = styled.div`
+  width: 20rem;
+  height: 20rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
 const delimiterStyle = css`
   max-width: 65rem;
   max-height: auto;
@@ -72,5 +80,6 @@ export {
   BtnEdit,
   BtnFavorite,
   ControlsContainer,
+  ModalContainer,
   delimiterStyle,
 };

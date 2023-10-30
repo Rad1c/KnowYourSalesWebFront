@@ -12,7 +12,32 @@ const useAccountStore = create((set) => ({
 
       return response;
     } catch (error) {
-      console.error("Error fetching user name:", error);
+      console.error("Error fetching user name: ", error);
+    }
+  },
+  updateUser: async (
+    id,
+    firstName,
+    lastName,
+    sex,
+    dateOfBirth
+  ) => {
+    try {
+      await axiosPrivate.put(`/user`,
+      JSON.stringify(
+        {
+          id,
+          firstName,
+          lastName,
+          sex,
+          dateOfBirth
+        },
+        {
+          headers: {"Content-Type": "application/json"},
+        }
+      ));
+    } catch (error) {
+      console.log("Error updating user: ", error);
     }
   },
   getCommerce: async () => {
@@ -24,7 +49,7 @@ const useAccountStore = create((set) => ({
 
       return response;
     } catch (error) {
-      console.error("Error fetching commerce name:", error);
+      console.error("Error fetching commerce name: ", error);
     }
   },
   verifyAccount: async (code) => {
