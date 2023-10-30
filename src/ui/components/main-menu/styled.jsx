@@ -11,6 +11,10 @@ const Container = styled.div`
   width: 100%;
   background-image: url("img/header-wavy.png");
   background-color: #55347f;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+
   --mask: conic-gradient(
       from -45deg at bottom,
       #0000,
@@ -68,7 +72,44 @@ const BtnSign = css`
   }
 `;
 
+const FavoriteContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 25rem;
+  height: 30rem;
+  background-color: #fafafa;
+  border-radius: 5px;
+  border: 1px solid #777;
+  position: absolute;
+  top: 8rem;
+  overflow: scroll;
+  outline: none;
+`;
+
+const FavoriteContainerContent = styled.div`
+  width: inherit;
+  position: absolute;
+  top: 0;
+  left: .5rem;
+  
+  ::-webkit-scrollbar{
+    display: none;
+  }
+`;
+
+const FavoriteContainerEmpty = styled.div`
+  color: #777;
+  font-size: 2.4rem;
+  text-align: center;
+`;
+
 const AccountMenu = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
   background-color: #fafafa;
   color: #1e1e1e;
   font-size: 1.6rem;
@@ -79,6 +120,10 @@ const AccountMenu = styled.div`
   top: 8rem;
   right: 3rem;
   outline: 0;
+`;
+
+const AccountItem = styled.p`
+  cursor: pointer;
 `;
 
 const ModalContainer = styled.div`
@@ -97,6 +142,10 @@ export {
   UserIcon,
   CommerceIcon,
   BtnSign,
+  FavoriteContainer,
+  FavoriteContainerContent,
+  FavoriteContainerEmpty,
   AccountMenu,
+  AccountItem,
   ModalContainer,
 };
