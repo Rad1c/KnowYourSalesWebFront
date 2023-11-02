@@ -19,22 +19,15 @@ const useProductsStore = create((set) => ({
 
     set({ cities: response.data });
   },
-  getArticles: async (
-    pageSize,
-    page,
-    name = "",
-    cityName = "",
-    categoryName = "",
-    commerceId = ""
-  ) => {
+  getArticles: async (pageSize, page, name = "", cityId = "", categoryId = "", commerceId = "") => {
     try {
       const response = await axiosPrivate.get("/articles", {
         params: {
           pageSize,
           page,
           name,
-          cityName,
-          categoryName,
+          cityId,
+          categoryId,
           commerceId,
         },
       });
@@ -59,25 +52,27 @@ const useProductsStore = create((set) => ({
   ) => {
     const response = await axiosPrivate.post(
       "/article",
-      JSON.stringify({
-        commerceId,
-        categoryIds,
-        shopIds,
-        currencyName,
-        name,
-        description,
-        oldPrice,
-        newPrice,
-        validDate,
-        images,
-      },
-      {
-        headers: { "Content-Type": "application/json" },
-      })
-    )
+      JSON.stringify(
+        {
+          commerceId,
+          categoryIds,
+          shopIds,
+          currencyName,
+          name,
+          description,
+          oldPrice,
+          newPrice,
+          validDate,
+          images,
+        },
+        {
+          headers: { "Content-Type": "application/json" },
+        }
+      )
+    );
 
     return response;
-  }
+  },
 }));
 
 export default useProductsStore;

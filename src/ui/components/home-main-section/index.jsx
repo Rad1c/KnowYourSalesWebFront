@@ -1,22 +1,20 @@
 /** @jsxImportSource @emotion/react */
-import {
-  MainSectionContainer,
-  TextContainer,
-  SelectContainer,
-  BtnSearch,
-} from "./styled";
+import { MainSectionContainer, TextContainer, SelectContainer, BtnSearch } from "./styled";
 import { MaskDiv } from "../common/styled";
 import { useEffect } from "react";
 import Menu from "../menu";
 import SelectOption from "../select";
 import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import useProductsStore from "../../../store/productsStore";
 
 const MainSection = () => {
-  const { cities, getCitiesByCountryCode, categories, getCategories } =
-    useProductsStore();
+  const { cities, getCitiesByCountryCode, categories, getCategories } = useProductsStore();
   const navigate = useNavigate();
+  const [selectedCity, setSelectedCity] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("");
+  const [btnSearchEnabled, setBtnSearchEnabled] = useState(false);
 
   useEffect(() => {
     const fetchCitiesAndCategories = async () => {
@@ -37,6 +35,23 @@ const MainSection = () => {
     name: category.name,
   }));
 
+  const handleCityChange = (cityId) => {
+    setSelectedCity(cityId);
+
+    if (selectedCategory) setBtnSearchEnabled(true);
+  };
+
+  const HandleCategoryChange = (categoryId) => {
+    setSelectedCategory(categoryId);
+
+    if (selectedCity) setBtnSearchEnabled(true);
+  };
+
+  const handleBtnSearch = () => {
+    if (btnSearchEnabled) {
+      navigate(`/products?city=${selectedCity}&category=${selectedCategory}`);
+    }
+  };
   return (
     <MaskDiv>
       <MainSectionContainer id="main-section">
@@ -52,19 +67,28 @@ const MainSection = () => {
               marginTop: "4.5rem",
             }}
           >
-            Pronađite najbolje i najnovije popuste u radnjama iz vašeg grada{" "}
-            <br /> i uštedite sa nama.
+            Pronađite najbolje i najnovije popuste u radnjama iz vašeg grada <br /> i uštedite sa
+            nama.
           </p>
         </TextContainer>
         <SelectContainer>
-          <SelectOption name="Odaberite grad" data={citiesMap} />
-          <SelectOption name="Odaberite kategoriju" data={categoriesMap} />
+          <SelectOption
+            name="Odaberite grad"
+            data={citiesMap}
+            returnSelectValue={handleCityChange}
+          />
+          <SelectOption
+            name="Odaberite kategoriju"
+            data={categoriesMap}
+            returnSelectValue={HandleCategoryChange}
+          />
           <Button
             variant="outlined"
             color="inherit"
             size="small"
+            disabled={!btnSearchEnabled}
             css={BtnSearch}
-            onClick={() => navigate("/products")}
+            onClick={handleBtnSearch}
           >
             Započnite pretragu
           </Button>

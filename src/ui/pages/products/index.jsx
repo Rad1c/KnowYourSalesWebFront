@@ -13,26 +13,45 @@ const Products = ({ role }) => {
   const { articles, getArticles } = useProductsStore();
 
   useEffect(() => {
-    const fetchArticles = async () =>{
-      await getArticles(100, 1)
+    const searchParams = new URLSearchParams(window.location.search);
+    const cityId = searchParams.get("city");
+    const categoryId = searchParams.get("category");
+
+    const fetchArticles = async () => {
+      if (cityId && categoryId) {
+        await getArticles(6, 1, null, cityId, categoryId);
+      } else {
+        await getArticles(6, 1);
+      }
     };
 
     fetchArticles();
-    console.log(articles)
-  }, [])
-  
-  const { primaryColor, secondaryColor, searchColor } = useColor(role)
+  }, []);
+
+  const handlePagination = async (event, value) => {
+    const searchParams = new URLSearchParams(window.location.search);
+    const cityId = searchParams.get("city");
+    const categoryId = searchParams.get("category");
+
+    if (cityId && categoryId) {
+      await getArticles(6, value, null, cityId, categoryId);
+    } else {
+      await getArticles(6, value);
+    }
+  };
+
+  const { primaryColor, secondaryColor, searchColor } = useColor(role);
 
   return (
     <ContentWrapper>
-      <MainMenu backgroundColor={primaryColor} searchColor={searchColor} role={role}/>
-      <SortProducts primaryColor={primaryColor} secondaryColor={secondaryColor}/>
+      <MainMenu backgroundColor={primaryColor} searchColor={searchColor} role={role} />
+      <SortProducts primaryColor={primaryColor} secondaryColor={secondaryColor} />
       <CardContainer>
-        {articles &&
-          articles.map((article) => (
+        {articles.items &&
+          articles.items.map((article) => (
             <div key={article.articleId}>
               <ProductCard
-                // key={article.artileId}
+                key={article.artileId}
                 role={role}
                 id={article.artileId}
                 discount={Math.round(article.sale)}
@@ -49,9 +68,10 @@ const Products = ({ role }) => {
           ))}
       </CardContainer>
       <Pagination
-        count={Math.ceil(articles.length / 12)}
+        count={Math.ceil(articles.totalCount / 6)}
         shape="rounded"
         size="large"
+        onChange={handlePagination}
         sx={{
           marginBottom: "8rem",
           "& .css-yx0nvq-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected": {
