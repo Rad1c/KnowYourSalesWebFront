@@ -51,9 +51,6 @@ const validationCommerceUpdateSchema = Yup.object().shape({
     .min(2, "Minimalni broj karakter je 2")
     .max(50, "Maksimalni broj karaktera je 50")
     .required("Ime je obavezno"),
-
-  city: Yup.string()
-    .required("Sjedište trgovine je obavezno")
 })
 
 const validationLoginSchema = Yup.object().shape({

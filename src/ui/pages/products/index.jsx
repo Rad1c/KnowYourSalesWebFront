@@ -32,7 +32,7 @@ const Products = ({ role }) => {
           articles.map((article) => (
             <div key={article.articleId}>
               <ProductCard
-                // key={article.artileId}
+                key={article.artileId}
                 role={role}
                 id={article.artileId}
                 discount={Math.round(article.sale)}

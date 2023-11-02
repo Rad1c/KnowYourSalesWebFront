@@ -23,8 +23,6 @@ const useProductsStore = create((set) => ({
     pageSize,
     page,
     name = "",
-    cityName = "",
-    categoryName = "",
     commerceId = ""
   ) => {
     try {
@@ -33,8 +31,6 @@ const useProductsStore = create((set) => ({
           pageSize,
           page,
           name,
-          cityName,
-          categoryName,
           commerceId,
         },
       });

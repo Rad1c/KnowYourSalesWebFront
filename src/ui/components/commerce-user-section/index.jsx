@@ -2,7 +2,7 @@
 /* eslint-disable react/prop-types */
 import { useState } from "react";
 import {
-  P,
+  Name,
   Container,
   ImgContainer,
   BtnContainer,
@@ -10,7 +10,7 @@ import {
   BtnFavorite,
   ControlsContainer,
   ModalContainer,
-  delimiterStyle,
+  Delimiter,
 } from "./styled";
 import { Modal } from "@mui/material";
 import UserUpdate from "../modals/user-update";
@@ -28,7 +28,7 @@ const CommerceUserSection = ({ name, img, role, user, allowed }) => {
           <ImgContainer>
             <img src={img} alt="commerce-img" style={{ height: `${role === "User" ? "4.5rem" : "3rem"}` }} />
           </ImgContainer>
-          <P>{name}</P>
+          <Name>{name}</Name>
         </ControlsContainer>
         {role !== "none" &&
           <ControlsContainer>
@@ -62,7 +62,7 @@ const CommerceUserSection = ({ name, img, role, user, allowed }) => {
           </ControlsContainer>
         }
       </div>
-      <img src="/img/commerce-delimiter.png" alt="delimiter" css={delimiterStyle} />
+      <Delimiter src="/img/commerce-delimiter.png" alt="delimiter" />
     </Container>
   );
 };
