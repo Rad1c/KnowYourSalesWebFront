@@ -226,7 +226,7 @@ const MainMenu = ({backgroundColor, searchColor, role}) => {
                   height: "5rem",
                   cursor: "pointer",
                 }}
-                onClick={() => navigate("/products")}
+                onClick={() => navigate("/home")}
               />
             </div>
           </Hidden>

@@ -3,15 +3,17 @@ import {
   Select,
   FormControl,
   InputLabel,
+  MenuItem,
 } from "@mui/material";
 import { SortContainer, Underline } from "./styled";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import useProductsStore from "../../../store/productsStore";
 import SelectOption from "../select";
 
-const SortProducts = ({primaryColor, secondaryColor}) => {
-  const { cities, getCitiesByCountryCode, categories, getCategories } =
-    useProductsStore();
+const SortProducts = ({primaryColor, secondaryColor, sortCriteria, pageSizeCriteria}) => {
+  const [sort, setSort] = useState("Datum objave");
+  const [pageSize, setPageSize] = useState(24);
+  const { cities, getCitiesByCountryCode, categories, getCategories } = useProductsStore();
 
   useEffect(() => {
     const fetchCitiesAndCategories = async () => {
@@ -39,52 +41,24 @@ const SortProducts = ({primaryColor, secondaryColor}) => {
         <div style={{ display: "flex", justifyContent: "space-around" }}>
           <SelectOption name={"Odaberite grad"} data={citiesMap} backgroundColor={"#fafafa"} color={secondaryColor} disabled={true}/>
           <SelectOption name={"Odaberite kategoriju"} data={categoriesMap} backgroundColor={"#fafafa"} color={primaryColor} disabled={true}/>
-          {/* <Autocomplete
-            disablePortal
-            id="txtCity"
-            options={citiesMap}
-            sx={{ marginBottom: "25px", width: "200px" }}
-            getOptionLabel={(option) => option.label}
-            isOptionEqualToValue={(option, value) => option.id === value.id}
-            onChange={(_, value) => {
-              setCityValue(value);
-            }}
-            renderInput={(params) => (
-              <TextField {...params} label="Grad" variant="standard" />
-            )}
-          />
-          <Autocomplete
-            disablePortal
-            id="txtCategory"
-            options={categoriesMap}
-            sx={{ marginBottom: "25px", width: "200px", marginLeft: "25px" }}
-            getOptionLabel={(option) => option.label}
-            isOptionEqualToValue={(option, value) => option.id === value.id}
-            onChange={(_, value) => {
-              setCategoryValue(value);
-            }}
-            renderInput={(params) => (
-              <TextField {...params} label="Kategorija" variant="standard" />
-            )}
-          /> */}
         </div>
         <div style={{ display: "flex", gap: "2rem", alignItems: "center" }}>
           <div style={{ display: "flex", gap: "0.3rem", alignItems: "center" }}>
             <label>Sortiraj po</label>
             <FormControl sx={{ width: "20rem" }}>
               <Select
-                defaultValue={3}
-                inputProps={{
-                  name: "Sort",
-                  id: "sort-by",
+                value={sort}
+                onChange={(event) => {
+                  setSort(event.target.value)
+                  sortCriteria(event.target.value)
                 }}
                 sx={{ maxHeight: "2.4rem" }}
-                >
-                <option value={1}>Stara cijena</option>
-                <option value={2}>Nova cijena</option>
-                <option value={3}>Popust</option>
-                <option value={4}>Datum objave</option>
-                <option value={5}>Datum trajanja</option>
+              >
+                <MenuItem key={"Stara cijena"} value={"Stara cijena"}>Stara cijena</MenuItem>
+                <MenuItem key={"Nova cijena"} value={"Nova cijena"}>Nova cijena</MenuItem>
+                <MenuItem key={"Popust"} value={"Popust"}>Popust</MenuItem>
+                <MenuItem key={"Datum objave"} value={"Datum objave"}>Datum objave</MenuItem>
+                <MenuItem key={"Datum trajanja"} value={"Datum trajanja"}>Datum trajanja</MenuItem>
               </Select>
             </FormControl>
             <img src="/img/sort.png" alt="Sorting button" style={{height: "2rem", cursor: "pointer"}} />
@@ -94,16 +68,16 @@ const SortProducts = ({primaryColor, secondaryColor}) => {
             <InputLabel variant="standard">Prikaži</InputLabel>
             <FormControl sx={{ width: "8rem" }}>
               <Select
-                defaultValue={24}
-                inputProps={{
-                  name: "show",
-                  id: "show",
+                value={pageSize}
+                onChange={(event) => {
+                  setPageSize(event.target.value)
+                  pageSizeCriteria(event.target.value)
                 }}
                 sx={{ maxHeight: "2.4rem" }}
                 >
-                <option value={16}>12</option>
-                <option value={24}>24</option>
-                <option value={32}>36</option>
+                <MenuItem value={12}>12</MenuItem>
+                <MenuItem value={24}>24</MenuItem>
+                <MenuItem value={36}>36</MenuItem>
               </Select>
             </FormControl>
             <InputLabel variant="standard">po strani</InputLabel>
