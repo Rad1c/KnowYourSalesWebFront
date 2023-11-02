@@ -115,7 +115,7 @@ const Product = ({ role }) => {
             style={{ height: "100%", width: "100%", zIndex: "1" }}
           >
             <TileLayer
-              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
             <Marker position={[44.771080, 17.205880]}>

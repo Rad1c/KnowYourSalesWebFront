@@ -18,6 +18,7 @@ const Products = ({ role }) => {
     };
 
     fetchArticles();
+    console.log(articles)
   }, [])
   
   const { primaryColor, secondaryColor, searchColor } = useColor(role)
@@ -29,20 +30,22 @@ const Products = ({ role }) => {
       <CardContainer>
         {articles &&
           articles.map((article) => (
-            <ProductCard
-              key={article.artileId}
-              role={role}
-              id={article.artileId}
-              discount={article.sale}
-              productImg={"/img/product.png"}
-              commerceImg={"/img/product-commerce.png"}
-              name={article.name}
-              oldPrice={article.oldPrice}
-              newPrice={article.newPrice}
-              validFrom={article.created.slice(0, 6).split("/").join(".")}
-              validTo={article.validDate.slice(0, 10).split("/").join(".")}
-              primaryColor={primaryColor}
-            />
+            <div key={article.articleId}>
+              <ProductCard
+                // key={article.artileId}
+                role={role}
+                id={article.artileId}
+                discount={Math.round(article.sale)}
+                productImg={article.picture}
+                commerceImg={article.logo}
+                name={article.name}
+                oldPrice={article.oldPrice}
+                newPrice={article.newPrice}
+                validFrom={article.created.slice(0, 6).split("/").join(".")}
+                validTo={article.validDate.slice(0, 10).split("/").join(".")}
+                primaryColor={primaryColor}
+              />
+            </div>
           ))}
       </CardContainer>
       <Pagination
