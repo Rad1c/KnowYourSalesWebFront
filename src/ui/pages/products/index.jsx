@@ -7,9 +7,11 @@ import ProductCard from "../../components/product-card";
 import SortProducts from "../../components/sort-products";
 import useProductsStore from "../../../store/productsStore";
 import { useColor } from "../../../hooks/useColors";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const Products = ({ role }) => {
+  const [pageSize, setPageSize] = useState(24);
+  const [sort, setSort] = useState("Datum objave")
   const { articles, getArticles } = useProductsStore();
 
   useEffect(() => {
@@ -19,14 +21,14 @@ const Products = ({ role }) => {
 
     const fetchArticles = async () => {
       if (cityId && categoryId) {
-        await getArticles(6, 1, null, cityId, categoryId);
+        await getArticles(pageSize, 1, null, cityId, categoryId);
       } else {
-        await getArticles(6, 1);
+        await getArticles(pageSize, 1);
       }
     };
 
     fetchArticles();
-  }, []);
+  }, [pageSize]);
 
   const handlePagination = async (event, value) => {
     const searchParams = new URLSearchParams(window.location.search);
@@ -34,9 +36,9 @@ const Products = ({ role }) => {
     const categoryId = searchParams.get("category");
 
     if (cityId && categoryId) {
-      await getArticles(6, value, null, cityId, categoryId);
+      await getArticles(pageSize, value, null, cityId, categoryId);
     } else {
-      await getArticles(6, value);
+      await getArticles(pageSize, value);
     }
   };
 
@@ -45,7 +47,11 @@ const Products = ({ role }) => {
   return (
     <ContentWrapper>
       <MainMenu backgroundColor={primaryColor} searchColor={searchColor} role={role} />
-      <SortProducts primaryColor={primaryColor} secondaryColor={secondaryColor} />
+      <SortProducts 
+        primaryColor={primaryColor} 
+        secondaryColor={secondaryColor} 
+        sortCriteria={sort => setSort(sort)} 
+        pageSizeCriteria={pageSize => setPageSize(pageSize)}/>
       <CardContainer>
         {articles.items &&
           articles.items.map((article) => (
@@ -68,7 +74,7 @@ const Products = ({ role }) => {
           ))}
       </CardContainer>
       <Pagination
-        count={Math.ceil(articles.totalCount / 6)}
+        count={Math.ceil(articles.totalCount / pageSize)}
         shape="rounded"
         size="large"
         onChange={handlePagination}
