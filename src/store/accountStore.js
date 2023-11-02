@@ -52,6 +52,27 @@ const useAccountStore = create((set) => ({
       console.error("Error fetching commerce name: ", error);
     }
   },
+  updateCommerce: async (
+    name,
+    cityId,
+    logo
+  ) => {
+    try { 
+      await axiosPrivate.put("/commerce", 
+      JSON.stringify(
+        {
+          name,
+          cityId,
+          logo
+        },
+        {
+          headers: {"Content-Type": "application/json"},
+        }
+      ));
+    } catch (error) {
+        console.log("Error updating commerce: ", error);
+    }
+  },
   verifyAccount: async (code) => {
     try {
       const response = await axiosPrivate.post(

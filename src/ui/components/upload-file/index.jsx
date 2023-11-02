@@ -1,38 +1,61 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
-import React, { useRef } from 'react';
-import { TextField } from '@mui/material'
-import { FileInput, FileButton } from "./styled";
+import { useEffect, useRef } from 'react';
+import { FileInputContainer, ImageContainer, FileText, FileImage, FileInput, FileButton, HelperText } from "./styled";
 import { useState } from 'react';
 
-const FileUploadField = React.forwardRef(({ required, label, mb, uploadedFile }) => {
-  const [fileName, setFileName] = useState("");
+const FileUploadField = ({ label, commerceLogo, mb, uploadedFile }) => {
+  const [sizeError, setSizeError] = useState("");
+  const [fileImage, setFileImage] = useState("");
+
+  useEffect(() => {
+    if (commerceLogo) setFileImage(commerceLogo)
+  }, [])
 
   const inputFile = useRef(null);
 
   const handleFileChange = (event) => {
-    uploadedFile(event.target.files[0]);
-    setFileName(event.target.files[0].name)
+    if(event.target.files[0].size > 5_242_880) {
+      setSizeError(true);
+    } else {
+      setSizeError(false)
+      const file = event.target.files[0];
+      if(file){
+        const reader = new FileReader();
+        reader.onload = () => {
+          setFileImage(reader.result)
+          commerceLogo ? 
+          uploadedFile(reader.result.slice(23)) :
+          uploadedFile({
+            image: reader.result.slice(23), 
+            isThumbnail: label === "Naslovna slika" ? true : false
+          });
+        }
+        reader.readAsDataURL(file);
+      }
+    }
   };
 
   return (
-    <div style={{ width: "100%", position: 'relative', marginBottom: mb }}>
-      <TextField label={`${label}(do 5 MB velicine)`} variant="outlined" required={required} style={{ width: "100%" }} value={fileName}/>
+    <FileInputContainer style={{ marginBottom: mb }}>
+      <ImageContainer>
+        {!fileImage && <FileText>
+          {`${label}(do 5 MB velicine) ${label === "Naslovna slika" ? "*" : ""}`}
+          {sizeError && <HelperText>Velicina fajla je iznad 5 MB</HelperText>}
+        </FileText>}
+        {fileImage && <FileImage src={fileImage} alt="Article image" />}
+      </ImageContainer>
       <FileInput
         accept="image/*"
         readOnly
+        hidden
         type="file"
         onChange={handleFileChange}
         ref={inputFile}
       />
-      <label >
-        <FileButton type='button' onClick={() => inputFile.current.click()}>
-          +
-        </FileButton>
-      </label>
-    </div>
+      <FileButton type='button' onClick={() => inputFile.current.click()}>Dodaj</FileButton>
+    </FileInputContainer>
   );
-})
-
-FileUploadField.displayName = 'FileUploadField';
+}
 
 export default FileUploadField;

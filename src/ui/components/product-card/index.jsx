@@ -2,18 +2,20 @@
 /* eslint-disable react/prop-types */
 import { useState } from "react";
 import {
+  CardContainer,
+  Discount,
+  ArticleImage,
+  Description,
   CommerceImageContainer,
-  ProductLocationAndTime,
+  CommerceImage,
   ProductName,
-  cardStyles,
-  imageStyles,
   OldPrice,
   NewPrice,
-  Description,
-  Discount,
+  ProductLocationAndTime,
   FavoriteContainer,
   Favorite,
 } from "./styled";
+import { useNavigate } from "react-router";
 
 const ProductCard = (props) => {
   const {
@@ -32,18 +34,26 @@ const ProductCard = (props) => {
 
   const [showFavorite, setShowFavorite] = useState(false);
   const [liked, setLiked] = useState(false)
+  const navigate = useNavigate();
 
   return (
-    <div css={cardStyles} onMouseOver={() => setShowFavorite(true)} onMouseOut={() => setShowFavorite(false)}>
+    <CardContainer 
+      onMouseOver={() => setShowFavorite(true)} 
+      onMouseOut={() => setShowFavorite(false)}
+      // TODO: koristiti id za navigaciju
+      onClick={() => navigate("/product")}
+    >
       <Discount style={{ backgroundColor: primaryColor }}>{discount}%</Discount>
-      <img src={productImg} alt="product" css={imageStyles} />
+      <ArticleImage src={productImg} alt="product" />
       <Description>
         <CommerceImageContainer>
-          <img src={commerceImg} alt="product-commerce" />
+          <CommerceImage src={commerceImg} alt="Commerce logo" />
         </CommerceImageContainer>
         <ProductName>{name}</ProductName>
-        <OldPrice>{oldPrice} KM</OldPrice>
-        <NewPrice style={{ color: primaryColor }}>{newPrice}KM</NewPrice>
+        <div>
+          <OldPrice>{oldPrice} KM</OldPrice>
+          <NewPrice style={{ color: primaryColor }}>{newPrice}KM</NewPrice>
+        </div>
         <ProductLocationAndTime>
           {validFrom} - {validTo}
         </ProductLocationAndTime>
@@ -53,7 +63,7 @@ const ProductCard = (props) => {
           {!liked ? <Favorite src="/img/Favorite.svg" alt="Favorite icon" onClick={() => setLiked(true)}/>
           : <Favorite src="/img/Favorite-clicked.svg" alt="Clicked favorite icon" onClick={() => setLiked(false)}/>}
         </FavoriteContainer> }
-    </div>
+    </CardContainer>
   );
 };
 export default ProductCard;

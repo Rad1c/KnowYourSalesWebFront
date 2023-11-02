@@ -1,10 +1,10 @@
 /* eslint-disable react-refresh/only-export-components */
-import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 
-const cardStyles = css`
+const CardContainer = styled.div`
   position: relative;
   width: 25rem;
+  height: 42rem;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   text-align: center;
   cursor: pointer;
@@ -12,58 +12,8 @@ const cardStyles = css`
   :hover {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
   }
-`;
-
-const imageStyles = css`
-  width: 100%;
-  height: auto;
-  z-index: 1;
-  border-radius: 4px;
-`;
-
-const descriptionStyles = css`
-  margin-top: 1rem;
-`;
-
-const CommerceImageContainer = styled.div`
-  height: 2.5rem;
-  width: 100%;
-  aling-items: center;
-  padding-top: .5rem;
-  margin-bottom: 1.2rem;
-  display: flex;
-  justify-content: space-around;
-`;
-
-const ProductName = styled.p`
-  font-size: 1.8rem;
-  text-transform: uppercase;
-  color: #555;
-  line-height: 1.2;
-  margin-bottom: .7rem;
-`;
-
-const ProductLocationAndTime = styled.p`
-  font-size: 2rem;
-  color: #555;
-  margin-bottom: .5rem;
-`;
-
-const OldPrice = styled.p`
-  color: #777;
-  font-size: 1.8rem;
-  margin-top: 2rem;
-  text-decoration: line-through;
-`;
-
-const NewPrice = styled.p`
-  font-weight: bold;
-  margin-top: -.2rem;
-  font-size: 3.2rem;
-  color: #54357f;
-  margin-bottom: 2rem;
-`;
-
+  `;
+  
 const Discount = styled.span`
   position: absolute;
   top: 0;
@@ -85,11 +35,17 @@ const Discount = styled.span`
   -webkit-mask: var(--mask);
   mask: var(--mask);
 `;
+  
+const ArticleImage = styled.img`
+  width: 100%;
+  height: 22rem;
+  z-index: 1;
+`;
 
 const Description = styled.div`
+  height: 20rem;
   margin-top: -2.2rem;
   padding-top: 2rem;
-  padding-bottom: 1rem;
   background-color: #efebf3;
   --mask: conic-gradient(
       from 135deg at top,
@@ -100,6 +56,47 @@ const Description = styled.div`
     50%/30px 100%;
   -webkit-mask: var(--mask);
   mask: var(--mask);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+`;
+
+const CommerceImageContainer = styled.div`
+  height: 2.5rem;
+  width: 100%;
+  aling-items: center;
+  display: flex;
+  justify-content: space-around;
+`;
+
+const CommerceImage = styled.img`
+  height: 100%;
+  width: 50%%;
+`;
+
+const ProductName = styled.p`
+  font-size: 1.8rem;
+  text-transform: uppercase;
+  color: #555;
+  line-height: 1.2;
+`;
+
+const OldPrice = styled.p`
+  color: #777;
+  font-size: 1.8rem;
+  text-decoration: line-through;
+`;
+
+const NewPrice = styled.p`
+  font-weight: bold;
+  font-size: 3.2rem;
+  color: #54357f;
+`;
+
+const ProductLocationAndTime = styled.p`
+  font-size: 2rem;
+  color: #555;
 `;
 
 const FavoriteContainer = styled.div`
@@ -122,16 +119,16 @@ const Favorite = styled.img`
 `;
 
 export {
-  descriptionStyles,
+  CardContainer,
+  Discount,
+  ArticleImage,
   Description,
-  imageStyles,
-  cardStyles,
   CommerceImageContainer,
+  CommerceImage,
   ProductName,
-  ProductLocationAndTime,
   OldPrice,
   NewPrice,
-  Discount,
+  ProductLocationAndTime,
   FavoriteContainer,
   Favorite,
 };

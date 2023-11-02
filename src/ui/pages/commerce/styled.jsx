@@ -74,12 +74,4 @@ const ShowItems = styled.a`
   }
 `;
 
-const ModalContainer = styled.div`
-  width: 20rem;
-  height: 20rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-export { Container, ShopContainer, BtnContainer, BtnAdd, Title, ShowItems, BtnAddProduct, ModalContainer };
+export { Container, ShopContainer, BtnContainer, BtnAdd, Title, ShowItems, BtnAddProduct };

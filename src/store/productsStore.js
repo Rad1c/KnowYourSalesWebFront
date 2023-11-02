@@ -45,6 +45,39 @@ const useProductsStore = create((set) => ({
       set({ articles: [] });
     }
   },
+  addArticle: async (
+    commerceId,
+    categoryIds,
+    shopIds,
+    currencyName,
+    name,
+    description,
+    oldPrice,
+    newPrice,
+    validDate,
+    images
+  ) => {
+    const response = await axiosPrivate.post(
+      "/article",
+      JSON.stringify({
+        commerceId,
+        categoryIds,
+        shopIds,
+        currencyName,
+        name,
+        description,
+        oldPrice,
+        newPrice,
+        validDate,
+        images,
+      },
+      {
+        headers: { "Content-Type": "application/json" },
+      })
+    )
+
+    return response;
+  }
 }));
 
 export default useProductsStore;

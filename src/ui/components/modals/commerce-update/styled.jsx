@@ -5,7 +5,7 @@ const Wrapper = styled.div`
 `;
 
 const Container = styled.div`
-  width: 60rem;
+  width: 50rem;
   background-color: #fafafa;
   display: flex;
   flex-direction: column;
@@ -13,8 +13,27 @@ const Container = styled.div`
   border-radius: 5px;
   overflow: hidden;
 `;
-  
-  const Header = styled.div`
+
+const RowContainer = styled.div`
+  margin-bottom: 2.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const BtnRegisterStyle = css`
+  background-image: url("/img/btn-wavy.png");
+  background-color: #357F54;
+  font-size: 1.2rem;
+  padding: 1rem 3rem;
+  color: #fafafa;
+  :hover {
+    color: #357F54;
+    background-color: #fafafa;
+  }
+`;
+
+const Header = styled.div`
   background-color: #f5f5f5;
   background-image: url("/img/login-wavy.png");
   color: #357F54;
@@ -24,36 +43,17 @@ const Container = styled.div`
   margin-bottom: 2rem;
 `;
 
-const FormContainer = styled.div`
+const ControlsContainer = styled.div`
   margin: 0 3rem;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-`;
-  
-const RowContainer = styled.div`
-  margin-bottom: 2.5rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-`;
-
-const BtnSaveStyle = css`
-  background-image: url("/img/btn-wavy.png");
-  background-color: #357F54;
-  font-size: 1.2rem;
-  padding: 1rem 3rem;
-  color: #fafafa;
-  :hover {
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
-  }
 `;
 
 export {
-  Wrapper,
   Container,
-  Header,
-  FormContainer,
   RowContainer,
-  BtnSaveStyle,
+  BtnRegisterStyle,
+  Header,
+  ControlsContainer,
+  Wrapper,
 };

@@ -7,7 +7,6 @@ import {
   BtnAdd,
   Title,
   ShowItems,
-  // ModalContainer, // TODO: obrisati komponentu u styled
 } from "./styled";
 import MainMenu from "../../components/main-menu";
 import ProductCard from "../../components/product-card";
@@ -27,6 +26,7 @@ const products = [
   {
     id: "1",
     discount: 20,
+    name: "Ime artikla",
     productImg: "/img/product.png",
     commerceImg: "/img/product-commerce.png",
     oldPrice: 100.0,
@@ -37,6 +37,7 @@ const products = [
   {
     id: "2",
     discount: 20,
+    name: "Ime artikla",
     productImg: "/img/product.png",
     commerceImg: "/img/product-commerce.png",
     oldPrice: 100.0,
@@ -47,6 +48,7 @@ const products = [
   {
     id: "3",
     discount: 20,
+    name: "Ime artikla",
     productImg: "/img/product.png",
     commerceImg: "/img/product-commerce.png",
     oldPrice: 100.0,
@@ -57,6 +59,7 @@ const products = [
   {
     id: "4",
     discount: 20,
+    name: "Ime artikla",
     productImg: "/img/product.png",
     commerceImg: "/img/product-commerce.png",
     oldPrice: 100.0,
@@ -67,6 +70,7 @@ const products = [
   {
     id: "5",
     discount: 20,
+    name: "Ime artikla",
     productImg: "/img/product.png",
     commerceImg: "/img/product-commerce.png",
     oldPrice: 100.0,
@@ -77,6 +81,7 @@ const products = [
   {
     id: "6",
     discount: 20,
+    name: "Ime artikla",
     productImg: "/img/product.png",
     commerceImg: "/img/product-commerce.png",
     oldPrice: 100.0,
@@ -87,6 +92,7 @@ const products = [
   {
     id: "7",
     discount: 20,
+    name: "Ime artikla",
     productImg: "/img/product.png",
     commerceImg: "/img/product-commerce.png",
     oldPrice: 100.0,
@@ -97,6 +103,7 @@ const products = [
   {
     id: "8",
     discount: 20,
+    name: "Ime artikla",
     productImg: "/img/product.png",
     commerceImg: "/img/product-commerce.png",
     oldPrice: 100.0,
@@ -107,6 +114,7 @@ const products = [
   {
     id: "9",
     discount: 20,
+    name: "Ime artikla",
     productImg: "/img/product.png",
     commerceImg: "/img/product-commerce.png",
     oldPrice: 100.0,
@@ -115,8 +123,6 @@ const products = [
     validTo: "24.03.2023",
   },
 ];
-
-const img = "/img/product-commerce.png";
 
 const Commerce = ({ role }) => {
   const [productsValue] = useState(products);
@@ -150,13 +156,12 @@ const Commerce = ({ role }) => {
     }
 
     fetchShops();
-    console.log(shops)
   }, [])
 
   return (
     <Container>
       <MainMenu backgroundColor={primaryColor} searchColor={searchColor} role={role}/>
-      <CommerceUserSection name={user?.name} img={img} role={role} allowed={"Commerce"}/>
+      <CommerceUserSection name={user?.name} img={user?.logo} role={role} user={user} allowed={"Commerce"} />
       <div>
         <Title style={{ color: primaryColor }}>Radnje</Title>
         <ShopContainer>
@@ -172,7 +177,7 @@ const Commerce = ({ role }) => {
                   setShop(shop);
                   setOpenUpdateShopModal(true);
                 }}>
-                <ShopCard key={shop.id} city={shop.cityName} address={shop.address} role={role} />
+                <ShopCard key={shop.id} city={shop.cityName} address={shop.address} latitude={shop.latitude} longitude={shop.longitude} role={role} />
               </div>
             ))
           }
@@ -198,6 +203,7 @@ const Commerce = ({ role }) => {
               key={product.id}
               id={product.id}
               discount={product.discount}
+              name={product.name}
               productImg={product.productImg}
               commerceImg={product.commerceImg}
               oldPrice={product.oldPrice}
@@ -232,7 +238,7 @@ const Commerce = ({ role }) => {
       </Modal>
       <Modal open={openAddArticleModal} onClose={() => setOpenAddArticleModal(false)} disableAutoFocus
         style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
-        <AddArticle shop={shop} setIsModalOpen={isModalOpen => setOpenAddArticleModal(isModalOpen)}/>
+        <AddArticle shop={shop} commerceId={user.id} setIsModalOpen={isModalOpen => setOpenAddArticleModal(isModalOpen)}/>
       </Modal>
     </Container>
   );

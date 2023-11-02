@@ -1,14 +1,9 @@
 import styled from "@emotion/styled";
 
 const Container = styled.div`
-  height: 25rem;
+  height: 35rem;
   width: 23rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem;
-  background-color: #eeebf2;
+  background-color: #fafafa;
   cursor: pointer;
 
   :hover {
@@ -16,26 +11,28 @@ const Container = styled.div`
   }
 `;
 
-const ImageHolder = styled.img`
-  height: 5.6rem;
-  margin-top: 1rem;
-`
+const ContentContainer = styled.div`
+  height: 35%;
+  background-color: #eeebf2;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+`;
 
 const CityHolder = styled.p`
-  margin-bottom: 1rem;
   color: #777;
-  font-size: 1.6rem;
-  font-weight: bold;
+  font-size: 1.8rem;
   text-align: center;
   text-transform: capitalize;
 `;
 
 const AddressHolder = styled.p`
-  font-weight: bold;
   font-size: 2rem;
   color: #555;
   text-align: center;
   text-transform: capitalize;
 `;
 
-export { CityHolder, ImageHolder, AddressHolder, Container };
+export { ContentContainer, CityHolder, AddressHolder, Container };

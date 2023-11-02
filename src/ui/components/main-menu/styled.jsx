@@ -13,7 +13,7 @@ const Container = styled.div`
   background-color: #55347f;
   position: sticky;
   top: 0;
-  z-index: 10;
+  z-index: 1100;
 
   --mask: conic-gradient(
       from -45deg at bottom,

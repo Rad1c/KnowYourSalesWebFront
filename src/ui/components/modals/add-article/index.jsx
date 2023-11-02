@@ -13,10 +13,14 @@ import {
   Container,
   Header,
   FormContainer,
-  ControlsContainer,
   RowContainer,
   BtnSaveStyle,
 } from "./styled";
+import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DatePicker } from "@mui/x-date-pickers";
+import dayjs from "dayjs";
 import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
 import FileUploadField from "../../upload-file";
@@ -25,16 +29,20 @@ import useCommerceStore from "../../../../store/commerceStore";
 import { validationAddArticleSchema } from "../../../../validators/validator";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useEffect, useState } from "react";
-import { useForm, Controller } from "react-hook-form";
+import { useForm } from "react-hook-form";
   
-const AddArticle = ({ setIsModalOpen }) => {
+const AddArticle = ({ commerceId, setIsModalOpen }) => {
   const [open, setOpen] = useState(false); // for backdrop
   const [selectedShop, setSelectedShop] = useState([]);
   const [selectedShopId, setSelectedShopId] = useState([]);
   let selectedShopIds = [];
   const [selectedCategory, setSelectedCategory] = useState("");
-  const [files, setFiles] = useState([])
-  const { categories, getCategories } = useProductsStore();
+  const tomorrowDate = dayjs().add(1, "day");
+  tomorrowDate.format("YYYY-MM-DD");
+  const [date, setDate] = useState(tomorrowDate);
+  const [images, setImages] = useState([])
+  const [disabled, setDisabled] = useState(true);
+  const { categories, getCategories, addArticle } = useProductsStore();
   const { shops, getShops } = useCommerceStore();
     
   useEffect(() => {
@@ -47,7 +55,10 @@ const AddArticle = ({ setIsModalOpen }) => {
   }, []);
 
   const uploadingFiles = uploadedFile => {
-    setFiles(prevFiles => [...prevFiles, uploadedFile]);
+    console.log(uploadedFile)
+    const { isThumbnail } = uploadedFile;
+    isThumbnail ? setDisabled(false) : null;
+    setImages(prevFiles => [...prevFiles, uploadedFile]);
   }
 
   const createIdArray = objectNames => {
@@ -70,7 +81,6 @@ const AddArticle = ({ setIsModalOpen }) => {
 
   const {
     register,
-    control,
     handleSubmit,
     formState: { errors },
   } = useForm({
@@ -86,20 +96,34 @@ const AddArticle = ({ setIsModalOpen }) => {
       articleCategory,
     } = data;
   
+    const valiDate = date.format().slice(0, 10) + " 00:00:00";
+
     console.log(
       articleName,
       description,
       oldPrice,
       newPrice,
       selectedShopId,
-      articleCategory,
-      files,
+      [articleCategory],
+      valiDate,
+      images,
     );
 
-    // TODO: POST artikla u bazi, GET id artikla i POST slika u bazi i na supabase
+    // TODO: POST artikla u bazu
     try {
       setOpen(true);
-      // await addArticle()
+      await addArticle(
+        commerceId,
+        [articleCategory],
+        selectedShopId,
+        "Konvertibilna marka",
+        articleName,
+        description,
+        oldPrice,
+        newPrice,
+        valiDate,
+        images,
+      );
       setOpen(false);
       setIsModalOpen(false);
     } catch (error) {
@@ -121,135 +145,136 @@ const AddArticle = ({ setIsModalOpen }) => {
         </Header>
         <form onSubmit={handleSubmit(submitForm)}>
           <FormContainer>
-            <ControlsContainer>
+            <TextField
+              id="txtArticleName"
+              label="Ime artikla *"
+              variant="outlined"
+              {...register("articleName")}
+              error={Boolean(errors.articleName)}
+              helperText={errors?.articleName?.message}
+              sx={{ marginBottom: "2.3rem" }}
+            />
+            <TextField
+              id="txtDescription"
+              label="Opis *"
+              variant="outlined"
+              multiline
+              minRows={6}
+              maxRows={6}
+              {...register("description")}
+              error={Boolean(errors.description)}
+              helperText={errors?.description?.message}
+              sx={{ marginBottom: "2.3rem" }}
+            />
+            <RowContainer>
               <TextField
-                id="txtArticleName"
-                label="Ime artikla"
+                id="txtOldPrice"
+                label="Stara cijena(u KM) *"
                 variant="outlined"
-                {...register("articleName")}
-                error={Boolean(errors.articleName)}
-                helperText={errors?.articleName?.message}
-                sx={{ marginBottom: "2.3rem" }}
+                {...register("oldPrice")}
+                error={Boolean(errors.oldPrice)}
+                helperText={errors?.oldPrice?.message}
+                sx={{ width: "48%" }}
               />
               <TextField
-                id="txtDescription"
-                label="Opis"
+                id="txtNewPrice"
+                label="Nova cijena(u KM) *"
                 variant="outlined"
-                {...register("description")}
-                error={Boolean(errors.description)}
-                helperText={errors?.description?.message}
-                sx={{ marginBottom: "2.3rem" }}
-                multiline
-                minRows={6}
-                maxRows={6}
+                {...register("newPrice")}
+                error={Boolean(errors.newPrice)}
+                helperText={errors?.newPrice?.message}
+                sx={{ width: "48%" }}
               />
-              <RowContainer>
-                <TextField
-                  id="txtOldPrice"
-                  label="Stara cijena(u KM)"
+            </RowContainer>
+            <RowContainer style={{gap: "4%"}}>
+              <FormControl fullWidth >
+                <InputLabel id="shopSelectLabel" style={{ maxHeight: "1.4375em" }}>Radnje(dostupnost) *</InputLabel>
+                <Select
+                  labelId="shopSelectLabel"
+                  id="shopSelect"
+                  value={selectedShop}
+                  label="Radnje(dostupnost)"
                   variant="outlined"
-                  {...register("oldPrice")}
-                  error={Boolean(errors.oldPrice)}
-                  helperText={errors?.oldPrice?.message}
-                  sx={{ width: "48%" }}
-                />
-                <TextField
-                  id="txtNewPrice"
-                  label="Nova cijena(u KM)"
-                  variant="outlined"
-                  {...register("newPrice")}
-                  error={Boolean(errors.newPrice)}
-                  helperText={errors?.newPrice?.message}
-                  sx={{ width: "48%" }}
-                />
-              </RowContainer>
-              <RowContainer style={{gap: "4%"}}>
-                <FormControl fullWidth >
-                  <InputLabel id="shopSelectLabel" style={{ maxHeight: "1.4375em" }}>Radnje(dostupnost) *</InputLabel>
-                  <Select
-                    labelId="shopSelectLabel"
-                    id="shopSelect"
-                    value={selectedShop}
-                    label="Radnje(dostupnost)"
-                    variant="outlined"
-                    multiple
-                    renderValue={(selected) => selected.join(', ')}
-                    {...register("articleShops")}
-                    error={Boolean(errors.articleShops)}
-                    helperText={errors?.articleShops?.message}
-                    MenuProps={{
-                      PaperProps: {
-                        style: {
-                          maxHeight: 200,
-                        },
+                  multiple
+                  renderValue={(selected) => selected.join(', ')}
+                  {...register("articleShops")}
+                  error={Boolean(errors.articleShops)}
+                  helperText={errors?.articleShops?.message}
+                  MenuProps={{
+                    PaperProps: {
+                      style: {
+                        maxHeight: 200,
                       },
-                    }}
-                    onChange={event => {
-                      setSelectedShop(event.target.value)
-                      createIdArray(event.target.value)
-                    }}
-                  >
-                    {shops.map(shop => (
-                      <MenuItem key={shop.id} value={shop.name} >{shop.name}</MenuItem>))
-                    }
-                  </Select>
-                </FormControl>
-                <FormControl fullWidth>
-                  <InputLabel id="categorySelectLabel">Kategorija *</InputLabel>
-                  <Select
-                    labelId="categorySelectLabel"
-                    id="categorySelect"
-                    value={selectedCategory}
-                    label="Kategorija"
-                    variant="outlined"
-                    {...register("articleCategory")}
-                    error={Boolean(errors.articleCategory)}
-                    helperText={errors?.articleCategory?.message}
-                    MenuProps={{
-                      PaperProps: {
-                        style: {
-                          maxHeight: 200,
-                        },
-                      },
-                    }}
-                    onChange={(event) => {
-                      setSelectedCategory(event.target.value)
-                    }}
-                  >
-                    {categories.map(category => (
-                      <MenuItem key={category.id} value={category.id} >{category.name}</MenuItem>))
-                    }
-                  </Select>
-                </FormControl>
-              </RowContainer>
-            </ControlsContainer>
-            <ControlsContainer>
-              <Controller 
-                name="titlePicture"
-                control={control}
-                render={({ field }) => (
-                  <FileUploadField 
-                    label={"Naslovna slika"} 
-                    required={true} 
-                    mb={"2.3rem"} 
-                    uploadedFile={uploadingFiles} 
-                    {...field}
-                  />
-                )}
-              /> 
-              <FileUploadField label={"Slika"} mb={"2.3rem"} uploadedFile={uploadingFiles}/>
-              <FileUploadField label={"Slika"} mb={"2.3rem"} uploadedFile={uploadingFiles}/>
-              <FileUploadField label={"Slika"} mb={"2.3rem"} uploadedFile={uploadingFiles}/>
-              <FileUploadField label={"Slika"} uploadedFile={uploadingFiles}/>
-              <RowContainer style={{justifyContent: "flex-end"}}>
-                <Button variant="outlined" css={BtnSaveStyle} type="submit" 
-                  style={{ backgroundColor: "#357F54" }}
+                    },
+                  }}
+                  onChange={event => {
+                    setSelectedShop(event.target.value)
+                    createIdArray(event.target.value)
+                  }}
                 >
-                  Sačuvaj
-                </Button>
-              </RowContainer>
-            </ControlsContainer>
+                  {shops.map(shop => (
+                    <MenuItem key={shop.id} value={shop.name} >{shop.name}</MenuItem>))
+                  }
+                </Select>
+              </FormControl>
+              <FormControl fullWidth>
+                <InputLabel id="categorySelectLabel">Kategorija *</InputLabel>
+                <Select
+                  labelId="categorySelectLabel"
+                  id="categorySelect"
+                  value={selectedCategory}
+                  label="Kategorija"
+                  variant="outlined"
+                  {...register("articleCategory")}
+                  error={Boolean(errors.articleCategory)}
+                  helperText={errors?.articleCategory?.message}
+                  MenuProps={{
+                    PaperProps: {
+                      style: {
+                        maxHeight: 200,
+                      },
+                    },
+                  }}
+                  onChange={(event) => {
+                    setSelectedCategory(event.target.value)
+                  }}
+                >
+                  {categories.map(category => (
+                    <MenuItem key={category.id} value={category.id} >{category.name}</MenuItem>))
+                  }
+                </Select>
+              </FormControl>
+            </RowContainer>
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <DemoContainer components={["DatePicker"]}>
+                <DatePicker 
+                  label="Datum isteka popusta *" 
+                  value={date}
+                  minDate={tomorrowDate}
+                  onChange={(newValue) => setDate(newValue)}
+                  sx={{ width: "100%", marginBottom: "2.3rem" }}
+                />
+              </DemoContainer>
+            </LocalizationProvider>
+            <RowContainer>
+              <FileUploadField label={"Naslovna slika"} uploadedFile={uploadingFiles}/>
+              <FileUploadField label={"Slika"} uploadedFile={uploadingFiles}/>
+              <FileUploadField label={"Slika"} uploadedFile={uploadingFiles}/>
+              <FileUploadField label={"Slika"} uploadedFile={uploadingFiles}/>
+              <FileUploadField label={"Slika"} uploadedFile={uploadingFiles}/>
+            </RowContainer>
           </FormContainer>
+          <RowContainer style={{justifyContent: "flex-end", marginRight: "3rem"}}>
+            <Button 
+              variant="outlined" 
+              css={BtnSaveStyle} 
+              type="submit" 
+              disabled={disabled} 
+              style={{ backgroundColor: `${(disabled) ? "#ccc" : "#357F54" }` }}
+            >
+              Sačuvaj
+            </Button>
+          </RowContainer>
         </form>
       </Container>
     </Wrapper>

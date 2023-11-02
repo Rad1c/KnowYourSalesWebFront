@@ -46,6 +46,16 @@ const validationCommerceRegisterSchema = Yup.object().shape({
   confirmPassword: Yup.string().oneOf([Yup.ref("password"), null], "Lozinke se ne slazu"),
 });
 
+const validationCommerceUpdateSchema = Yup.object().shape({
+  name: Yup.string()
+    .min(2, "Minimalni broj karakter je 2")
+    .max(50, "Maksimalni broj karaktera je 50")
+    .required("Ime je obavezno"),
+
+  city: Yup.string()
+    .required("Sjedište trgovine je obavezno")
+})
+
 const validationLoginSchema = Yup.object().shape({
   email: Yup.string().email("Email je neispravan").required("Email je obavezan"),
 
@@ -120,7 +130,8 @@ const validationAddArticleSchema = Yup.object().shape({
 export { 
   validationUserRegisterSchema,
   validationUserUpdateSchema,
-  validationCommerceRegisterSchema, 
+  validationCommerceRegisterSchema,
+  validationCommerceUpdateSchema,
   validationLoginSchema, 
   validationAddShopSchema, 
   validationUpdateShopSchema,
