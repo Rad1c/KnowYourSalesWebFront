@@ -1,4 +1,3 @@
-import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 
 const Container = styled.div`
@@ -9,7 +8,7 @@ const Container = styled.div`
   align-items: center;
 `;
 
-const P = styled.p`
+const Name = styled.p`
   color: #1e1e1e;
   font-size: 5rem;
   font-weight: bold;
@@ -65,7 +64,7 @@ const ModalContainer = styled.div`
   align-items: center;
 `;
 
-const delimiterStyle = css`
+const Delimiter = styled.img`
   max-width: 65rem;
   max-height: auto;
   margin-bottom: 5.6rem;
@@ -73,7 +72,7 @@ const delimiterStyle = css`
 `;
 
 export {
-  P,
+  Name,
   Container,
   ImgContainer,
   BtnContainer,
@@ -81,5 +80,5 @@ export {
   BtnFavorite,
   ControlsContainer,
   ModalContainer,
-  delimiterStyle,
+  Delimiter,
 };

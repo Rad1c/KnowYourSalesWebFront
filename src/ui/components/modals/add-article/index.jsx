@@ -26,12 +26,13 @@ import CircularProgress from "@mui/material/CircularProgress";
 import FileUploadField from "../../upload-file";
 import useProductsStore from "../../../../store/productsStore";
 import useCommerceStore from "../../../../store/commerceStore";
+import extractUserDataFromToken from "../../../../assets/helper"
 import { validationAddArticleSchema } from "../../../../validators/validator";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
   
-const AddArticle = ({ commerceId, setIsModalOpen }) => {
+const AddArticle = ({ setIsModalOpen }) => {
   const [open, setOpen] = useState(false); // for backdrop
   const [selectedShop, setSelectedShop] = useState([]);
   const [selectedShopId, setSelectedShopId] = useState([]);
@@ -44,6 +45,8 @@ const AddArticle = ({ commerceId, setIsModalOpen }) => {
   const [disabled, setDisabled] = useState(true);
   const { categories, getCategories, addArticle } = useProductsStore();
   const { shops, getShops } = useCommerceStore();
+  const token = localStorage.getItem("refresh");
+  const { id } = extractUserDataFromToken(token)
     
   useEffect(() => {
     const fetchShopsAndCategories = async () => {
@@ -113,7 +116,7 @@ const AddArticle = ({ commerceId, setIsModalOpen }) => {
     try {
       setOpen(true);
       await addArticle(
-        commerceId,
+        id,
         [articleCategory],
         selectedShopId,
         "Konvertibilna marka",

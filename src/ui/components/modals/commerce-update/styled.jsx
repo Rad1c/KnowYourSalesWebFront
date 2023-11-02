@@ -46,6 +46,17 @@ const Header = styled.div`
 const ControlsContainer = styled.div`
   margin: 0 3rem;
   display: flex;
+  justify-content: space-between;
+`;
+
+const UploadContainer = styled.div`
+  justify-self: center; 
+  align-self: center;
+`;
+
+const InputContainer = styled.div`
+  width: 75%;
+  dispay: flex;
   flex-direction: column;
 `;
 
@@ -55,5 +66,7 @@ export {
   BtnRegisterStyle,
   Header,
   ControlsContainer,
+  UploadContainer,
+  InputContainer,
   Wrapper,
 };

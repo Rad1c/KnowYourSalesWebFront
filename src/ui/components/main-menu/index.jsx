@@ -479,13 +479,13 @@ const MainMenu = ({backgroundColor, searchColor, role}) => {
       <Modal open={openAddShopModal} onClose={() => setOpenAddShopModal(false)} disableAutoFocus 
         style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
         <ModalContainer>
-          <AddShop />
+          <AddShop setIsModalOpen={isModalOpen => setOpenAddShopModal(isModalOpen)}/>
         </ModalContainer>
       </Modal>
       <Modal open={openAddArticleModal} onClose={() => setOpenAddArticleModal(false)} disableAutoFocus 
         style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
         <ModalContainer>
-          <AddArticle />
+          <AddArticle setIsModalOpen={isModalOpen => setOpenAddArticleModal(isModalOpen)}/>
         </ModalContainer>
       </Modal>
     </Container>

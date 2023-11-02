@@ -25,9 +25,9 @@ const FileUploadField = ({ label, commerceLogo, mb, uploadedFile }) => {
         reader.onload = () => {
           setFileImage(reader.result)
           commerceLogo ? 
-          uploadedFile(reader.result.slice(23)) :
+          uploadedFile(reader.result) :
           uploadedFile({
-            image: reader.result.slice(23), 
+            image: reader.result, 
             isThumbnail: label === "Naslovna slika" ? true : false
           });
         }

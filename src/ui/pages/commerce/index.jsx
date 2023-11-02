@@ -238,7 +238,7 @@ const Commerce = ({ role }) => {
       </Modal>
       <Modal open={openAddArticleModal} onClose={() => setOpenAddArticleModal(false)} disableAutoFocus
         style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
-        <AddArticle shop={shop} commerceId={user.id} setIsModalOpen={isModalOpen => setOpenAddArticleModal(isModalOpen)}/>
+        <AddArticle shop={shop} setIsModalOpen={isModalOpen => setOpenAddArticleModal(isModalOpen)}/>
       </Modal>
     </Container>
   );
