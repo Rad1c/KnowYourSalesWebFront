@@ -4,12 +4,13 @@
 import { SelectStyle, SelectLabel, SelectContainer, ArrowDown } from "./styled";
 import { useState, useEffect } from "react";
 
-const SelectOption = ({ name, data, backgroundColor, color, disabled, returnSelectValue }) => {
+const SelectOption = ({ initialValue, name, data, backgroundColor, color, disabled, returnSelectValue }) => {
   const [selectedValue, setSelectedValue] = useState("");
   const [selectData, setSelectData] = useState([]);
 
   useEffect(() => {
     setSelectData(data);
+    setSelectedValue(initialValue);
   }, [data]);
 
   return (

@@ -10,7 +10,7 @@ import { useEffect, useState } from "react";
 import useProductsStore from "../../../store/productsStore";
 import SelectOption from "../select";
 
-const SortProducts = ({primaryColor, secondaryColor, sortCriteria, pageSizeCriteria}) => {
+const SortProducts = ({primaryColor, secondaryColor, city, category, sortCriteria, pageSizeCriteria}) => {
   const [sort, setSort] = useState("Datum objave");
   const [pageSize, setPageSize] = useState(24);
   const { cities, getCitiesByCountryCode, categories, getCategories } = useProductsStore();
@@ -39,8 +39,22 @@ const SortProducts = ({primaryColor, secondaryColor, sortCriteria, pageSizeCrite
     <>
       <SortContainer>
         <div style={{ display: "flex", justifyContent: "space-around" }}>
-          <SelectOption name={"Odaberite grad"} data={citiesMap} backgroundColor={"#fafafa"} color={secondaryColor} disabled={true}/>
-          <SelectOption name={"Odaberite kategoriju"} data={categoriesMap} backgroundColor={"#fafafa"} color={primaryColor} disabled={true}/>
+          <SelectOption 
+            name={"Odaberite grad"} 
+            data={citiesMap} 
+            initialValue={city}
+            backgroundColor={"#fafafa"} 
+            color={secondaryColor} 
+            disabled={true}
+          />
+          <SelectOption 
+            name={"Odaberite kategoriju"} 
+            data={categoriesMap} 
+            initialValue={category}
+            backgroundColor={"#fafafa"} 
+            color={primaryColor} 
+            disabled={true}
+          />
         </div>
         <div style={{ display: "flex", gap: "2rem", alignItems: "center" }}>
           <div style={{ display: "flex", gap: "0.3rem", alignItems: "center" }}>

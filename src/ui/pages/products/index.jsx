@@ -11,13 +11,15 @@ import { useEffect, useState } from "react";
 
 const Products = ({ role }) => {
   const [pageSize, setPageSize] = useState(24);
-  const [sort, setSort] = useState("Datum objave")
+  const [sort, setSort] = useState("Datum objave");
+  const [city, setCity] = useState("");
+  const [category, setCategory] = useState("");
   const { articles, getArticles } = useProductsStore();
 
   useEffect(() => {
     const searchParams = new URLSearchParams(window.location.search);
-    const cityId = searchParams.get("city");
-    const categoryId = searchParams.get("category");
+    const cityId = searchParams.get("city"); setCity(cityId);
+    const categoryId = searchParams.get("category"); setCategory(categoryId);
 
     const fetchArticles = async () => {
       if (cityId && categoryId) {
@@ -50,8 +52,11 @@ const Products = ({ role }) => {
       <SortProducts 
         primaryColor={primaryColor} 
         secondaryColor={secondaryColor} 
+        city={city}
+        category={category}
         sortCriteria={sort => setSort(sort)} 
-        pageSizeCriteria={pageSize => setPageSize(pageSize)}/>
+        pageSizeCriteria={pageSize => setPageSize(pageSize)}
+      />
       <CardContainer>
         {articles.items &&
           articles.items.map((article) => (

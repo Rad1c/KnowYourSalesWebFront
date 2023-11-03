@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 
 const Container = styled.div`
   height: 35rem;
-  width: 23rem;
+  width: 25rem;
   background-color: #fafafa;
   cursor: pointer;
 

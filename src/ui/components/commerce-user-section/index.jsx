@@ -30,7 +30,7 @@ const CommerceUserSection = ({ name, img, role, user, allowed }) => {
           </ImgContainer>
           <Name>{name}</Name>
         </ControlsContainer>
-        {role !== "none" &&
+        {role !== "none" && 
           <ControlsContainer>
             {role !== "Commerce" && ((role === "User" && allowed === role) ? 
                 <BtnContainer style={{backgroundColor: "#7F3551"}}>
