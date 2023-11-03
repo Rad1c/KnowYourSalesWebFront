@@ -17,31 +17,28 @@ import {
 } from "./styled";
 import { useNavigate } from "react-router";
 
-const ProductCard = (props) => {
-  const {
-    role,
-    id,
-    discount,
-    productImg,
-    commerceImg,
-    name,
-    oldPrice,
-    newPrice,
-    validFrom,
-    validTo,
-    primaryColor,
-  } = props;
-
+const ProductCard = ({
+  role,
+  id,
+  discount,
+  productImg,
+  commerceImg,
+  name,
+  oldPrice,
+  newPrice,
+  validFrom,
+  validTo,
+  primaryColor,
+}) => {
   const [showFavorite, setShowFavorite] = useState(false);
-  const [liked, setLiked] = useState(false)
+  const [liked, setLiked] = useState(false);
   const navigate = useNavigate();
 
   return (
-    <CardContainer 
-      onMouseOver={() => setShowFavorite(true)} 
+    <CardContainer
+      onMouseOver={() => setShowFavorite(true)}
       onMouseOut={() => setShowFavorite(false)}
-      // TODO: koristiti id za navigaciju
-      onClick={() => navigate("/product")}
+      onClick={() => navigate(`/product/${id}`)}
     >
       <Discount style={{ backgroundColor: primaryColor }}>{discount}%</Discount>
       <ArticleImage src={productImg} alt="product" />
@@ -58,11 +55,19 @@ const ProductCard = (props) => {
           {validFrom} - {validTo}
         </ProductLocationAndTime>
       </Description>
-      {role === "User" && showFavorite && 
+      {role === "User" && showFavorite && (
         <FavoriteContainer>
-          {!liked ? <Favorite src="/img/Favorite.svg" alt="Favorite icon" onClick={() => setLiked(true)}/>
-          : <Favorite src="/img/Favorite-clicked.svg" alt="Clicked favorite icon" onClick={() => setLiked(false)}/>}
-        </FavoriteContainer> }
+          {!liked ? (
+            <Favorite src="/img/Favorite.svg" alt="Favorite icon" onClick={() => setLiked(true)} />
+          ) : (
+            <Favorite
+              src="/img/Favorite-clicked.svg"
+              alt="Clicked favorite icon"
+              onClick={() => setLiked(false)}
+            />
+          )}
+        </FavoriteContainer>
+      )}
     </CardContainer>
   );
 };

@@ -15,8 +15,6 @@ const VerifyAccount = () => {
     if (status == 200) {
       setIsVerfied(true);
     }
-
-    console.log(status);
   }, [status]);
 
   return (

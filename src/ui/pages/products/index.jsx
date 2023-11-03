@@ -11,8 +11,8 @@ import { useEffect, useState } from "react";
 
 const Products = ({ role }) => {
   const [pageSize, setPageSize] = useState(24);
-  const [sort, setSort] = useState("Datum objave")
-  const { articles, getArticles } = useProductsStore();
+  const [sort, setSort] = useState("Datum objave");
+  const { articles, getArticles, setSearchIsEnabled } = useProductsStore();
 
   useEffect(() => {
     const searchParams = new URLSearchParams(window.location.search);
@@ -29,6 +29,10 @@ const Products = ({ role }) => {
 
     fetchArticles();
   }, [pageSize]);
+
+  useEffect(() => {
+    setSearchIsEnabled(true);
+  }, []);
 
   const handlePagination = async (event, value) => {
     const searchParams = new URLSearchParams(window.location.search);
@@ -47,19 +51,20 @@ const Products = ({ role }) => {
   return (
     <ContentWrapper>
       <MainMenu backgroundColor={primaryColor} searchColor={searchColor} role={role} />
-      <SortProducts 
-        primaryColor={primaryColor} 
-        secondaryColor={secondaryColor} 
-        sortCriteria={sort => setSort(sort)} 
-        pageSizeCriteria={pageSize => setPageSize(pageSize)}/>
+      <SortProducts
+        primaryColor={primaryColor}
+        secondaryColor={secondaryColor}
+        sortCriteria={(sort) => setSort(sort)}
+        pageSizeCriteria={(pageSize) => setPageSize(pageSize)}
+      />
       <CardContainer>
         {articles.items &&
           articles.items.map((article) => (
-            <div key={article.articleId}>
+            <div key={article.id}>
               <ProductCard
-                key={article.artileId}
+                key={article.id}
                 role={role}
-                id={article.artileId}
+                id={article.id}
                 discount={Math.round(article.sale)}
                 productImg={article.picture}
                 commerceImg={article.logo}
