@@ -74,7 +74,7 @@ const Product = ({ role }) => {
           />
           <MapContainerWrapper>
             <MapContainer
-              center={[article.geoLocations[0].longitude, article.geoLocations[0].latitude]}
+              center={[article.geoLocations[0].latitude, article.geoLocations[0].longitude]}
               zoom={15}
               scrollWheelZoom={true}
               style={{ height: "100%", width: "100%", zIndex: "1" }}
@@ -84,7 +84,7 @@ const Product = ({ role }) => {
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
               />
               {article.geoLocations.map((geo) => (
-                <Marker position={[geo.longitude, geo.latitude]}>
+                <Marker position={[geo.latitude, geo.longitude]}>
                   <Popup>{geo.address}</Popup>
                 </Marker>
               ))}
