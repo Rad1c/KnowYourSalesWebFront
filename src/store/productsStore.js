@@ -7,6 +7,7 @@ const useProductsStore = create((set) => ({
   cities: [],
   articles: [],
   article: null,
+  pageSize: 24,
   moreArticlesFromCommerce: [],
   moreArticlesFromCategory: [],
   getCategories: async () => {
@@ -111,6 +112,9 @@ const useProductsStore = create((set) => ({
   },
   setSearchIsEnabled: (isEnabled) => {
     set({ searchIsEnabled: isEnabled });
+  },
+  setPageSize: (pageSize) => {
+    set({ pageSize });
   },
   addArticle: async (
     commerceId,
