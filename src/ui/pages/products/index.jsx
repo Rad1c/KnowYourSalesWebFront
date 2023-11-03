@@ -32,6 +32,10 @@ const Products = ({ role }) => {
     fetchArticles();
   }, [pageSize]);
 
+  useEffect(() => {
+    setSearchIsEnabled(true);
+  }, []);
+
   const handlePagination = async (event, value) => {
     const searchParams = new URLSearchParams(window.location.search);
     const cityId = searchParams.get("city");
@@ -60,11 +64,11 @@ const Products = ({ role }) => {
       <CardContainer>
         {articles.items &&
           articles.items.map((article) => (
-            <div key={article.articleId}>
+            <div key={article.id}>
               <ProductCard
-                key={article.artileId}
+                key={article.id}
                 role={role}
-                id={article.artileId}
+                id={article.id}
                 discount={Math.round(article.sale)}
                 productImg={article.picture}
                 commerceImg={article.logo}

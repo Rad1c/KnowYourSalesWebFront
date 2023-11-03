@@ -1,15 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/no-unknown-property */
 /* eslint-disable react/prop-types */
-import {
-  AppBar,
-  Toolbar,
-  IconButton,
-  InputBase,
-  Button,
-  Hidden,
-  Modal,
-} from "@mui/material";
+import { AppBar, Toolbar, IconButton, InputBase, Button, Hidden, Modal } from "@mui/material";
 import {
   Container,
   AppBarStyle,
@@ -29,12 +21,13 @@ import SearchIcon from "/img/search.svg";
 import Login from "../login";
 import useAuthStore from "../../../store/authStore";
 import useAccountStore from "../../../store/accountStore";
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 import AddShop from "../modals/add-shop";
 import AddArticle from "../modals/add-article";
 import FavoriteProductCard from "../favorite-product-card";
 import FavoriteShopCard from "../favorite-shop-card";
+import useProductsStore from "../../../store/productsStore";
 
 const favoriteCommerces = [
   {
@@ -154,18 +147,19 @@ const favoriteProducts = [
   },
 ];
 
-const MainMenu = ({backgroundColor, searchColor, role}) => {
+const MainMenu = ({ backgroundColor, searchColor, role }) => {
   const [setAnchorEl] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [open, setOpen] = useState(false);
   const [openAddShopModal, setOpenAddShopModal] = useState(false);
   const [openAddArticleModal, setOpenAddArticleModal] = useState(false);
-  const [openFavoriteCommerceModal, setOpenFavoriteCommerceModal] = useState(false)
-  const [openFavoriteArticleModal, setOpenFavoriteArticleModal] = useState(false)
-  const [name, setName] = useState("")
+  const [openFavoriteCommerceModal, setOpenFavoriteCommerceModal] = useState(false);
+  const [openFavoriteArticleModal, setOpenFavoriteArticleModal] = useState(false);
+  const [name, setName] = useState("");
   const { logout } = useAuthStore();
   const { getUser, getCommerce } = useAccountStore();
   const navigate = useNavigate();
+  const { searchArticles, searchIsEnabled } = useProductsStore();
 
   // TODO: za search meni funkcionalnost; treba je dovrsiti
   const handleMenuOpen = (event) => {
@@ -177,24 +171,26 @@ const MainMenu = ({backgroundColor, searchColor, role}) => {
     setSearchTerm(searchTerm);
   };
 
+  const handleSearchSubmit = async () => {
+    if (searchTerm) await searchArticles(searchTerm);
+  };
+
   useMemo(() => {
     const fetchUserName = async (role) => {
-      if(role === "User"){
-        await getUser().then(response => setName(response.data.firstName))
+      if (role === "User") {
+        await getUser().then((response) => setName(response.data.firstName));
       }
 
-      if(role === "Commerce"){
-        await getCommerce().then(response => setName(response.data.name))
+      if (role === "Commerce") {
+        await getCommerce().then((response) => setName(response.data.name));
       }
-    }
+    };
 
-    fetchUserName(role)
-  }, [role])
+    fetchUserName(role);
+  }, [role]);
 
   return (
-    <Container
-      style={{ backgroundColor }}
-    >
+    <Container style={{ backgroundColor }}>
       <AppBar position="static" sx={AppBarStyle} style={{ backgroundColor }}>
         <Toolbar sx={{ justifyContent: "space-between", marginTop: ".5rem" }}>
           <Hidden mdUp>
@@ -237,34 +233,28 @@ const MainMenu = ({backgroundColor, searchColor, role}) => {
               edge="start"
               onClick={handleMenuOpen}
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-              >
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                 <path d="M0 0h24v24H0z" fill="none" />
-                <path
-                  fill="white"
-                  d="M4 18h16v-2H4zm0-5h16v-2H4zm0-5h16V6H4z"
-                />
+                <path fill="white" d="M4 18h16v-2H4zm0-5h16v-2H4zm0-5h16V6H4z" />
               </svg>
             </IconButton>
           </Hidden>
 
           <Hidden smDown>
-            <InputBase
-              variant="outlined"
-              placeholder="Pretražite..."
-              value={searchTerm}
-              onChange={handleSearchChange}
-              endAdornment={
-                <IconButton>
-                  <img src={SearchIcon} alt="Search Icon" />
-                </IconButton>
-              }
-              sx={InputBaseStyle({ searchColor })}
-            />
+            {searchIsEnabled && (
+              <InputBase
+                variant="outlined"
+                placeholder="Pretražite..."
+                value={searchTerm}
+                onChange={handleSearchChange}
+                endAdornment={
+                  <IconButton onClick={handleSearchSubmit}>
+                    <img src={SearchIcon} alt="Search Icon" />
+                  </IconButton>
+                }
+                sx={InputBaseStyle({ searchColor })}
+              />
+            )}
             {role == "User" && (
               <div style={{ display: "flex", gap: "4rem" }}>
                 <UserIcon
@@ -281,10 +271,10 @@ const MainMenu = ({backgroundColor, searchColor, role}) => {
                   open={openFavoriteCommerceModal}
                   onClose={() => setOpenFavoriteCommerceModal(false)}
                 >
-                  <FavoriteContainer style={{right: "19rem"}}>
-                    {favoriteCommerces.length > 0 ? 
+                  <FavoriteContainer style={{ right: "19rem" }}>
+                    {favoriteCommerces.length > 0 ? (
                       <FavoriteContainerContent>
-                        {favoriteCommerces.map(shop => (
+                        {favoriteCommerces.map((shop) => (
                           <div key={shop.id} onClick={() => navigate("/commerce")}>
                             <FavoriteShopCard
                               key={shop.id}
@@ -294,11 +284,10 @@ const MainMenu = ({backgroundColor, searchColor, role}) => {
                             />
                           </div>
                         ))}
-                      </FavoriteContainerContent> :
-                      <FavoriteContainerEmpty>
-                        Nemate sačuvanih prodavnica
-                      </FavoriteContainerEmpty>
-                    }
+                      </FavoriteContainerContent>
+                    ) : (
+                      <FavoriteContainerEmpty>Nemate sačuvanih prodavnica</FavoriteContainerEmpty>
+                    )}
                   </FavoriteContainer>
                 </Modal>
                 <UserIcon
@@ -315,10 +304,10 @@ const MainMenu = ({backgroundColor, searchColor, role}) => {
                   open={openFavoriteArticleModal}
                   onClose={() => setOpenFavoriteArticleModal(false)}
                 >
-                  <FavoriteContainer style={{right: "12rem"}}>
-                    {favoriteProducts.length > 0 ? 
+                  <FavoriteContainer style={{ right: "12rem" }}>
+                    {favoriteProducts.length > 0 ? (
                       <FavoriteContainerContent>
-                        {favoriteProducts.map(product => (
+                        {favoriteProducts.map((product) => (
                           <div key={product.id} onClick={() => navigate("/product")}>
                             <FavoriteProductCard
                               key={product.id}
@@ -329,12 +318,11 @@ const MainMenu = ({backgroundColor, searchColor, role}) => {
                               validTo={product.validTo}
                             />
                           </div>
-                        ))} 
-                      </FavoriteContainerContent> :
-                      <FavoriteContainerEmpty>
-                        Nemate sačuvanih artikala
-                      </FavoriteContainerEmpty>
-                    }
+                        ))}
+                      </FavoriteContainerContent>
+                    ) : (
+                      <FavoriteContainerEmpty>Nemate sačuvanih artikala</FavoriteContainerEmpty>
+                    )}
                   </FavoriteContainer>
                 </Modal>
                 <DiamondContainer
@@ -376,12 +364,8 @@ const MainMenu = ({backgroundColor, searchColor, role}) => {
                   onClose={() => setOpen(false)}
                 >
                   <AccountMenu>
-                    <AccountItem onClick={() => navigate("/user")}>
-                      Podešavanja naloga
-                    </AccountItem>
-                    <AccountItem onClick={logout}>
-                      Odjavite se
-                    </AccountItem>
+                    <AccountItem onClick={() => navigate("/user")}>Podešavanja naloga</AccountItem>
+                    <AccountItem onClick={logout}>Odjavite se</AccountItem>
                   </AccountMenu>
                 </Modal>
               </div>
@@ -440,9 +424,7 @@ const MainMenu = ({backgroundColor, searchColor, role}) => {
                     <AccountItem onClick={() => navigate("/commerce")}>
                       Podešavanja naloga
                     </AccountItem>
-                    <AccountItem onClick={logout}>
-                      Odjavite se
-                    </AccountItem>
+                    <AccountItem onClick={logout}>Odjavite se</AccountItem>
                   </AccountMenu>
                 </Modal>
               </div>
@@ -476,16 +458,24 @@ const MainMenu = ({backgroundColor, searchColor, role}) => {
           </Hidden>
         </Toolbar>
       </AppBar>
-      <Modal open={openAddShopModal} onClose={() => setOpenAddShopModal(false)} disableAutoFocus 
-        style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
+      <Modal
+        open={openAddShopModal}
+        onClose={() => setOpenAddShopModal(false)}
+        disableAutoFocus
+        style={{ display: "flex", justifyContent: "center", alignItems: "center" }}
+      >
         <ModalContainer>
-          <AddShop setIsModalOpen={isModalOpen => setOpenAddShopModal(isModalOpen)}/>
+          <AddShop setIsModalOpen={(isModalOpen) => setOpenAddShopModal(isModalOpen)} />
         </ModalContainer>
       </Modal>
-      <Modal open={openAddArticleModal} onClose={() => setOpenAddArticleModal(false)} disableAutoFocus 
-        style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
+      <Modal
+        open={openAddArticleModal}
+        onClose={() => setOpenAddArticleModal(false)}
+        disableAutoFocus
+        style={{ display: "flex", justifyContent: "center", alignItems: "center" }}
+      >
         <ModalContainer>
-          <AddArticle setIsModalOpen={isModalOpen => setOpenAddArticleModal(isModalOpen)}/>
+          <AddArticle setIsModalOpen={(isModalOpen) => setOpenAddArticleModal(isModalOpen)} />
         </ModalContainer>
       </Modal>
     </Container>

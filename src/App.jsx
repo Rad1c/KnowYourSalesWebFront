@@ -39,7 +39,7 @@ function App() {
         <Route path="/verify-account/:verificationCode" element={<VerifyAccount />} />
 
         <Route path="/products" element={<Products role={role} />} />
-        <Route path="/product" element={<Product role={role} />} />
+        <Route path="/product/:id" element={<Product role={role} />} />
 
         {/* treba rolu proslijedit i na osnovu nje renderovat stvari */}
         <Route path="/commerce" element={<Commerce role={role} />} />

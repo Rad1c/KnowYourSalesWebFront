@@ -12,25 +12,7 @@ import {
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 import { useState } from "react";
 
-const productsImages = [
-  {
-    img: "/img/product1.png",
-  },
-  {
-    img: "/img/product.png",
-  },
-  {
-    img: "/img/product1.png",
-  },
-  {
-    img: "/img/product.png",
-  },
-  {
-    img: "/img/product1.png",
-  },
-];
-
-const ProductImages = () => {
+const ProductImages = ({ productsImages }) => {
   const [mainImgIndexValue, setMainImgIndexValue] = useState(0);
 
   const ArrowLeftClickHandler = () => {
@@ -48,29 +30,34 @@ const ProductImages = () => {
   return (
     <Container>
       <ControlsHolder>
-        <Arrow style={{backgroundImage: `url("/img/expand-left.png")`}} onClick={ArrowLeftClickHandler} />
+        <Arrow
+          style={{ backgroundImage: `url("/img/expand-left.png")` }}
+          onClick={ArrowLeftClickHandler}
+        />
         <ImgMainContainer>
           <TransformWrapper initialScale={1} doubleClick={true} smooth>
             <TransformComponent>
-              <div style={{cursor: "zoom-in"}}>
-                <MainImg
-                  src={productsImages[mainImgIndexValue % productsImages.length].img}
-                  alt="commerce-img"
-                />
+              <div style={{ cursor: "zoom-in" }}>
+                {productsImages && (
+                  <MainImg
+                    src={productsImages[mainImgIndexValue % productsImages.length]}
+                    alt="commerce-img"
+                  />
+                )}
               </div>
             </TransformComponent>
           </TransformWrapper>
         </ImgMainContainer>
-        <Arrow style={{backgroundImage: `url("/img/expand-right.png")`}} onClick={ArrowRightClickHandler} />
+        <Arrow
+          style={{ backgroundImage: `url("/img/expand-right.png")` }}
+          onClick={ArrowRightClickHandler}
+        />
       </ControlsHolder>
       <Box>
         <ImgsSecondWrapper>
-          {productsImages.map((productImage, index) => (
+          {productsImages.map((img, index) => (
             <ImgSecondaryContainer key={index}>
-              <SecondaryImg
-                src={productImage.img}
-                alt="commerce-img"
-              />
+              <SecondaryImg src={img} alt="article-img" />
             </ImgSecondaryContainer>
           ))}
         </ImgsSecondWrapper>
